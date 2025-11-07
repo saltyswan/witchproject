@@ -50,6 +50,7 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider.is_in_group("mobs"):
 			queue_free()
+			print("BAM you're dead")
 			#NOTE: GET NOTION OF HP
 	
 

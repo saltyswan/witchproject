@@ -11,11 +11,8 @@ const SPEED = 100.0
 func _ready() -> void:
 	add_to_group("mobs")
 	current_hp = max_hp
-
-func initialize(spawn_position: Vector2, player_position: Vector2) -> void:
-	position = spawn_position
-	target_position = player_position
-
+	target = get_tree().get_nodes_in_group("witch")[0]
+	
 func _physics_process(delta: float) -> void:
 	
 	if target == null:
@@ -23,6 +20,7 @@ func _physics_process(delta: float) -> void:
 	
 	nav_agent.target_position = target.global_position
 	velocity = global_position.direction_to(nav_agent.get_next_path_position()) * SPEED
+	
 	
 	move_and_slide()
 	

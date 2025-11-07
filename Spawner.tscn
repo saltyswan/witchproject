@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://jwwqhjdi6e5b"]
+[gd_scene load_steps=2 format=3 uid="uid://jwwqhjdi6e5b"]
+
+[ext_resource type="Script" uid="uid://cref4hmkh7jom" path="res://spawner.gd" id="1_mimr8"]
 
 [node name="Spawner" type="Node2D"]
+script = ExtResource("1_mimr8")
+
+[connection signal="all_waves_cleared" from="." to="." method="_on_all_waves_cleared"]
+[connection signal="wave_cleared" from="." to="." method="_on_wave_cleared"]
+[connection signal="wave_started" from="." to="." method="_on_wave_started"]
