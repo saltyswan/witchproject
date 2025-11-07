@@ -31,7 +31,6 @@ func _physics_process(delta: float) -> void:
 	#else:
 		#velocity.x = move_toward(velocity.x, 0, SPEED)
 
-
 func _on_ready() -> void:
 	
 	var witches = get_tree().get_nodes_in_group("witch")

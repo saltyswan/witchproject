@@ -7,11 +7,18 @@ script/source = "extends Node2D
 
 @onready var danger_zone: Area2D = $DangerZone
 @onready var threshold: CollisionShape2D = $DangerZone/Threshold
-
 @export var enemy_scene: PackedScene
 @export var combat_music: AudioStreamPlayer
 @export var witch: CharacterBody2D
 @export var spawn_location: PathFollow2D
+@export var red_slime: CharacterBody2D
+@onready var red_slime_scene = preload(\"res://Enemies/Red_slime.tscn\")
+
+var in_combat: bool = false
+
+signal fight_started
+signal fight_ended
+signal timeout
 
 func _ready() -> void:
 	pass
@@ -19,68 +26,36 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func _on_fight_ended() -> void:
-	pass # Replace with function body.
-
-
-func _on_fight_started() -> void:
-	pass # Replace with function body.
-
-
-signal fight_started
-signal fight_ended
-
 func _on_danger_zone_body_entered(body: Node2D) -> void:
-	
 	if body.is_in_group(\"witch\"):
-		print(\"DANGER ZONE TRIGGERED\")
-		print(body)
-		if in_combat:
-			return
-		else:
-			in_combat = true
-		combat_music.play()
-		print(\"FIGHT MODE ACTIVATED\")
 		emit_signal(\"fight_started\")
 
-var in_combat: bool = false
+func _on_fight_started() -> void:
+	#combat_music.play()
+	if in_combat:
+		return
+	else:
+		print(\"DANGER ZONE TRIGGERED\")
+		emit_signal(\"timeout\")
+		in_combat = true
 
-#func start_fight():
-	
-	#spawn_enemies(player)
-	#create spawn waves and balance them
-	
-func end_fight():
+func _on_fight_ended() -> void:
+	if witch:
+			witch.queue.free()
 	in_combat = false
 	emit_signal(\"fight_ended\")
-	combat_music.stop()
+	#combat_music.stop()
 	#ANIMATION DOORS CLOSED AND SPAWN AREAS DISAPPEARED
 
-#var triggered = false
-#signal witch_entered_danger_zone
 
 
-
-# Called when the node enters the scene tree for the first time.
-
-	
-#func _on_danger_zone_body_entered(body: Node2D) -> void:
-	#
-	#if triggered:
-		#return
-	
-	#NOTE: Deactivated to move to Playground, convert here to signal
-	#if body.is_in_group(\"witch\"):	
-		##Signalfight.emit_signal(\"witch_entered_danger_zone\")
-		#animation_player.play(\"attack_down\")
-		##issue: music starts again each time i step on danger zone, 
-		##must activate only one time before fight ends
-		#danger_zone.monitoring = false
-		#threshold.disabled = true
-		#triggered = true
-		
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _on_slime_timer_timeout() -> void:
+	print(\"Enemies should spawn\")
+	var mob_spawn_location = get_node(\"SpawnPath/SpawnLocation\")
+	mob_spawn_location.progress_ratio = randf()
+	var player_position = $Witch.position
+	red_slime.initialize(mob_spawn_location.position, player_position)
+	#NOTE: CREATE A DEDICATED NODE FOR IT?
 "
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_vo80h"]
