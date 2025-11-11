@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmfurd482hj0e"]
+
+[ext_resource type="Script" uid="uid://cwuysewbeowtk" path="res://UI_HUD/main_menu.gd" id="1_k42oj"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_k42oj"]
+
+[sub_resource type="Shortcut" id="Shortcut_id7el"]
+events = [SubResource("InputEventKey_k42oj")]
+
+[node name="MainMenu" type="Node2D"]
+position = Vector2(600, 300)
+script = ExtResource("1_k42oj")
+
+[node name="GameTitle" type="Label" parent="."]
+offset_left = -311.0
+offset_top = -105.0
+offset_right = 306.0
+offset_bottom = -42.0
+theme_override_font_sizes/font_size = 45
+text = "THE AWESOME WITCH GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.0
+offset_top = 40.0
+offset_right = 95.0
+offset_bottom = 108.0
+grow_horizontal = 2
+grow_vertical = 2
+shortcut = SubResource("Shortcut_id7el")
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="."]
+offset_left = -91.0
+offset_top = 127.0
+offset_right = 95.0
+offset_bottom = 195.0
+text = "Quit"
+
+[node name="BackgroundMenu" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="CreditsButton" type="Button" parent="."]
+offset_left = -91.0
+offset_top = 220.0
+offset_right = 95.0
+offset_bottom = 288.0
+text = "Credits"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_pressed"]

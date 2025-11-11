@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dib81kjkapo7c"]
 
 [ext_resource type="Script" uid="uid://clb3lm8lmb7de" path="res://Enemies/red_slime.gd" id="1_umj5r"]
-[ext_resource type="Texture2D" uid="uid://cwr4mfb56q0f8" path="res://Enemies/red-slime-spritesheet.png" id="2_2eoam"]
+[ext_resource type="Texture2D" uid="uid://cwr4mfb56q0f8" path="res://red-slime-spritesheet.png" id="2_2eoam"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l0c1i"]
 radius = 6.0
@@ -96,7 +96,9 @@ animations = [{
 radius = 5.0990195
 
 [node name="RedSlime" type="CharacterBody2D" groups=["mobs"]]
+collision_layer = 3
 script = ExtResource("1_umj5r")
+max_hp = 25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
@@ -117,3 +119,5 @@ shape = SubResource("CircleShape2D_6mum7")
 path_desired_distance = 2.0
 target_desired_distance = 1.0
 path_max_distance = 10.0
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]

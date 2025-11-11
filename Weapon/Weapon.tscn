@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://db0u3xvvwgiqq"]
+
+[ext_resource type="Script" uid="uid://d2tsoh1a0hmdv" path="res://Weapon/weapon.gd" id="1_370bg"]
+[ext_resource type="Texture2D" uid="uid://c6nc2780nmt1s" path="res://Weapon/32x32_PixelWeapons_Free.png" id="1_fwiay"]
+[ext_resource type="PackedScene" uid="uid://c7tsn6lhdpryo" path="res://Bullet.tscn" id="2_l4m4n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_370bg"]
+atlas = ExtResource("1_fwiay")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l4m4n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_370bg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Weapon" type="Node2D" node_paths=PackedStringArray("Spawnbullet")]
+script = ExtResource("1_370bg")
+Bullet = ExtResource("2_l4m4n")
+Spawnbullet = NodePath("SpawnBullet")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(3, -3)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_l4m4n")
+autoplay = "default"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
+[node name="SpawnBullet" type="Marker2D" parent="."]
+position = Vector2(7, -7)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

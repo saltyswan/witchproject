@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkyd0c8sk5ka7"
-path="res://.godot/imported/FamilialFlying.png-3b8b5d663d28c717b5ef375f257ea707.ctex"
+uid="uid://lj6koq6as6mj"
+path="res://.godot/imported/Sprite_witch_shootdown2.png-f4f8c060043df4533f6137ccb143e635.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/FamilialFlying.png"
-dest_files=["res://.godot/imported/FamilialFlying.png-3b8b5d663d28c717b5ef375f257ea707.ctex"]
+source_file="res://Player/Sprite_witch_shootdown2.png"
+dest_files=["res://.godot/imported/Sprite_witch_shootdown2.png-f4f8c060043df4533f6137ccb143e635.ctex"]
 
 [params]
 

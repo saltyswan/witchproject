@@ -14,11 +14,11 @@ script/source = "extends Node2D
 @export var red_slime: CharacterBody2D
 @onready var red_slime_scene = preload(\"res://Enemies/Red_slime.tscn\")
 
-
 var in_combat: bool = false
 
 signal fight_started
 signal fight_ended
+var stage_cleared = false
 
 func _ready() -> void:
 	pass
@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_danger_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group(\"witch\"):
+	if body.is_in_group(\"witch\") and stage_cleared == false:
 		emit_signal(\"fight_started\")
 #
 func _on_fight_started() -> void:
@@ -38,13 +38,20 @@ func _on_fight_started() -> void:
 		print(\"DANGER ZONE TRIGGERED\")
 		in_combat = true
 		
+#Add here function to emit signal fight ended
+
+func _on_spawner_all_waves_cleared() -> void:
+	fight_ended.emit()
+	stage_cleared = true
+
 
 func _on_fight_ended() -> void:
 	if witch:
-		witch.queue.free()
+		#witch.queue.free()
 		in_combat = false
-		emit_signal(\"fight_ended\")
 		print(\"Fight is won GG!\")
+	else:
+		return
 	#combat_music.stop()
 	#ANIMATION DOORS CLOSED AND SPAWN AREAS DISAPPEARED
 

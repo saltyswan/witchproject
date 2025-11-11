@@ -9,61 +9,63 @@ signal all_waves_cleared
 @export var spawn1 : Marker2D
 @export var spawn2 : Marker2D
 @export var spawn3 : Marker2D
-@export var spawn4 : Marker2D
 
 
 var waves = [
 	{"count": 3, "delay": 1.0}, #Wave 1 = 3 enemies
 	{"count": 5, "delay": 0.8},
-	{"count": 8, "delay": 0.6}]
+	{"count": 8, "delay": 0.6} ]
 
 var current_wave = 0
 var enemies_remaining = 0
-var spawning = false
+var spawning = true
 
 
 #func _on_dangermode_fight_started() -> void:
 	#spawning = true
 
 func _on_wave_started():
+	if spawning:
 		current_wave = 0
 		_start_next_wave()
-	
-#func start_waves():
-	#if spawning:
-		#current_wave = 0
-		#_start_next_wave()
-	#else:
-		#return
+	else:
+		return
 
 func _start_next_wave():
 	if current_wave >= waves.size():
 		all_waves_cleared.emit()
-		emit_signal("fight_ended")
 		return
 	var wave_data = waves[current_wave]
 	emit_signal("wave_started", current_wave + 1)
 	enemies_remaining = wave_data.count
 	for i in range(wave_data.count):
-		print("Enemies can spawn")
 		await get_tree().create_timer(wave_data.delay).timeout
 		_spawn_enemy()
 		spawning = false
 
 func _spawn_enemy():
 	var enemy = red_slime_scene.instantiate()
-	enemy.global_position = spawn1.global_position
 	enemy.connect("tree_exited", Callable(self, "_on_enemy_died")) #detect when freed
 	add_child(enemy)
-	
+	if current_wave == 0:
+		enemy.global_position = spawn1.global_position
+	if current_wave == 1:
+		enemy.global_position = spawn2.global_position
+	if current_wave == 2:
+		enemy.global_position = spawn3.global_position
 	
 func _on_enemy_died():
-	print("Enemies:", enemies_remaining)
+	#print("Enemies:", enemies_remaining)
 	enemies_remaining -= 1
 	if enemies_remaining <= 0 and not spawning:
 		emit_signal("wave_cleared", current_wave + 1)
 		current_wave += 1
 		_start_next_wave()
+
+
+func _on_dangermode_fight_ended() -> void:
+	pass # Replace with function body.
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -74,10 +76,3 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-
-
-
-func _on_dangermode_fight_ended() -> void:
-	pass # Replace with function body.
