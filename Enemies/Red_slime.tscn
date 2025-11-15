@@ -96,22 +96,22 @@ animations = [{
 radius = 5.0990195
 
 [node name="RedSlime" type="CharacterBody2D" groups=["mobs"]]
-collision_layer = 3
+collision_mask = 28
 script = ExtResource("1_umj5r")
 max_hp = 25
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["mobs"]]
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_l0c1i")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["mobs"]]
 position = Vector2(0, -21)
 sprite_frames = SubResource("SpriteFrames_nu2n0")
 autoplay = "default"
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." groups=["mobs"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["mobs"]]
 position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_6mum7")
 

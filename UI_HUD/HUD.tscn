@@ -3,5 +3,7 @@
 [node name="Hud" type="CanvasLayer"]
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 114.0
+offset_top = 16.0
+offset_right = 154.0
+offset_bottom = 56.0

@@ -1,22 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://db0u3xvvwgiqq"]
+[gd_scene load_steps=10 format=3 uid="uid://db0u3xvvwgiqq"]
 
 [ext_resource type="Script" uid="uid://d2tsoh1a0hmdv" path="res://Weapon/weapon.gd" id="1_370bg"]
-[ext_resource type="Texture2D" uid="uid://c6nc2780nmt1s" path="res://Weapon/32x32_PixelWeapons_Free.png" id="1_fwiay"]
 [ext_resource type="PackedScene" uid="uid://c7tsn6lhdpryo" path="res://Bullet.tscn" id="2_l4m4n"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_370bg"]
-atlas = ExtResource("1_fwiay")
-region = Rect2(64, 0, 32, 32)
+[ext_resource type="Texture2D" uid="uid://b3xpjkpwu5n0a" path="res://Weapon/Weapon_anim1.png" id="3_xee74"]
+[ext_resource type="Texture2D" uid="uid://bx0vgtt6j3d1y" path="res://Weapon/Weapon_anim2.png" id="4_14607"]
+[ext_resource type="Texture2D" uid="uid://trfgwt1u56pg" path="res://Weapon/Weapon_anim3.png" id="5_fjvgv"]
+[ext_resource type="Texture2D" uid="uid://cre163mdb4vjk" path="res://Weapon/Weapon_anim4.png" id="6_nn8gg"]
+[ext_resource type="Texture2D" uid="uid://diitjeq8sva5p" path="res://Weapon/Weapon_anim5.png" id="7_a1n0d"]
+[ext_resource type="Texture2D" uid="uid://dbjvvnyy21n2c" path="res://Weapon/Weapon_anim6.png" id="8_klwo7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l4m4n"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_370bg")
+"texture": ExtResource("3_xee74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_14607")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fjvgv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nn8gg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_a1n0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_klwo7")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [node name="Weapon" type="Node2D" node_paths=PackedStringArray("Spawnbullet")]
@@ -25,16 +41,14 @@ Bullet = ExtResource("2_l4m4n")
 Spawnbullet = NodePath("SpawnBullet")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(3, -3)
+rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_l4m4n")
 autoplay = "default"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.3
-autostart = true
 
 [node name="SpawnBullet" type="Marker2D" parent="."]
-position = Vector2(7, -7)
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]

@@ -10,6 +10,7 @@ signal all_waves_cleared
 @export var spawn2 : Marker2D
 @export var spawn3 : Marker2D
 
+var dead = false
 
 var waves = [
 	{"count": 3, "delay": 1.0}, #Wave 1 = 3 enemies
@@ -19,10 +20,6 @@ var waves = [
 var current_wave = 0
 var enemies_remaining = 0
 var spawning = true
-
-
-#func _on_dangermode_fight_started() -> void:
-	#spawning = true
 
 func _on_wave_started():
 	if spawning:
@@ -36,12 +33,13 @@ func _start_next_wave():
 		all_waves_cleared.emit()
 		return
 	var wave_data = waves[current_wave]
-	emit_signal("wave_started", current_wave + 1)
+	#emit_signal("wave_started", current_wave + 1)
 	enemies_remaining = wave_data.count
 	for i in range(wave_data.count):
-		await get_tree().create_timer(wave_data.delay).timeout
-		_spawn_enemy()
-		spawning = false
+		if not dead:
+			await get_tree().create_timer(wave_data.delay).timeout
+			_spawn_enemy()
+			spawning = false
 
 func _spawn_enemy():
 	var enemy = red_slime_scene.instantiate()
@@ -76,3 +74,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_animation_player_animation_started(anim_name: StringName) -> void:
+	if anim_name == "death_down":
+		dead = true

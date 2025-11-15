@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Dangermode="*res://dangermode.tscn"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
@@ -80,6 +84,15 @@ aim_down={
 "events": [Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":3,"axis_value":1.0,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="Enemies"
+2d_physics/layer_2="Witch"
+2d_physics/layer_3="Walls & items"
+2d_physics/layer_4="Hurtbox"
+2d_physics/layer_5="Bullets"
+2d_physics/layer_6="LevelPortal"
 
 [rendering]
 

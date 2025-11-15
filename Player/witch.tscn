@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://2wm1kj185ahp"]
+[gd_scene load_steps=34 format=3 uid="uid://2wm1kj185ahp"]
 
 [ext_resource type="Script" uid="uid://x1wd1ftbm1l7" path="res://Player/witch.gd" id="1_3anrn"]
 [ext_resource type="Texture2D" uid="uid://bv1w2ytejxcy3" path="res://Player/Sprite_witch_shootdown1.png" id="3_qkg00"]
@@ -61,7 +61,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death_down",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -303,7 +303,13 @@ _data = {
 &"walk_up": SubResource("Animation_sk4no")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sk4no"]
+radius = 4.0
+height = 10.0
+
 [node name="Witch" type="CharacterBody2D" groups=["witch"]]
+collision_layer = 2
+collision_mask = 36
 script = ExtResource("1_3anrn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -326,7 +332,20 @@ autoplay = "idle_down"
 
 [node name="Weapon" parent="." instance=ExtResource("24_02vsg")]
 
-[node name="Timer" parent="Weapon" index="1"]
-autostart = false
+[node name="Hurtbox" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-1, -2)
+shape = SubResource("CapsuleShape2D_sk4no")
+
+[node name="InvTimer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="AnimationPlayer" to="Weapon" method="_on_animation_player_animation_started"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="timeout" from="InvTimer" to="." method="_on_inv_timer_timeout"]
 
 [editable path="Weapon"]

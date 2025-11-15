@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=4 uid="uid://47e11neavc7r"]
+[gd_scene load_steps=19 format=4 uid="uid://47e11neavc7r"]
 
 [ext_resource type="Script" uid="uid://ce4n0n5p8tiuw" path="res://playground.gd" id="1_pio1y"]
 [ext_resource type="PackedScene" uid="uid://2wm1kj185ahp" path="res://Player/witch.tscn" id="2_o00ia"]
 [ext_resource type="Texture2D" uid="uid://cceth3tqyyxkr" path="res://maps/Dungeon_Tileset.png" id="6_4bqqs"]
 [ext_resource type="PackedScene" uid="uid://cbk1ebode25f8" path="res://dangermode.tscn" id="7_ynsuh"]
+[ext_resource type="Script" uid="uid://xlbk5ibc86lr" path="res://go_to_lv_2.gd" id="8_pi42a"]
 [ext_resource type="AudioStream" uid="uid://bamvfnfta7afv" path="res://MSD/game-8-bit.mp3" id="8_v7dth"]
 [ext_resource type="PackedScene" uid="uid://jwwqhjdi6e5b" path="res://Spawner.tscn" id="9_pi42a"]
 [ext_resource type="PackedScene" uid="uid://dmfurd482hj0e" path="res://UI_HUD/MainMenu.tscn" id="10_h1jm5"]
@@ -127,7 +128,7 @@ sources/0 = SubResource("TileSetAtlasSource_ynsuh")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4bqqs"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4bqqs"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v7dth"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pi42a"]
 texture = ExtResource("6_4bqqs")
@@ -287,11 +288,15 @@ texture = ExtResource("6_4bqqs")
 9:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_h1jm5"]
-physics_layer_0/collision_layer = 3
-physics_layer_0/physics_material = SubResource("PhysicsMaterial_4bqqs")
+physics_layer_0/collision_layer = 4
+physics_layer_0/collision_mask = 23
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_v7dth")
 sources/0 = SubResource("TileSetAtlasSource_pi42a")
 
 [sub_resource type="PackedScene" id="PackedScene_v7dth"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h1jm5"]
+size = Vector2(33, 32)
 
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_pio1y")
@@ -303,7 +308,7 @@ position = Vector2(-128, -136)
 position = Vector2(-80, 64)
 
 [node name="Spawn3" type="Marker2D" parent="."]
-position = Vector2(283, -185)
+position = Vector2(276, -185)
 
 [node name="SpawnPath" type="Path2D" parent="."]
 position = Vector2(39.769226, 3.021637)
@@ -324,7 +329,17 @@ position = Vector2(80, -105)
 zoom = Vector2(1.5, 1.5)
 
 [node name="Witch" parent="." instance=ExtResource("2_o00ia")]
-position = Vector2(-32, -277)
+position = Vector2(-80, -237)
+
+[node name="AnimatedSprite2D" parent="Witch/Weapon" index="0"]
+position = Vector2(-5.9604645e-08, 0)
+scale = Vector2(0.8, 0.8)
+
+[node name="SpawnBullet" parent="Witch/Weapon" index="2"]
+position = Vector2(3, -2)
+
+[node name="Hurtbox" parent="Witch" index="4"]
+visible = true
 
 [node name="Ground" type="TileMapLayer" parent="."]
 z_index = -1
@@ -357,6 +372,17 @@ spawn3 = NodePath("../Spawn3")
 
 [node name="MainMenu" parent="." instance=ExtResource("10_h1jm5")]
 
+[node name="GoToLv2" type="Area2D" parent="."]
+position = Vector2(322, -48)
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("8_pi42a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoToLv2"]
+position = Vector2(6.5, 0)
+shape = SubResource("RectangleShape2D_h1jm5")
+
+[connection signal="animation_started" from="Witch/AnimationPlayer" to="Spawner" method="_on_animation_player_animation_started"]
 [connection signal="fight_ended" from="Dangermode" to="." method="_on_dangermode_fight_ended"]
 [connection signal="fight_ended" from="Dangermode" to="Witch" method="_on_dangermode_fight_ended"]
 [connection signal="fight_ended" from="Dangermode" to="Witch/Weapon" method="_on_dangermode_fight_ended"]
@@ -370,6 +396,8 @@ spawn3 = NodePath("../Spawn3")
 [connection signal="tree_exiting" from="Spawner" to="." method="_on_spawner_tree_exiting"]
 [connection signal="wave_started" from="Spawner" to="." method="_on_spawner_wave_started"]
 [connection signal="wave_started" from="Spawner" to="Dangermode" method="_on_spawner_wave_started"]
+[connection signal="body_entered" from="GoToLv2" to="." method="_on_go_to_lv_2_body_entered"]
 
 [editable path="Witch"]
 [editable path="Witch/Weapon"]
+[editable path="Spawner"]

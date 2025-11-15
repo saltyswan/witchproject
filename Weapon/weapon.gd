@@ -3,12 +3,11 @@ extends Node2D
 @export var Bullet : PackedScene
 @export var Spawnbullet : Marker2D
 
-# Called when the node enters the scene tree for the first time.
+var gameover = false
+
 func _ready() -> void:
 	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 func _process(delta: float) -> void:
 	pass
 	
@@ -21,17 +20,28 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void: 
 	shoot()
+	print("Shooting!")
 
 func shoot():
-	$Timer.start()
+	$ShootTimer.start()
 	var b = Bullet.instantiate()
 	get_tree().get_current_scene().add_child(b)
 	b.transform = Spawnbullet.global_transform
 
 
+
 func _on_dangermode_fight_started() -> void:
-	shoot()
+	#print("Shooting starts")
+	if gameover == false:
+		shoot()
 
 
 func _on_dangermode_fight_ended() -> void:
-	$Timer.stop()
+	$ShootTimer.stop()
+	gameover = true
+	print("Shooting will stop")
+
+
+func _on_animation_player_animation_started(anim_name: StringName) -> void:
+	if anim_name == "death_down":
+		gameover = true

@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_danger_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group(\"witch\") and stage_cleared == false:
+	if stage_cleared == false:
 		emit_signal(\"fight_started\")
 #
 func _on_fight_started() -> void:
@@ -55,8 +55,6 @@ func _on_fight_ended() -> void:
 	#combat_music.stop()
 	#ANIMATION DOORS CLOSED AND SPAWN AREAS DISAPPEARED
 
-
-
 func _on_slime_timer_timeout() -> void:
 	print(\"Enemies should spawn\")
 	var mob_spawn_location = get_node(\"SpawnPath/SpawnLocation\")
@@ -75,6 +73,8 @@ script = SubResource("GDScript_hu84v")
 
 [node name="DangerZone" type="Area2D" parent="."]
 position = Vector2(-1, 0)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("2_w2pf1")
 
 [node name="Threshold" type="CollisionShape2D" parent="DangerZone"]
