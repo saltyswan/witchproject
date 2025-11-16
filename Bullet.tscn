@@ -104,7 +104,7 @@ _data = {
 &"shoot": SubResource("Animation_nllvn")
 }
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" groups=["bullet"]]
 collision_layer = 16
 collision_mask = 5
 script = ExtResource("1_7281b")

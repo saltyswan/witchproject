@@ -340,6 +340,10 @@ position = Vector2(3, -2)
 
 [node name="Hurtbox" parent="Witch" index="4"]
 visible = true
+collision_mask = 45
+
+[node name="InvTimer" parent="Witch" index="5"]
+one_shot = true
 
 [node name="Ground" type="TileMapLayer" parent="."]
 z_index = -1

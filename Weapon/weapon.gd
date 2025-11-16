@@ -20,7 +20,6 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout() -> void: 
 	shoot()
-	print("Shooting!")
 
 func shoot():
 	$ShootTimer.start()

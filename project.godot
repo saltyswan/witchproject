@@ -31,6 +31,7 @@ enabled=PackedStringArray()
 
 mobs=""
 witch=""
+bullet=""
 
 [input]
 
@@ -90,7 +91,7 @@ aim_down={
 2d_physics/layer_1="Enemies"
 2d_physics/layer_2="Witch"
 2d_physics/layer_3="Walls & items"
-2d_physics/layer_4="Hurtbox"
+2d_physics/layer_4="WitchHurtbox"
 2d_physics/layer_5="Bullets"
 2d_physics/layer_6="LevelPortal"
 

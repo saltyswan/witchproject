@@ -93,10 +93,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6mum7"]
-radius = 5.0990195
+radius = 6.0
 
 [node name="RedSlime" type="CharacterBody2D" groups=["mobs"]]
-collision_mask = 28
+collision_mask = 30
 script = ExtResource("1_umj5r")
 max_hp = 25
 
@@ -110,6 +110,7 @@ sprite_frames = SubResource("SpriteFrames_nu2n0")
 autoplay = "default"
 
 [node name="Hitbox" type="Area2D" parent="." groups=["mobs"]]
+collision_mask = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["mobs"]]
 position = Vector2(0, -11)
@@ -121,3 +122,11 @@ target_desired_distance = 1.0
 path_max_distance = 10.0
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+
+[node name="KnockTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]

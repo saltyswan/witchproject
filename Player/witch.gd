@@ -5,14 +5,14 @@ const SPEED = 300.0
 @export var max_hp: int = 100
 @onready var _animated_sprite: AnimationPlayer = $AnimationPlayer
 
-var current_hp: int
 var gameover = false
-var hit_damage = 50
+var hit_damage = 10
 var invincible = false
-var knockback : Vector2 = Vector2.ZERO
+var current_hp = max_hp
 
 func _ready() -> void:
 	add_to_group("witch")
+	
 
 func _physics_process(delta: float) -> void:
 	
@@ -44,24 +44,13 @@ func _physics_process(delta: float) -> void:
 		velocity.y = directionY * SPEED
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
-		
-		#NOTE: add knockback override & simplify movement
-
 	
 	move_and_slide()
 
-func taking_knockback(from_pos: Vector2, push: float = 800):
-	var direction =  (global_position - from_pos).normalized()
-	knockback = direction * push
-	print("Ouch!")
-
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-		if not invincible and area.is_in_group("mobs"):
+func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
+		if not invincible and body.is_in_group("mobs"):
 			take_damage()
-			print(current_hp)
 			invincible_state()
-			var enemy = area.get_parent()
-			taking_knockback(enemy.global_position, 800)
 		if current_hp <= 0:
 			print("BAM you're dead")
 			gameover = true
@@ -74,6 +63,7 @@ func invincible_state(duration: float = 1.0):
 	print("Nothing can stop me!")
 	$InvTimer.wait_time = duration
 	$InvTimer.start()
+	#ADD BLINK FOR DURATION
 
 func _on_inv_timer_timeout() -> void:
 	invincible = false
@@ -82,6 +72,7 @@ func _on_inv_timer_timeout() -> void:
 
 func take_damage():
 	current_hp -= hit_damage
+	print("Current HP:", current_hp)
 
 func  _on_dangermode_fight_started() -> void:
 	_animated_sprite.play("attack_down")
@@ -92,7 +83,6 @@ func _on_dangermode_fight_ended() -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	print(anim_name)
 	if anim_name == "death_down":
 			get_tree().change_scene_to_file("res://GameOver.tscn")
 			print("Now heading to Game Over screen")

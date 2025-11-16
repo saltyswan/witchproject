@@ -27,14 +27,14 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_danger_zone_body_entered(body: Node2D) -> void:
-	if stage_cleared == false:
+	if stage_cleared == false and not in_combat:
 		emit_signal(\"fight_started\")
 #
 func _on_fight_started() -> void:
 	#combat_music.play()
-	if in_combat:
-		return
-	else:
+	#if in_combat:
+		#return
+	#else:
 		print(\"DANGER ZONE TRIGGERED\")
 		in_combat = true
 		
