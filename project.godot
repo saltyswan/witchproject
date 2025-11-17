@@ -32,6 +32,7 @@ enabled=PackedStringArray()
 mobs=""
 witch=""
 bullet=""
+doors=""
 
 [input]
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbk1ebode25f8"]
+[gd_scene load_steps=5 format=3 uid="uid://cbk1ebode25f8"]
 
+[ext_resource type="PackedScene" uid="uid://cvqxihjksyiv8" path="res://maps/fading.tscn" id="2_flest"]
 [ext_resource type="Script" uid="uid://ds15g2c84en53" path="res://danger_zone.gd" id="2_w2pf1"]
 
 [sub_resource type="GDScript" id="GDScript_hu84v"]
@@ -47,11 +48,16 @@ func _on_spawner_all_waves_cleared() -> void:
 
 func _on_fight_ended() -> void:
 	if witch:
-		#witch.queue.free()
+		var doors = get_tree().get_nodes_in_group(\"doors\")
+		#doors[0].open_doors()
+		for d in doors:
+			d.open_doors()
 		in_combat = false
 		print(\"Fight is won GG!\")
 	else:
 		return
+		
+
 	#combat_music.stop()
 	#ANIMATION DOORS CLOSED AND SPAWN AREAS DISAPPEARED
 
@@ -65,8 +71,8 @@ func _on_slime_timer_timeout() -> void:
 "
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_vo80h"]
-a = Vector2(12, -211)
-b = Vector2(-128, -69)
+a = Vector2(177, -163)
+b = Vector2(-251, -160)
 
 [node name="Dangermode" type="Node2D"]
 script = SubResource("GDScript_hu84v")
@@ -80,7 +86,11 @@ script = ExtResource("2_w2pf1")
 [node name="Threshold" type="CollisionShape2D" parent="DangerZone"]
 shape = SubResource("SegmentShape2D_vo80h")
 
+[node name="Fading" parent="." instance=ExtResource("2_flest")]
+
 [connection signal="fight_ended" from="." to="." method="_on_fight_ended"]
 [connection signal="fight_started" from="." to="." method="_on_fight_started"]
 [connection signal="body_entered" from="DangerZone" to="." method="_on_danger_zone_body_entered"]
 [connection signal="visibility_changed" from="DangerZone/Threshold" to="." method="_on_threshold_visibility_changed"]
+
+[editable path="Fading"]

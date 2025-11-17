@@ -13,9 +13,9 @@ signal all_waves_cleared
 var dead = false
 
 var waves = [
-	{"count": 3, "delay": 1.0}, #Wave 1 = 3 enemies
-	{"count": 5, "delay": 0.8},
-	{"count": 8, "delay": 0.6} ]
+	{"count": 2, "delay": 1.0}, #Wave 1 = 3 enemies
+	{"count": 4, "delay": 0.8},
+	{"count": 6, "delay": 0.6} ]
 
 var current_wave = 0
 var enemies_remaining = 0
