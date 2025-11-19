@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnsn4s1bbh85y"]
+
+[ext_resource type="Texture2D" uid="uid://b7ip8tte4w5l8" path="res://Enemies/Bat_flying1.png" id="1_nc5xu"]
+[ext_resource type="Texture2D" uid="uid://c3pxnticbd5yv" path="res://Enemies/Bat_flying2.png" id="2_0g1cs"]
+[ext_resource type="Texture2D" uid="uid://cijlbcdmyyfso" path="res://Enemies/Bat_flying3.png" id="3_ppg8i"]
+[ext_resource type="Texture2D" uid="uid://kw8ntdko6hhu" path="res://Enemies/Bat_flying4.png" id="4_srckj"]
+[ext_resource type="Texture2D" uid="uid://cutsubrdyufn7" path="res://Enemies/Bat_flying5.png" id="5_s2gqn"]
+[ext_resource type="Texture2D" uid="uid://b5ux1djof3uim" path="res://Enemies/Bat_flying6.png" id="6_2o2nd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jvndi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nc5xu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0g1cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ppg8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_srckj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s2gqn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2o2nd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Bat" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_jvndi")
+frame_progress = 0.3577695
