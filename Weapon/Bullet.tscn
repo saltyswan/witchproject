@@ -126,5 +126,7 @@ libraries = {
 autoplay = "shoot"
 
 [node name="Sounds" type="AudioStreamPlayer2D" parent="."]
+visible = false
+volume_db = -80.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

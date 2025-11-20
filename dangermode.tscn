@@ -33,9 +33,9 @@ func _on_danger_zone_body_entered(body: Node2D) -> void:
 #
 func _on_fight_started() -> void:
 	#combat_music.play()
-	#if in_combat:
-		#return
-	#else:
+	if in_combat:
+		return
+	else:
 		print(\"DANGER ZONE TRIGGERED\")
 		in_combat = true
 		

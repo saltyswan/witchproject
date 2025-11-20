@@ -1,0 +1,76 @@
+[gd_scene load_steps=14 format=3 uid="uid://bnsn4s1bbh85y"]
+
+[ext_resource type="Texture2D" uid="uid://sfishgxxgwt3" path="res://Enemies/Skeleton_attack1.png" id="1_e5202"]
+[ext_resource type="Texture2D" uid="uid://bkcdxhxh6tqqo" path="res://Enemies/Skeleton_walk1.png" id="1_g687e"]
+[ext_resource type="Texture2D" uid="uid://b2aecsib2bdf" path="res://Enemies/Skeleton_walk2.png" id="2_i84q7"]
+[ext_resource type="Texture2D" uid="uid://b2twoqvuabiup" path="res://Enemies/Skeleton_attack2.png" id="2_pf54f"]
+[ext_resource type="Texture2D" uid="uid://s3gy0785uw6h" path="res://Enemies/Skeleton_walk3.png" id="3_nc5xu"]
+[ext_resource type="Texture2D" uid="uid://bk8oxyusq6xim" path="res://Enemies/Skeleton_attack3.png" id="3_o5rw1"]
+[ext_resource type="Texture2D" uid="uid://c42lhq7befxdt" path="res://Enemies/Skeleton_walk4.png" id="4_0g1cs"]
+[ext_resource type="Texture2D" uid="uid://c3e5uc43ng1ub" path="res://Enemies/Skeleton_attack4.png" id="4_2ojyg"]
+[ext_resource type="Texture2D" uid="uid://du8akhlcfb2v0" path="res://Enemies/Skeleton_attack5.png" id="5_jm08w"]
+[ext_resource type="Texture2D" uid="uid://5cxabuj2uygw" path="res://Enemies/Skeleton_attack6.png" id="6_ny6m6"]
+[ext_resource type="Texture2D" uid="uid://cds5pe5n3pvbo" path="res://Enemies/Skeleton_attack7.png" id="7_ghoec"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agc0e"]
+radius = 6.0
+height = 22.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jvndi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e5202")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pf54f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_o5rw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2ojyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jm08w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ny6m6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ghoec")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g687e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i84q7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nc5xu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0g1cs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="SkeletonNode" type="Node2D"]
+
+[node name="Skeleton" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Skeleton"]
+shape = SubResource("CapsuleShape2D_agc0e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Skeleton"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Skeleton"]
+sprite_frames = SubResource("SpriteFrames_jvndi")
+autoplay = "default"
