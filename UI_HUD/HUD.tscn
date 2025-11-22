@@ -1,9 +1,51 @@
-[gd_scene format=3 uid="uid://5c7goktvlfsd"]
+[gd_scene load_steps=3 format=3 uid="uid://5c7goktvlfsd"]
+
+[ext_resource type="Script" uid="uid://4dg1bqchqeh2" path="res://UI_HUD/hud.gd" id="1_5digi"]
+[ext_resource type="Texture2D" uid="uid://dxv7rjarenil1" path="res://UI_HUD/Heart_full.png" id="1_xaqt5"]
 
 [node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_5digi")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = 114.0
-offset_top = 16.0
-offset_right = 154.0
-offset_bottom = 56.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.17600001
+anchor_right = 0.194
+anchor_bottom = 0.031000001
+offset_left = -7.752014
+offset_top = 132.0
+offset_right = 10.511993
+offset_bottom = 279.912
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Heart1" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_xaqt5")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_xaqt5")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Heart3" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_xaqt5")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Heart4" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_xaqt5")
+expand_mode = 4
+stretch_mode = 5

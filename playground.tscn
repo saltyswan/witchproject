@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://47e11neavc7r"]
+[gd_scene load_steps=29 format=4 uid="uid://47e11neavc7r"]
 
 [ext_resource type="Script" uid="uid://ce4n0n5p8tiuw" path="res://playground.gd" id="1_pio1y"]
 [ext_resource type="PackedScene" uid="uid://2wm1kj185ahp" path="res://Player/witch.tscn" id="2_o00ia"]
@@ -7,11 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cceth3tqyyxkr" path="res://maps/Dungeon_Tileset.png" id="6_4bqqs"]
 [ext_resource type="Texture2D" uid="uid://2erfuf20tgyp" path="res://maps/Doors4.png" id="6_te8jg"]
 [ext_resource type="PackedScene" uid="uid://cbk1ebode25f8" path="res://dangermode.tscn" id="7_ynsuh"]
-[ext_resource type="Script" uid="uid://xlbk5ibc86lr" path="res://go_to_lv_2.gd" id="8_pi42a"]
+[ext_resource type="Script" uid="uid://xlbk5ibc86lr" path="res://Levels/go_to_lv_2.gd" id="8_pi42a"]
 [ext_resource type="AudioStream" uid="uid://bamvfnfta7afv" path="res://MSD/game-8-bit.mp3" id="8_v7dth"]
 [ext_resource type="PackedScene" uid="uid://jwwqhjdi6e5b" path="res://Spawner.tscn" id="9_pi42a"]
 [ext_resource type="PackedScene" uid="uid://dmfurd482hj0e" path="res://UI_HUD/MainMenu.tscn" id="10_h1jm5"]
 [ext_resource type="PackedScene" uid="uid://kpg6ry6cr1k6" path="res://maps/DoorsSpawn.tscn" id="11_pio1y"]
+[ext_resource type="PackedScene" uid="uid://5c7goktvlfsd" path="res://UI_HUD/HUD.tscn" id="13_yjl7g"]
+[ext_resource type="PackedScene" uid="uid://cl0vg0wlg3oot" path="res://UI_HUD/PauseMenu.tscn" id="14_f7pug"]
 
 [sub_resource type="Curve2D" id="Curve2D_v7dth"]
 _data = {
@@ -643,8 +645,10 @@ navigation_polygon = SubResource("NavigationPolygon_v7dth")
 position = Vector2(80, -105)
 zoom = Vector2(1.5, 1.5)
 
-[node name="Witch" parent="." instance=ExtResource("2_o00ia")]
+[node name="Witch" parent="." node_paths=PackedStringArray("hearts_scene") instance=ExtResource("2_o00ia")]
 position = Vector2(65, -257)
+scale = Vector2(1.3, 1.3)
+hearts_scene = NodePath("../Hud/VBoxContainer")
 
 [node name="AnimatedSprite2D" parent="Witch/Weapon" index="0"]
 position = Vector2(-5.9604645e-08, 0)
@@ -677,6 +681,9 @@ combat_music = NodePath("../CombatMusic")
 witch = NodePath("../Witch")
 spawn_location = NodePath("../SpawnPath/SpawnLocation")
 
+[node name="Fading" parent="Dangermode" index="1"]
+visible = false
+
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 autoplay = true
 
@@ -690,6 +697,7 @@ spawn2 = NodePath("../Spawn2")
 spawn3 = NodePath("../Spawn3")
 
 [node name="MainMenu" parent="." instance=ExtResource("10_h1jm5")]
+position = Vector2(600, 340)
 
 [node name="GoToLv2" type="Area2D" parent="."]
 position = Vector2(340, -62)
@@ -704,6 +712,10 @@ shape = SubResource("RectangleShape2D_h1jm5")
 
 [node name="DoorsSpawn" parent="." instance=ExtResource("11_pio1y")]
 position = Vector2(312, -64)
+
+[node name="Hud" parent="." instance=ExtResource("13_yjl7g")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("14_f7pug")]
 
 [connection signal="animation_started" from="Witch/AnimationPlayer" to="Spawner" method="_on_animation_player_animation_started"]
 [connection signal="fight_ended" from="Dangermode" to="." method="_on_dangermode_fight_ended"]
@@ -728,3 +740,5 @@ position = Vector2(312, -64)
 [editable path="Dangermode/Fading"]
 [editable path="Spawner"]
 [editable path="DoorsSpawn"]
+[editable path="Hud"]
+[editable path="PauseMenu"]

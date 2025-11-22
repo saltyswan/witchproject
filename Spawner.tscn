@@ -5,6 +5,15 @@
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_mimr8")
 
+[node name="WaveDelay" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="ClearDelay" type="Timer" parent="."]
+wait_time = 1.0999999999999999
+
 [connection signal="all_waves_cleared" from="." to="." method="_on_all_waves_cleared"]
 [connection signal="wave_cleared" from="." to="." method="_on_wave_cleared"]
 [connection signal="wave_started" from="." to="." method="_on_wave_started"]
+[connection signal="timeout" from="WaveDelay" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ClearDelay" to="." method="_on_clear_delay_timeout"]

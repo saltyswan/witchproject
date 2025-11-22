@@ -8,6 +8,7 @@
 events = [SubResource("InputEventKey_k42oj")]
 
 [node name="MainMenu" type="Node2D"]
+process_mode = 3
 position = Vector2(600, 300)
 script = ExtResource("1_k42oj")
 

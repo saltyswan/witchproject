@@ -5,10 +5,6 @@ func _ready() -> void:
 	$Spawner.connect("wave_started", Callable(self, "_on_wave_started"))
 	$Spawner.connect("wave_cleared", Callable (self, "_on_wave_cleared"))
 	$Spawner.connect ("all_waves_cleared", Callable (self, "_on_waves_cleared"))
-	
-	var hud_scene = preload("res://UI_HUD/HUD.tscn")
-	var hud = hud_scene.instantiate()
-	add_child(hud)
 
 var dangermode = false
 

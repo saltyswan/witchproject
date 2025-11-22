@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=4 uid="uid://du0rs2i2vgpcj"]
+[gd_scene load_steps=17 format=4 uid="uid://du0rs2i2vgpcj"]
 
 [ext_resource type="Script" uid="uid://buhivvim7jq4i" path="res://Levels/level_2.gd" id="1_lfj2m"]
 [ext_resource type="PackedScene" uid="uid://jwwqhjdi6e5b" path="res://Spawner.tscn" id="2_m3ha0"]
 [ext_resource type="PackedScene" uid="uid://2wm1kj185ahp" path="res://Player/witch.tscn" id="3_vd23k"]
+[ext_resource type="PackedScene" uid="uid://5c7goktvlfsd" path="res://UI_HUD/HUD.tscn" id="6_jglcl"]
 [ext_resource type="PackedScene" uid="uid://cbk1ebode25f8" path="res://dangermode.tscn" id="7_xosfc"]
 [ext_resource type="Texture2D" uid="uid://cceth3tqyyxkr" path="res://maps/Dungeon_Tileset.png" id="8_mbiy8"]
 
@@ -326,14 +327,12 @@ navigation_polygon = SubResource("NavigationPolygon_6dto8")
 position = Vector2(80, -105)
 zoom = Vector2(1.5, 1.5)
 
-[node name="Witch" parent="." instance=ExtResource("3_vd23k")]
+[node name="Witch" parent="." node_paths=PackedStringArray("hearts_scene") instance=ExtResource("3_vd23k")]
 position = Vector2(-144, -96)
+hearts_scene = NodePath("../Hud/VBoxContainer")
 
 [node name="SpawnBullet" parent="Witch/Weapon" index="2"]
 position = Vector2(3, 0)
-
-[node name="Hurtbox" parent="Witch" index="4"]
-visible = true
 
 [node name="Ground" type="TileMapLayer" parent="."]
 z_index = -1
@@ -363,6 +362,8 @@ spawn1 = NodePath("../Spawn1")
 spawn2 = NodePath("../Spawn2")
 spawn3 = NodePath("../Spawn3")
 
+[node name="Hud" parent="." instance=ExtResource("6_jglcl")]
+
 [connection signal="animation_started" from="Witch/AnimationPlayer" to="Spawner" method="_on_animation_player_animation_started"]
 [connection signal="fight_ended" from="Dangermode" to="." method="on_fight_ended"]
 [connection signal="fight_ended" from="Dangermode" to="Witch/Weapon" method="_on_dangermode_fight_ended"]
@@ -376,3 +377,5 @@ spawn3 = NodePath("../Spawn3")
 [editable path="Witch"]
 [editable path="Witch/Weapon"]
 [editable path="Dangermode"]
+[editable path="Dangermode/Fading"]
+[editable path="Hud"]

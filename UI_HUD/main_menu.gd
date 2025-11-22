@@ -9,6 +9,8 @@ func _on_play_pressed():
 func _on_quit_pressed():
 	get_tree().quit()
 
+#NOTE: Nice to have: credits
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
