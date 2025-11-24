@@ -14,9 +14,19 @@ const KB_FORCE = 300
 func _ready() -> void:
 	add_to_group("mobs")
 	current_hp = max_hp
-	target = get_tree().get_nodes_in_group("witch")[0]
+	var werewitch = get_tree().get_nodes_in_group("witch")
+	target = werewitch[0]
 	
 func _physics_process(delta: float) -> void:
+	
+	if not is_instance_valid(target):
+		var werewitch = get_tree().get_nodes_in_group("witch")
+		print(werewitch)
+		if werewitch.size() > 0:
+			print("Switching target")
+			target = werewitch[0]
+		else:
+			return
 	
 	if knocked:
 		velocity = knockback
@@ -29,10 +39,6 @@ func _physics_process(delta: float) -> void:
 		velocity = global_position.direction_to(nav_agent.get_next_path_position()) * SPEED
 		move_and_slide()
 		return
-	
-	if target == null:
-		return
-	
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullet"):

@@ -38,7 +38,7 @@ func _on_fight_started() -> void:
 	else:
 		print(\"DANGER ZONE TRIGGERED\")
 		in_combat = true
-		
+		$WerewolfTimer.start()
 #Add here function to emit signal fight ended
 
 func _on_spawner_all_waves_cleared() -> void:
@@ -54,6 +54,7 @@ func _on_fight_ended() -> void:
 			d.open_doors()
 		in_combat = false
 		print(\"Fight is won GG!\")
+		$WerewolfTimer.stop()
 	else:
 		return
 		
@@ -87,6 +88,9 @@ script = ExtResource("2_w2pf1")
 shape = SubResource("SegmentShape2D_vo80h")
 
 [node name="Fading" parent="." instance=ExtResource("2_flest")]
+
+[node name="WerewolfTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [connection signal="fight_ended" from="." to="." method="_on_fight_ended"]
 [connection signal="fight_started" from="." to="." method="_on_fight_started"]
