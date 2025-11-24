@@ -2,22 +2,21 @@ extends CharacterBody2D
 
 const SPEED = 150.0
 
-@export var max_hp: int = 4
-@export var hearts_scene: VBoxContainer
 @onready var _animated_sprite: AnimationPlayer = $AnimationPlayer
 @onready var wolf_scene = preload("res://Player/werewolf.tscn")
 
 var gameover = false
-var hit_damage = 1
 var invincible = false
-var current_hp = max_hp
-var hearts_list : Array[TextureRect]
+var combat_mode = false
+#var current_hp = max_hp
 
 func _ready() -> void:
 	add_to_group("witch")
-	for child in hearts_scene.get_children():
-		hearts_list.append(child)
-	print(hearts_list)
+	$"../Dangermode".wolf_timeout.connect(_on_werewolf_timer_timeout)
+
+	#for child in hearts_scene.get_children():
+		#hearts_list.append(child)
+	#print(hearts_list)
 
 func _physics_process(delta: float) -> void:
 	
@@ -50,19 +49,14 @@ func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
 		if gameover:
 			return
 		if not invincible and body.is_in_group("mobs"):
-			take_damage()
+			HpPlayer.take_damage()
 			invincible_state()
-		if current_hp <= 0:
+		if HpPlayer.current_hp <= 0:
 			print("BAM you're dead")
 			gameover = true
 			_animated_sprite.play("death_down")
 		else:
 			return
-		
-func update_hearts():
-		for i:int in range(hearts_list.size()):
-			hearts_list[i].visible = i < current_hp
-		print("You lost one heart")
 
 func invincible_state(duration: float = 1.0):
 	invincible = true
@@ -75,25 +69,28 @@ func _on_inv_timer_timeout() -> void:
 	invincible = false
 	print("I'm no longer invincible")
 
-func take_damage():
-	current_hp -= hit_damage
-	print("Current HP:", current_hp)
-	update_hearts()
-
 func  _on_dangermode_fight_started() -> void:
 	_animated_sprite.play("attack_down")
+	combat_mode = true
+	print("Combat mode is true, you can transform.")
+
+func _on_werewolf_timer_timeout() -> void:
+	if combat_mode:
+		print("I'm valid!")
+		var wolf_instance = wolf_scene.instantiate()
+		get_tree().get_current_scene().add_child(wolf_instance)
+		wolf_instance.global_position = global_position
+		queue_free()
+	else:
+		return
 
 func _on_dangermode_fight_ended() -> void:
 	_animated_sprite.play("idle_down")
+	combat_mode = false
+	print("I can't transform anymore")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death_down":
 			get_tree().change_scene_to_file("res://UI_HUD/GameOver.tscn")
 			print("Now heading to Game Over screen")
 #NOTE: add slow down here?
-
-func _on_werewolf_timer_timeout() -> void:
-	var wolf_instance = wolf_scene.instantiate()
-	get_tree().get_current_scene().add_child(wolf_instance)
-	wolf_instance.global_position = global_position
-	queue_free()

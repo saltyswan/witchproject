@@ -15,10 +15,12 @@ script/source = "extends Node2D
 @export var red_slime: CharacterBody2D
 @onready var red_slime_scene = preload(\"res://Enemies/Red_slime.tscn\")
 
+
 var in_combat: bool = false
 
 signal fight_started
 signal fight_ended
+signal wolf_timeout
 var stage_cleared = false
 
 func _ready() -> void:
@@ -39,7 +41,8 @@ func _on_fight_started() -> void:
 		print(\"DANGER ZONE TRIGGERED\")
 		in_combat = true
 		$WerewolfTimer.start()
-#Add here function to emit signal fight ended
+
+
 
 func _on_spawner_all_waves_cleared() -> void:
 	fight_ended.emit()
@@ -69,6 +72,11 @@ func _on_slime_timer_timeout() -> void:
 	var player_position = $Witch.position
 	red_slime.initialize(mob_spawn_location.position, player_position)
 	#NOTE: CREATE A DEDICATED NODE FOR IT?
+
+
+func _on_werewolf_timer_timeout() -> void:
+	print(\"The moon is full.\")
+	wolf_timeout.emit()
 "
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_vo80h"]
@@ -90,7 +98,7 @@ shape = SubResource("SegmentShape2D_vo80h")
 [node name="Fading" parent="." instance=ExtResource("2_flest")]
 
 [node name="WerewolfTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 5.0
 
 [connection signal="fight_ended" from="." to="." method="_on_fight_ended"]
 [connection signal="fight_started" from="." to="." method="_on_fight_started"]
