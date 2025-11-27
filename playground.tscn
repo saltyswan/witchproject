@@ -684,7 +684,7 @@ spawn_location = NodePath("../SpawnPath/SpawnLocation")
 visible = false
 
 [node name="WerewolfTimer" parent="Dangermode" index="2"]
-wait_time = 2.0
+wait_time = 3.0
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 autoplay = true

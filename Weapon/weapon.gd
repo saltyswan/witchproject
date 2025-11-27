@@ -27,6 +27,9 @@ func _on_timer_timeout() -> void:
 
 func shoot():
 	$ShootTimer.start()
+	call_deferred("instantiate_bullet")
+
+func instantiate_bullet():
 	var b = Bullet.instantiate()
 	get_tree().get_current_scene().add_child(b)
 	b.transform = Spawnbullet.global_transform

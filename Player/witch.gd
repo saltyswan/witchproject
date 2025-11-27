@@ -8,6 +8,7 @@ const SPEED = 150.0
 var gameover = false
 var invincible = false
 var combat_mode = false
+var transformation_triggered = false
 #var current_hp = max_hp
 
 func _ready() -> void:
@@ -75,7 +76,8 @@ func  _on_dangermode_fight_started() -> void:
 	print("Combat mode is true, you can transform.")
 
 func _on_werewolf_timer_timeout() -> void:
-	if combat_mode:
+	if combat_mode and not transformation_triggered:
+		transformation_triggered = true
 		print("I'm valid!")
 		var wolf_instance = wolf_scene.instantiate()
 		get_tree().get_current_scene().add_child(wolf_instance)

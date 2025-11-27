@@ -1,39 +1,71 @@
-[gd_scene load_steps=21 format=3 uid="uid://bqril3qd36dv4"]
+[gd_scene load_steps=35 format=3 uid="uid://bqril3qd36dv4"]
 
-[ext_resource type="Texture2D" uid="uid://drcle0b2yu1e4" path="res://Player/Transformation_anim.png" id="1_1qr21"]
 [ext_resource type="Script" uid="uid://co0xj73eyskns" path="res://Player/werewolf.gd" id="1_uiv21"]
+[ext_resource type="Texture2D" uid="uid://ohsq574usw0x" path="res://Player/Werewolf_attack1.png" id="2_r0xnq"]
 [ext_resource type="Texture2D" uid="uid://dhqd36qm8r62w" path="res://Player/Transformation_animcomplete1.png" id="3_75ii8"]
+[ext_resource type="Texture2D" uid="uid://d1j040gp3svx6" path="res://Player/Werewolf_attack2.png" id="3_y1w18"]
+[ext_resource type="Texture2D" uid="uid://c0fhrsjq661vh" path="res://Player/Werewolf_attack3.png" id="4_1k1t4"]
 [ext_resource type="Texture2D" uid="uid://hn6untw42jwy" path="res://Player/Transformation_animcomplete2.png" id="4_3ksy1"]
 [ext_resource type="Texture2D" uid="uid://dq4vc5dalthta" path="res://Player/Transformation_animcomplete3.png" id="5_fk3js"]
+[ext_resource type="Texture2D" uid="uid://6oj62g8q65me" path="res://Player/Werewolf_attack4.png" id="5_stnhq"]
 [ext_resource type="Texture2D" uid="uid://dxdksdst746er" path="res://Player/Transformation_animcomplete4.png" id="6_32c2h"]
+[ext_resource type="Texture2D" uid="uid://csls16vlv11tf" path="res://Player/Werewolf_death1.png" id="6_q7jjt"]
+[ext_resource type="Texture2D" uid="uid://s02valukemt" path="res://Player/Werewolf_death2.png" id="7_fd6wo"]
 [ext_resource type="Texture2D" uid="uid://doasys2oybjgp" path="res://Player/Transformation_animcomplete5.png" id="7_qrntf"]
 [ext_resource type="Texture2D" uid="uid://c3jmlq8jol3ut" path="res://Player/Transformation_animcomplete6.png" id="8_1eak0"]
+[ext_resource type="Texture2D" uid="uid://0e4el5kwp67c" path="res://Player/Werewolf_death3.png" id="8_ye8ko"]
 [ext_resource type="Texture2D" uid="uid://ct7olj156hthi" path="res://Player/claw-attack1.png" id="9_32c2h"]
+[ext_resource type="Texture2D" uid="uid://d2uj1qpey35cb" path="res://Player/Werewolf_death4.png" id="9_xfvxw"]
+[ext_resource type="Texture2D" uid="uid://datrup4ecycp1" path="res://Player/Werewolf_death5.png" id="10_ktt4j"]
 [ext_resource type="Texture2D" uid="uid://cfkn4b4rbmm8v" path="res://Player/claw-attack2.png" id="10_qrntf"]
 [ext_resource type="Texture2D" uid="uid://0aangkxfxjtl" path="res://Player/claw-attack3.png" id="11_1eak0"]
+[ext_resource type="Texture2D" uid="uid://4ailtuuf8xab" path="res://Player/Werewolf_death6.png" id="11_2eh8d"]
+[ext_resource type="Texture2D" uid="uid://brsmcmdgqrjyl" path="res://Player/Werewolf_death7.png" id="12_tqg10"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uiv21"]
 animations = [{
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r0xnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y1w18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1k1t4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_stnhq")
+}],
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_1qr21")
+"texture": ExtResource("6_q7jjt")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_1qr21")
+"texture": ExtResource("7_fd6wo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ye8ko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_xfvxw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ktt4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2eh8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_tqg10")
 }],
 "loop": false,
 "name": &"death",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -76,6 +108,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_q50x0"]
 resource_name = "death"
+length = 0.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -83,15 +116,15 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.54),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 
 [sub_resource type="Animation" id="Animation_g4ruo"]
 resource_name = "run"
-length = 2.5
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -99,15 +132,32 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.53333336, 1, 1.4666667, 1.9666667, 2.4666667),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_r0xnq"]
+resource_name = "attack"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q50x0"]
 _data = {
 &"RESET": SubResource("Animation_uiv21"),
+&"attack": SubResource("Animation_r0xnq"),
 &"death": SubResource("Animation_q50x0"),
 &"run": SubResource("Animation_g4ruo")
 }
@@ -117,7 +167,6 @@ radius = 7.0
 height = 26.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q50x0"]
-radius = 16.0
 height = 32.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jally"]
@@ -132,13 +181,65 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_1eak0")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_d0pc6"]
-radius = 6.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r0xnq"]
+radius = 8.0
+height = 32.0
+
+[sub_resource type="Animation" id="Animation_y1w18"]
+resource_name = "default"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("AnimatedSprite2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1k1t4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_stnhq"]
+_data = {
+&"RESET": SubResource("Animation_1k1t4"),
+&"default": SubResource("Animation_y1w18")
+}
 
 [node name="Werewolf" type="CharacterBody2D" node_paths=PackedStringArray("direction_sprite") groups=["witch"]]
 collision_layer = 2
@@ -148,7 +249,7 @@ direction_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uiv21")
-animation = &"death"
+animation = &"attack"
 autoplay = "run"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -158,6 +259,7 @@ libraries = {
 autoplay = "run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CapsuleShape2D_g4ruo")
 
 [node name="Hurtbox" type="Area2D" parent="."]
@@ -169,20 +271,34 @@ shape = SubResource("CapsuleShape2D_q50x0")
 
 [node name="InvTimer" type="Timer" parent="."]
 
-[node name="Claw" type="Node2D" parent="."]
+[node name="B2WTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Claw" type="Node2D" parent="." groups=["witch"]]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Claw"]
-position = Vector2(18, 2)
+position = Vector2(21, 2)
 sprite_frames = SubResource("SpriteFrames_jally")
-frame_progress = 0.80371284
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Claw"]
-position = Vector2(16, 4)
-shape = SubResource("CircleShape2D_d0pc6")
+position = Vector2(21, 1)
+shape = SubResource("CapsuleShape2D_r0xnq")
 
 [node name="ClawTimer" type="Timer" parent="Claw"]
+autostart = true
+
+[node name="AnimationPlay" type="AnimationPlayer" parent="Claw"]
+libraries = {
+&"": SubResource("AnimationLibrary_stnhq")
+}
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="InvTimer" to="." method="_on_inv_timer_timeout"]
+[connection signal="timeout" from="B2WTimer" to="." method="_on_b_2w_timer_timeout"]
+[connection signal="tree_entered" from="B2WTimer" to="." method="_on_b_2w_timer_tree_entered"]
+[connection signal="tree_entered" from="Claw" to="." method="_on_claw_tree_entered"]
+[connection signal="timeout" from="Claw/ClawTimer" to="." method="_on_claw_timer_timeout"]
+[connection signal="tree_entered" from="Claw/ClawTimer" to="." method="_on_claw_timer_tree_entered"]
+[connection signal="animation_finished" from="Claw/AnimationPlay" to="." method="_on_animation_play_animation_finished"]

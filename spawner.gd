@@ -40,7 +40,7 @@ func _start_next_wave():
 		#for i in range(wave_datas.count):
 			$WaveDelay.start()
 			print("Next wave started")
-			#await get_tree().create_timer(wave_data.delay).timeout
+
 
 
 func _on_timer_timeout() -> void:

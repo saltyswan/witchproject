@@ -45,7 +45,6 @@ func _process(delta: float) -> void:
 func _on_dangermode_fight_started() -> void:
 	pass # Replace with function body.
 
-
 func _on_spawner_wave_started(wave_number: Variant) -> void:
 	pass # Replace with function body.
 

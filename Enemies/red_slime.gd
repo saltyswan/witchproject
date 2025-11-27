@@ -23,7 +23,6 @@ func _physics_process(delta: float) -> void:
 		var werewitch = get_tree().get_nodes_in_group("witch")
 		print(werewitch)
 		if werewitch.size() > 0:
-			print("Switching target")
 			target = werewitch[0]
 		else:
 			return

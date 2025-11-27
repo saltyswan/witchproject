@@ -10,7 +10,7 @@ func _ready() -> void:
 
 	for child in hearts_scene.get_children():
 		hearts_list.append(child)
-		print(hearts_list)
+		#print(hearts_list)
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
