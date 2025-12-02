@@ -1,21 +1,119 @@
-[gd_scene load_steps=3 format=3 uid="uid://5c7goktvlfsd"]
+[gd_scene load_steps=15 format=3 uid="uid://5c7goktvlfsd"]
 
 [ext_resource type="Script" uid="uid://4dg1bqchqeh2" path="res://UI_HUD/hud.gd" id="1_5digi"]
-[ext_resource type="Texture2D" uid="uid://dxv7rjarenil1" path="res://UI_HUD/Heart_full.png" id="1_xaqt5"]
+[ext_resource type="Texture2D" uid="uid://dw02ophqolxsg" path="res://Enemies/HPheartv2.png" id="2_4ps3q"]
+[ext_resource type="Texture2D" uid="uid://2y8dqpc0htv7" path="res://UI_HUD/Moon-1.png" id="3_5w0r8"]
+[ext_resource type="Texture2D" uid="uid://b3cbhblhe1ul5" path="res://UI_HUD/Moon-2.png" id="4_h5tnk"]
+[ext_resource type="Texture2D" uid="uid://rxje4uiiujph" path="res://UI_HUD/Moon-3.png" id="5_5pbyu"]
+[ext_resource type="Texture2D" uid="uid://cmpe4gco7adxh" path="res://UI_HUD/Moon-4.png" id="6_osrgr"]
+[ext_resource type="Texture2D" uid="uid://3j40502ow4q7" path="res://UI_HUD/Moon-5.png" id="7_xaibk"]
+[ext_resource type="Texture2D" uid="uid://ceq2bdvh4kt1o" path="res://UI_HUD/Moon-6.png" id="8_rv3fl"]
+[ext_resource type="Texture2D" uid="uid://ci68irkmv5eoa" path="res://UI_HUD/Moon-7.png" id="9_gp7da"]
+[ext_resource type="Texture2D" uid="uid://nt0iq26arv4x" path="res://UI_HUD/Moon-8.png" id="10_qcu83"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5w0r8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5w0r8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_h5tnk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5pbyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_osrgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xaibk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rv3fl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gp7da")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qcu83")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_cae5a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:sprite_frames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_5w0r8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_xqndm"]
+resource_name = "default"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:sprite_frames")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("SpriteFrames_5w0r8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.0333333, 0.0666667, 0.1666667, 0.2666667, 0.3666667, 0.4666667, 0.5666667, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23r0t"]
+_data = {
+&"RESET": SubResource("Animation_cae5a"),
+&"default": SubResource("Animation_xqndm")
+}
 
 [node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("hearts_scene")]
 script = ExtResource("1_5digi")
 hearts_scene = NodePath("VBoxContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchors_preset = -1
-anchor_left = 0.17600001
-anchor_right = 0.194
-anchor_bottom = 0.031000001
-offset_left = -7.752014
-offset_top = 132.0
-offset_right = 10.511993
-offset_bottom = 279.912
+offset_left = 73.0
+offset_top = 65.0
+offset_right = 100.0
+offset_bottom = 236.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -23,30 +121,48 @@ size_flags_vertical = 4
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("1_xaqt5")
-expand_mode = 4
+texture = ExtResource("2_4ps3q")
 stretch_mode = 5
 
 [node name="Heart2" type="TextureRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("1_xaqt5")
-expand_mode = 4
+texture = ExtResource("2_4ps3q")
 stretch_mode = 5
 
 [node name="Heart3" type="TextureRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("1_xaqt5")
-expand_mode = 4
+texture = ExtResource("2_4ps3q")
 stretch_mode = 5
 
 [node name="Heart4" type="TextureRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("1_xaqt5")
-expand_mode = 4
+texture = ExtResource("2_4ps3q")
 stretch_mode = 5
+
+[node name="MoonSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(88, 273)
+sprite_frames = SubResource("SpriteFrames_5w0r8")
+frame = 1
+
+[node name="MoonPhases" type="AnimationPlayer" parent="MoonSprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_23r0t")
+}
+speed_scale = 0.5
+
+[node name="FullMoon" type="TextureRect" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 66.0
+offset_top = -19.0
+offset_right = 110.0
+offset_bottom = 25.0
+grow_vertical = 2
+texture = ExtResource("6_osrgr")

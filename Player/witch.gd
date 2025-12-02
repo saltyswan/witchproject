@@ -1,20 +1,23 @@
 extends CharacterBody2D
 
-const SPEED = 150.0
+const SPEED = 200.0
 
 @onready var _animated_sprite: AnimationPlayer = $AnimationPlayer
-@onready var wolf_scene = preload("res://Player/werewolf.tscn")
 
 var gameover = false
 var invincible = false
 var combat_mode = false
-var transformation_triggered = false
+var blinking = false
 #var current_hp = max_hp
 
 func _ready() -> void:
+	
+	$"../Dangermode".fight_ended.connect(on_dangermode_fight_ended)
+	$"../Dangermode".fight_started.connect(on_dangermode_fight_started)
+	
 	add_to_group("witch")
-	$"../Dangermode".wolf_timeout.connect(_on_werewolf_timer_timeout)
-
+	if combat_mode:
+		$Weapon.shoot()
 	#for child in hearts_scene.get_children():
 		#hearts_list.append(child)
 	#print(hearts_list)
@@ -23,18 +26,20 @@ func _physics_process(delta: float) -> void:
 	
 	if gameover:
 		return
-		
-	if Input.is_action_pressed("move_up"):
-		_animated_sprite.play("walk_up")
-		$Weapon.show_behind_parent = true
-		
-	elif Input.is_action_pressed("move_down"):
-		_animated_sprite.play("walk_down")
-		$Weapon.show_behind_parent = false
-		
-	else:
-		_animated_sprite.play("idle_down")
-		$Weapon.show_behind_parent = false
+	
+	if not blinking:
+	
+		if Input.is_action_pressed("move_up"):
+			_animated_sprite.play("walk_up")
+			$Weapon.show_behind_parent = true
+			
+		elif Input.is_action_pressed("move_down"):
+			_animated_sprite.play("walk_down")
+			$Weapon.show_behind_parent = false
+			
+		else:
+			_animated_sprite.play("idle_down")
+			$Weapon.show_behind_parent = false
 		#wont work anymore : reformulate for "when nothing is pressed"
 	
 	var input_vector = Vector2(Input.get_axis("move_left","move_right"), Input.get_axis("move_up", "move_down"))
@@ -50,6 +55,8 @@ func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
 		if gameover:
 			return
 		if not invincible and body.is_in_group("mobs"):
+			_animated_sprite.play("blink")
+			blinking = true
 			HpPlayer.take_damage()
 			invincible_state()
 		if HpPlayer.current_hp <= 0:
@@ -58,6 +65,8 @@ func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
 			_animated_sprite.play("death_down")
 		else:
 			return
+
+
 
 func invincible_state(duration: float = 1.0):
 	invincible = true
@@ -68,25 +77,15 @@ func invincible_state(duration: float = 1.0):
 
 func _on_inv_timer_timeout() -> void:
 	invincible = false
+	blinking = false
 	print("I'm no longer invincible")
 
-func  _on_dangermode_fight_started() -> void:
+func on_dangermode_fight_started() -> void:
 	_animated_sprite.play("attack_down")
 	combat_mode = true
 	print("Combat mode is true, you can transform.")
 
-func _on_werewolf_timer_timeout() -> void:
-	if combat_mode and not transformation_triggered:
-		transformation_triggered = true
-		print("I'm valid!")
-		var wolf_instance = wolf_scene.instantiate()
-		get_tree().get_current_scene().add_child(wolf_instance)
-		wolf_instance.global_position = global_position
-		queue_free()
-	else:
-		return
-
-func _on_dangermode_fight_ended() -> void:
+func on_dangermode_fight_ended() -> void:
 	_animated_sprite.play("idle_down")
 	combat_mode = false
 	print("I can't transform anymore")
@@ -95,4 +94,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death_down":
 			get_tree().change_scene_to_file("res://UI_HUD/GameOver.tscn")
 			print("Now heading to Game Over screen")
+	if anim_name == "blink":
+		print("I blinked!")
 #NOTE: add slow down here?

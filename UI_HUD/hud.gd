@@ -6,6 +6,9 @@ var hearts_list : Array[TextureRect]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
+	$MoonSprite.hide()
+	$FullMoon.hide()
+	
 	HpPlayer.hp_lost.connect(on_hp_lost)
 
 	for child in hearts_scene.get_children():
@@ -24,3 +27,12 @@ func on_hp_lost(current_hp):
 
 func _on_heart_1_visibility_changed() -> void:
 	pass
+
+
+func _on_dangermode_fight_started() -> void:
+	$MoonSprite.show()
+	$MoonSprite.play("default")
+
+
+func _on_dangermode_fight_ended() -> void:
+	$MoonSprite.hide()

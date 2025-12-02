@@ -20,10 +20,13 @@ func on_fight_started():
 	dangermode = true
 	print("Fight mode started")
 	$Spawner.wave_started.emit()
+	$Spawner/WolfTimer.start()
 	
 func on_fight_ended():
 	dangermode = false
 	print("Fight mode ended")
+	$Spawner/WolfTimer.stop()
+	$Spawner/WitchTimer.stop()
 
 func _on_wave_started(wave_number):
 	print("Wave ", wave_number, " started!")
@@ -52,7 +55,6 @@ func _on_spawner_wave_started(wave_number: Variant) -> void:
 func _on_go_to_lv_2_body_entered(body: Node2D) -> void:
 	if body.is_in_group("witch") and not dangermode:
 		fade_out_switch()
-	
 
 func fade_out_switch():
 		var fading_in = fading_scene.instantiate()

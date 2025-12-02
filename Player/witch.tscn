@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://2wm1kj185ahp"]
+[gd_scene load_steps=37 format=3 uid="uid://2wm1kj185ahp"]
 
 [ext_resource type="Script" uid="uid://x1wd1ftbm1l7" path="res://Player/witch.gd" id="1_3anrn"]
+[ext_resource type="Shader" uid="uid://kjiqujvjfoow" path="res://Player/witch.gdshader" id="2_02vsg"]
 [ext_resource type="Texture2D" uid="uid://bv1w2ytejxcy3" path="res://Player/Sprite_witch_shootdown1.png" id="3_qkg00"]
 [ext_resource type="Texture2D" uid="uid://lj6koq6as6mj" path="res://Player/Sprite_witch_shootdown2.png" id="4_k5khx"]
 [ext_resource type="Texture2D" uid="uid://ctbaubc76rcpt" path="res://Player/Sprite_witch_shootdown3.png" id="5_00lxy"]
@@ -24,6 +25,11 @@
 [ext_resource type="Texture2D" uid="uid://baw6nu17g8eqx" path="res://Player/Sprite_witch_runup4.png" id="19_55vgx"]
 [ext_resource type="PackedScene" uid="uid://db0u3xvvwgiqq" path="res://Weapon/Weapon.tscn" id="24_02vsg"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y6hiv"]
+shader = ExtResource("2_02vsg")
+shader_parameter/flash_color = Color(0.92156863, 0.9254902, 1, 0.9490196)
+shader_parameter/flash_value = 0.0
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_8u5wv"]
 animations = [{
 "frames": [{
@@ -42,6 +48,11 @@ animations = [{
 "loop": true,
 "name": &"attack_down",
 "speed": 8.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"blink",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -149,6 +160,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_wjae3"]
@@ -293,10 +316,27 @@ tracks/1/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_02vsg"]
+resource_name = "blink"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.001, 0.3333333, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iwfi3"]
 _data = {
 &"RESET": SubResource("Animation_hp8me"),
 &"attack_down": SubResource("Animation_wjae3"),
+&"blink": SubResource("Animation_02vsg"),
 &"death_down": SubResource("Animation_tqgtt"),
 &"idle_down": SubResource("Animation_ikhnm"),
 &"walk_down": SubResource("Animation_iwfi3"),
@@ -314,6 +354,7 @@ script = ExtResource("1_3anrn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+material = SubResource("ShaderMaterial_y6hiv")
 position = Vector2(1, -5)
 sprite_frames = SubResource("SpriteFrames_8u5wv")
 animation = &"idle_down"
@@ -327,9 +368,11 @@ shape = SubResource("CapsuleShape2D_sk4no")
 libraries = {
 &"": SubResource("AnimationLibrary_iwfi3")
 }
-autoplay = "idle_down"
 
 [node name="Weapon" parent="." instance=ExtResource("24_02vsg")]
+
+[node name="ShootTimer" parent="Weapon" index="1"]
+wait_time = 0.2
 
 [node name="Hurtbox" type="Area2D" parent="." groups=["witch"]]
 collision_layer = 8

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b5ux1djof3uim" path="res://Enemies/Bat_flying6.png" id="7_ugiml"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ap5ux"]
-radius = 4.999668
+radius = 5.9996014
 height = 15.998928
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nu2n0"]
@@ -39,7 +39,7 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m77bt"]
-radius = 6.998187
+radius = 7.9999886
 height = 19.999968
 
 [node name="Bat" type="CharacterBody2D" groups=["mobs"]]

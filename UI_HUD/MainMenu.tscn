@@ -1,61 +1,71 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmfurd482hj0e"]
+[gd_scene load_steps=5 format=3 uid="uid://dmfurd482hj0e"]
 
 [ext_resource type="Script" uid="uid://cwuysewbeowtk" path="res://UI_HUD/main_menu.gd" id="1_k42oj"]
+[ext_resource type="Texture2D" uid="uid://dhxxwn6q3e5s" path="res://UI_HUD/backgroundmain_v1.png" id="2_id7el"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_k42oj"]
 
 [sub_resource type="Shortcut" id="Shortcut_id7el"]
 events = [SubResource("InputEventKey_k42oj")]
 
-[node name="MainMenu" type="Node2D"]
+[node name="MainMenu" type="CanvasLayer"]
 process_mode = 3
-position = Vector2(600, 300)
 script = ExtResource("1_k42oj")
+
+[node name="BackgroundMenu" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("2_id7el")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -31.0
+offset_top = 123.0
+offset_right = 32.0
+offset_bottom = 246.0
+grow_horizontal = 2
+theme_override_constants/separation = 15
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+shortcut = SubResource("Shortcut_id7el")
+text = "Play"
+metadata/_edit_use_anchors_ = true
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+metadata/_edit_use_anchors_ = true
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+metadata/_edit_use_anchors_ = true
 
 [node name="GameTitle" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -299.0
-offset_top = -180.0
-offset_right = 318.0
-offset_bottom = -117.0
+offset_left = -172.0
+offset_top = 385.0
+offset_right = 445.0
+offset_bottom = 481.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 45
-text = "THE AWESOME WITCH GAME"
+theme_override_font_sizes/font_size = 70
+text = "WEREWITCH"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayButton" type="Button" parent="."]
-anchors_preset = -1
-anchor_bottom = 0.5
-offset_left = -91.0
-offset_top = 40.0
-offset_right = 95.0
-offset_bottom = 108.0
-grow_horizontal = 2
-grow_vertical = 2
-shortcut = SubResource("Shortcut_id7el")
-text = "Play"
-
-[node name="QuitButton" type="Button" parent="."]
-offset_left = -91.0
-offset_top = 127.0
-offset_right = 95.0
-offset_bottom = 195.0
-text = "Quit"
-
-[node name="BackgroundMenu" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
-
-[node name="CreditsButton" type="Button" parent="."]
-offset_left = -91.0
-offset_top = 220.0
-offset_right = 95.0
-offset_bottom = 288.0
-text = "Credits"
-
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
