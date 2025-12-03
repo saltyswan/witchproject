@@ -9,10 +9,11 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("mobs"):
 		speed = 0
 		$AnimationPlayer.play("explode")
+		$ExplodeSound.play()
 	else:
 		queue_free()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "explode":
-		print("Bullet has exploded")
+		print("[Bullet] Bullet has exploded")
 		queue_free()

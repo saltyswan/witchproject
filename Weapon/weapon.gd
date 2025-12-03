@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 	if shooting_mode:
 		shoot()
-		print("Ready = shooting")
+		print("[Weapon] Ready = shooting")
 	
 func _process(delta: float) -> void:
 	
@@ -45,12 +45,12 @@ func _on_dangermode_fight_started() -> void:
 	if not shooting_mode:
 		shooting_mode = true
 		shoot()
-		print("Combat mode ON: shooting started")
+		print("[Weapon] Combat mode ON: shooting started")
 
 func _on_dangermode_fight_ended() -> void:
 	shooting_mode = false
 	$ShootTimer.stop()
-	print("Shooting will stop")
+	print("[Weapon] Shooting will stop")
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:
 	if anim_name == "death_down":

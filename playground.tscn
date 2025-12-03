@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://47e11neavc7r"]
+[gd_scene load_steps=38 format=4 uid="uid://47e11neavc7r"]
 
 [ext_resource type="Script" uid="uid://ce4n0n5p8tiuw" path="res://playground.gd" id="1_pio1y"]
 [ext_resource type="PackedScene" uid="uid://2wm1kj185ahp" path="res://Player/witch.tscn" id="2_o00ia"]
@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cd0ni7o3hu65e" path="res://maps/Spiralstairs.png" id="5_h1jm5"]
 [ext_resource type="Texture2D" uid="uid://cceth3tqyyxkr" path="res://maps/Dungeon_Tileset.png" id="6_4bqqs"]
 [ext_resource type="Texture2D" uid="uid://2erfuf20tgyp" path="res://maps/Doors4.png" id="6_te8jg"]
+[ext_resource type="Texture2D" uid="uid://da5k3dcs3t6i0" path="res://maps/Bluetorch1-Sheet-export.png" id="7_f7pug"]
 [ext_resource type="PackedScene" uid="uid://cbk1ebode25f8" path="res://dangermode.tscn" id="7_ynsuh"]
 [ext_resource type="Script" uid="uid://xlbk5ibc86lr" path="res://Levels/go_to_lv_2.gd" id="8_pi42a"]
-[ext_resource type="AudioStream" uid="uid://bamvfnfta7afv" path="res://MSD/game-8-bit.mp3" id="8_v7dth"]
 [ext_resource type="PackedScene" uid="uid://jwwqhjdi6e5b" path="res://Spawner.tscn" id="9_pi42a"]
 [ext_resource type="PackedScene" uid="uid://kpg6ry6cr1k6" path="res://maps/DoorsSpawn.tscn" id="11_pio1y"]
 [ext_resource type="PackedScene" uid="uid://5c7goktvlfsd" path="res://UI_HUD/HUD.tscn" id="13_yjl7g"]
@@ -243,11 +243,20 @@ texture = ExtResource("6_te8jg")
 0:0/0 = 0
 1:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgc46"]
+texture = ExtResource("7_f7pug")
+0:0/animation_columns = 4
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_v7dth"]
 sources/0 = SubResource("TileSetAtlasSource_ynsuh")
 sources/1 = SubResource("TileSetAtlasSource_h1jm5")
 sources/2 = SubResource("TileSetAtlasSource_te8jg")
 sources/3 = SubResource("TileSetAtlasSource_yjl7g")
+sources/4 = SubResource("TileSetAtlasSource_jgc46")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4bqqs"]
 
@@ -602,17 +611,65 @@ texture = ExtResource("4_pi42a")
 9:9/0 = 0
 9:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_dk0co"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pactg"]
+texture = SubResource("CompressedTexture2D_dk0co")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ycdrs"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5m40n"]
+texture = SubResource("CompressedTexture2D_ycdrs")
+
 [sub_resource type="TileSet" id="TileSet_h1jm5"]
 physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 31
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_v7dth")
 sources/0 = SubResource("TileSetAtlasSource_pi42a")
 sources/1 = SubResource("TileSetAtlasSource_pio1y")
+sources/2 = SubResource("TileSetAtlasSource_pactg")
+sources/3 = SubResource("TileSetAtlasSource_5m40n")
 
 [sub_resource type="PackedScene" id="PackedScene_v7dth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1jm5"]
 size = Vector2(39.5, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6kx1"]
+atlas = ExtResource("7_f7pug")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jufm4"]
+atlas = ExtResource("7_f7pug")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymgag"]
+atlas = ExtResource("7_f7pug")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2qr3"]
+atlas = ExtResource("7_f7pug")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vnugj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6kx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jufm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymgag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2qr3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_pio1y")
@@ -674,29 +731,25 @@ material = SubResource("CanvasItemMaterial_4bqqs")
 tile_map_data = PackedByteArray("AAARAAMAAQACAAUAAAD4/wMAAQAAAAUAAAD3/wIAAQAAAAIAAAD3/wMAAQAAAAMAAAD4/wIAAQAAAAQAAAD5/wIAAQABAAQAAAD5/wMAAQABAAUAAAD6/wIAAQACAAQAAAD6/wMAAQACAAUAAAD7/wIAAQADAAQAAAD7/wMAAQADAAUAAAD8/wIAAQAEAAQAAAD8/wMAAQAEAAUAAAD9/wIAAQAAAAQAAAD9/wMAAQAAAAUAAAD+/wIAAQABAAQAAAD+/wMAAQABAAUAAAD//wIAAQACAAQAAAD//wMAAQACAAUAAAAAAAIAAQADAAQAAAAAAAMAAQADAAUAAAABAAIAAQAAAAQAAAABAAMAAQAAAAUAAAACAAIAAQABAAQAAAACAAMAAQABAAUAAAADAAIAAQACAAQAAAADAAMAAQACAAUAAAAEAAIAAQADAAQAAAAEAAMAAQADAAUAAAAFAAIAAQAEAAQAAAAFAAMAAQAEAAUAAAAGAAIAAQAAAAQAAAAGAAMAAQAAAAUAAAAHAAIAAQABAAQAAAAHAAMAAQABAAUAAAAIAAIAAQACAAQAAAAIAAMAAQACAAUAAAAJAAIAAQAAAAQAAAAJAAMAAQAAAAUAAAAKAAIAAQABAAQAAAAKAAMAAQABAAUAAAALAAIAAQACAAQAAAALAAMAAQACAAUAAAAMAAIAAQADAAQAAAAMAAMAAQADAAUAAAANAAIAAQAEAAQAAAANAAMAAQAEAAUAAAAOAAIAAQAFAAQAAAAOAAMAAQAFAAUAAAAPAAIAAQAAAAQAAAAPAAMAAQAAAAUAAAAQAAIAAQABAAQAAAAQAAMAAQABAAUAAAARAAIAAQACAAQAAAASAAIAAQADAAQAAAASAAMAAQADAAUAAAATAAIAAQAFAAAAAAATAAMAAQAFAAEAAAD3/+//AQAAAAAAAAD3//D/AQAAAAAAAAD3//H/AQAAAAEAAAD3//L/AQAAAAIAAAD3//P/AQAAAAMAAAD3//T/AQAAAAAAAAD3//X/AQAAAAEAAAD3//b/AQAAAAIAAAD3//f/AQAAAAMAAAD3//j/AQAAAAAAAAD3//n/AQAAAAEAAAD3//r/AQAAAAIAAAD3//v/AQAAAAMAAAD3//z/AQAAAAAAAAD3//3/AQAAAAEAAAD3//7/AQAAAAIAAAD3////AQAAAAMAAAD3/wAAAQAAAAAAAAD3/wEAAQAAAAEAAAATAO//AQAFAAAAAAATAPD/AQAFAAIAAAATAPH/AQAFAAMAAAATAPL/AQAFAAAAAAATAPP/AQAFAAEAAAATAPT/AQAFAAIAAAATAPX/AQAFAAMAAAATAPb/AQAFAAAAAAATAPf/AQAFAAEAAAATAPj/AQAFAAIAAAATAPn/AQAFAAMAAAATAPr/AQAFAAAAAAATAP3/AQAFAAMAAAATAP7/AQAFAAAAAAATAP//AQAFAAEAAAATAAAAAQAFAAIAAAATAAEAAQAFAAMAAAD4/+//AQACAAAAAAD5/+//AQADAAAAAAD6/+//AQAEAAAAAAD7/+//AQADAAAAAAD8/+//AQAEAAAAAAD9/+//AQABAAAAAAD+/+//AQACAAAAAAD//+//AQADAAAAAAAAAO//AQABAAAAAAABAO//AQACAAAAAAACAO//AQADAAAAAAADAO//AQAGAAMAAAAEAO//AQAHAAMAAAAFAO//AQAEAAAAAAAGAO//AQABAAAAAAAHAO//AQACAAAAAAAIAO//AQADAAAAAAAJAO//AQAEAAAAAAAKAO//AQABAAAAAAALAO//AQACAAAAAAAMAO//AQADAAAAAAANAO//AQAEAAAAAAAOAO//AQABAAAAAAAPAO//AQABAAAAAAAQAO//AQACAAAAAAARAO//AQADAAAAAAASAO//AQAEAAAAAAA=")
 tile_set = SubResource("TileSet_h1jm5")
 
-[node name="Dangermode" parent="." node_paths=PackedStringArray("combat_music", "spawn_location") instance=ExtResource("7_ynsuh")]
+[node name="Dangermode" parent="." node_paths=PackedStringArray("spawn_location") instance=ExtResource("7_ynsuh")]
 position = Vector2(127, -62)
 enemy_scene = SubResource("PackedScene_v7dth")
-combat_music = NodePath("../CombatMusic")
 spawn_location = NodePath("../SpawnPath/SpawnLocation")
 
 [node name="Fading" parent="Dangermode" index="1"]
 visible = false
 
-[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
-autoplay = true
-
-[node name="CombatMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_v7dth")
-parameters/looping = false
-
-[node name="Spawner" parent="." node_paths=PackedStringArray("moon_anim", "spawn1", "spawn2", "spawn3", "full_moon", "witch_instance") instance=ExtResource("9_pi42a")]
+[node name="Spawner" parent="." node_paths=PackedStringArray("moon_anim", "portal_anim", "spawn1", "spawn2", "spawn3", "full_moon", "witch_instance") instance=ExtResource("9_pi42a")]
 moon_anim = NodePath("../Hud/MoonSprite/MoonPhases")
+portal_anim = NodePath("Portal")
 spawn1 = NodePath("../Spawn1")
 spawn2 = NodePath("../Spawn2")
 spawn3 = NodePath("../Spawn3")
 full_moon = NodePath("../Hud/FullMoon")
 witch_instance = NodePath("../Witch")
+
+[node name="AnimatedSprite2D" parent="Spawner/Portal" index="0"]
+scale = Vector2(0.5, 0.5)
 
 [node name="GoToLv2" type="Area2D" parent="."]
 position = Vector2(340, -62)
@@ -711,6 +764,11 @@ shape = SubResource("RectangleShape2D_h1jm5")
 
 [node name="DoorsSpawn" parent="." instance=ExtResource("11_pio1y")]
 position = Vector2(312, -64)
+
+[node name="BlueTorch" type="AnimatedSprite2D" parent="DoorsSpawn"]
+position = Vector2(-432, 48)
+sprite_frames = SubResource("SpriteFrames_vnugj")
+autoplay = "default"
 
 [node name="Hud" parent="." instance=ExtResource("13_yjl7g")]
 
@@ -735,6 +793,7 @@ position = Vector2(312, -64)
 [connection signal="wave_started" from="Spawner" to="." method="_on_spawner_wave_started"]
 [connection signal="wave_started" from="Spawner" to="Dangermode" method="_on_spawner_wave_started"]
 [connection signal="timeout" from="Spawner/WitchTimer" to="Witch/Weapon" method="_on_witch_timer_timeout"]
+[connection signal="animation_finished" from="Spawner/Portal/AnimatedSprite2D" to="Spawner/Portal" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="GoToLv2" to="." method="_on_go_to_lv_2_body_entered"]
 
 [editable path="Witch"]

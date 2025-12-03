@@ -14,7 +14,7 @@ script/source = "extends Node2D
 @export var red_slime: CharacterBody2D
 @onready var red_slime_scene = preload(\"res://Enemies/Red_slime.tscn\")
 
-var in_combat: bool = false
+var now_in_combat: bool = false
 
 signal fight_started
 signal fight_ended
@@ -27,16 +27,18 @@ func _process(delta: float) -> void:
 	pass
 	
 func _on_danger_zone_body_entered(body: Node2D) -> void:
-	if stage_cleared == false and not in_combat:
+	if stage_cleared == false and not now_in_combat and body.is_in_group(\"witch\"):
+		print(body)
 		emit_signal(\"fight_started\")
 #
 func _on_fight_started() -> void:
+	print(\"[Dangermode] Now in combat =\", now_in_combat)
 	#combat_music.play()
-	if in_combat:
-		return
-	else:
-		print(\"DANGER ZONE TRIGGERED\")
-		in_combat = true
+	if now_in_combat:
+		print(\"[Dangermode] In combat\")
+	if not now_in_combat:
+		print(\"[Dangermode] DANGER ZONE TRIGGERED\")
+		#now_in_combat = true
 		#NOTE: add HUD moon changes
 
 func _on_spawner_all_waves_cleared() -> void:
@@ -48,13 +50,13 @@ func _on_fight_ended() -> void:
 	var doors = get_tree().get_nodes_in_group(\"doors\")
 	for d in doors:
 		d.open_doors()
-	in_combat = false
-	print(\"Fight is won GG!\")
+	now_in_combat = false
+	print(\"[Dangermode] Fight is won GG!\")
 
 	#combat_music.stop()
 
 func _on_slime_timer_timeout() -> void:
-	print(\"Enemies should spawn\")
+	print(\"[Dangermode] Enemies should spawn\")
 	var mob_spawn_location = get_node(\"SpawnPath/SpawnLocation\")
 	mob_spawn_location.progress_ratio = randf()
 	var player_position = $Witch.position

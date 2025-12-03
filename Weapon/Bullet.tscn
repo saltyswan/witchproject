@@ -1,17 +1,18 @@
-[gd_scene load_steps=19 format=3 uid="uid://c7tsn6lhdpryo"]
+[gd_scene load_steps=20 format=3 uid="uid://c7tsn6lhdpryo"]
 
 [ext_resource type="Script" uid="uid://dyo0p76i5l28k" path="res://Weapon/bullet.gd" id="1_ll01j"]
 [ext_resource type="Texture2D" uid="uid://cekdd5bttl8t7" path="res://Weapon/bullet_anim1.png" id="2_fprqk"]
 [ext_resource type="Texture2D" uid="uid://qn3d8dqv33qs" path="res://Weapon/bullet_explode1.png" id="2_s0tk3"]
 [ext_resource type="Texture2D" uid="uid://cdvavpi62sptl" path="res://Weapon/bullet_explode2.png" id="3_2xbrm"]
 [ext_resource type="Texture2D" uid="uid://cd65h0y2purve" path="res://Weapon/bullet_anim2.png" id="3_jhq2a"]
-[ext_resource type="AudioStream" uid="uid://dwnwfmwvnk8be" path="res://MSD/8-bit-kit-lazer.wav" id="3_yuci0"]
 [ext_resource type="Texture2D" uid="uid://doixt48n3dqp2" path="res://Weapon/bullet_explode3.png" id="4_7kr7v"]
 [ext_resource type="Texture2D" uid="uid://bfvvrty8avgbu" path="res://Weapon/bullet_anim3.png" id="4_ayqni"]
 [ext_resource type="Texture2D" uid="uid://bqdsanugqguu2" path="res://Weapon/bullet_explode4.png" id="5_5lkad"]
 [ext_resource type="Texture2D" uid="uid://b0ymedn030xpp" path="res://Weapon/bullet_anim4.png" id="5_lavnw"]
 [ext_resource type="Texture2D" uid="uid://nlxeft7s0b5e" path="res://Weapon/bullet_anim5.png" id="6_1a0e3"]
 [ext_resource type="Texture2D" uid="uid://c4lo68lex6der" path="res://Weapon/bullet_explode5.png" id="6_qo3tj"]
+[ext_resource type="AudioStream" uid="uid://dg0kaunywkgyk" path="res://MSD/ShootTry-Laser.wav" id="12_s0tk3"]
+[ext_resource type="AudioStream" uid="uid://b1ek30t5hg1ef" path="res://MSD/bulletexplode.wav" id="13_2xbrm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4s4u5"]
 animations = [{
@@ -86,49 +87,6 @@ tracks/1/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_nllvn"]
-resource_name = "shoot"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"shoot"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.10011717, 0.200196),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/2/type = "audio"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sounds")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("3_yuci0")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/2/use_blend = true
-
 [sub_resource type="Animation" id="Animation_s0tk3"]
 resource_name = "explode"
 length = 0.6
@@ -155,6 +113,34 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_nllvn"]
+resource_name = "shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"shoot"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.10011717, 0.200196),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vwfqb"]
@@ -184,9 +170,13 @@ libraries = {
 }
 autoplay = "shoot"
 
-[node name="Sounds" type="AudioStreamPlayer2D" parent="."]
-visible = false
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_s0tk3")
 volume_db = -80.0
+autoplay = true
+
+[node name="ExplodeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_2xbrm")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

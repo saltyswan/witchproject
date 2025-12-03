@@ -18,35 +18,34 @@ func _ready() -> void:
 
 func on_fight_started():
 	dangermode = true
-	print("Fight mode started")
+	print("[Playground] Fight mode started")
 	$Spawner.wave_started.emit()
 	$Spawner/WolfTimer.start()
+	$Dangermode.now_in_combat = true
+	print("[Playground] Now in combat = ", $Dangermode.now_in_combat)
 	
 func on_fight_ended():
 	dangermode = false
-	print("Fight mode ended")
+	print("[Playground] Fight mode ended")
 	$Spawner/WolfTimer.stop()
 	$Spawner/WitchTimer.stop()
 
 func _on_wave_started(wave_number):
-	print("Wave ", wave_number, " started!")
+	print("[Playground] Wave ", wave_number, " started!")
 
 func _on_wave_cleared(wave_number):
-	print("Wave ", wave_number, " cleared!")
+	print("[Playground] Wave ", wave_number, " cleared!")
 
 func _input(event) -> void:
 	if event.is_action_pressed("pause_menu"):
 		pause_menu.show()
 		get_tree().paused = true
-		print("I'm taking a break")
+		print("[Playground] I'm taking a break")
 #func take_a_break():
 	#if paused:
 
 func _process(delta: float) -> void:
 	pass
-
-func _on_dangermode_fight_started() -> void:
-	pass # Replace with function body.
 
 func _on_spawner_wave_started(wave_number: Variant) -> void:
 	pass # Replace with function body.
@@ -63,7 +62,7 @@ func fade_out_switch():
 		fading_in.fade_in()
 
 func on_fadein_complete():
-		print("Your screen should be black now...")
+		print("[Playground] Your screen should be black now...")
 		var fading_out = fading_scene.instantiate()
 		add_child(fading_out)
 		fading_out.fade_out()

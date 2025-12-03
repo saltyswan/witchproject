@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmfurd482hj0e"]
+[gd_scene load_steps=6 format=3 uid="uid://dmfurd482hj0e"]
 
 [ext_resource type="Script" uid="uid://cwuysewbeowtk" path="res://UI_HUD/main_menu.gd" id="1_k42oj"]
 [ext_resource type="Texture2D" uid="uid://dhxxwn6q3e5s" path="res://UI_HUD/backgroundmain_v1.png" id="2_id7el"]
+[ext_resource type="AudioStream" uid="uid://bjww0em0r3w6" path="res://MSD/button.wav" id="3_dbg2s"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_k42oj"]
 
@@ -43,6 +44,9 @@ shortcut = SubResource("Shortcut_id7el")
 text = "Play"
 metadata/_edit_use_anchors_ = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/PlayButton"]
+stream = ExtResource("3_dbg2s")
+
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Quit"
@@ -68,4 +72,5 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="finished" from="VBoxContainer/PlayButton/AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]

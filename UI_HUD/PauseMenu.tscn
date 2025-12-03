@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cl0vg0wlg3oot"]
+[gd_scene load_steps=3 format=3 uid="uid://cl0vg0wlg3oot"]
 
 [ext_resource type="Script" uid="uid://cc04oyv4gglxu" path="res://UI_HUD/pause_menu.gd" id="1_b3t1n"]
+[ext_resource type="AudioStream" uid="uid://bjww0em0r3w6" path="res://MSD/button.wav" id="2_dn211"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -43,9 +44,15 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Return"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Return"]
+stream = ExtResource("2_dn211")
+
 [node name="Retry" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Retry"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Retry"]
+stream = ExtResource("2_dn211")
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2

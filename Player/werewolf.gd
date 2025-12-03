@@ -46,34 +46,36 @@ func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
 			HpPlayer.take_damage()
 			invincible_state()
 		if HpPlayer.current_hp <= 0:
-			print("BAM you're dead")
+			print("[Werewolf] BAM you're dead")
 			gameover = true
+			$Spawner/WitchTimer.stop()
+			$GameOverWolf.play()
 			_animated_sprite.play("death")
 		else:
 			return
 
 func invincible_state(duration: float = 1.0):
 	invincible = true
-	print("Nothing can stop me!")
+	print("[Werewolf] Nothing can stop me!")
 	$InvTimer.wait_time = duration
 	$InvTimer.start()
 	#ADD BLINK FOR DURATION
 
 func _on_inv_timer_timeout() -> void:
 	invincible = false
-	print("I'm no longer invincible")
+	print("[Werewolf] I'm no longer invincible")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death":
 			get_tree().change_scene_to_file("res://UI_HUD/GameOver.tscn")
-			print("Now heading to Game Over screen")
+			print("[Werewolf] Now heading to Game Over screen")
 
 func _on_claw_timer_timeout() -> void:
 	if not gameover:
 		_animated_sprite.play("attack")
 		claw_node.show()
 		_claw_animation.play("default")
-		print("Claw attack !")
+		print("[Werewolf] Claw attack !")
 
 func _on_animation_play_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "default":

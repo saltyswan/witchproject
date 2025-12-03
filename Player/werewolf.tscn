@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bqril3qd36dv4"]
+[gd_scene load_steps=37 format=3 uid="uid://bqril3qd36dv4"]
 
 [ext_resource type="Script" uid="uid://co0xj73eyskns" path="res://Player/werewolf.gd" id="1_uiv21"]
 [ext_resource type="Texture2D" uid="uid://ohsq574usw0x" path="res://Player/Werewolf_attack1.png" id="2_r0xnq"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://0aangkxfxjtl" path="res://Player/claw-attack3.png" id="11_1eak0"]
 [ext_resource type="Texture2D" uid="uid://4ailtuuf8xab" path="res://Player/Werewolf_death6.png" id="11_2eh8d"]
 [ext_resource type="Texture2D" uid="uid://brsmcmdgqrjyl" path="res://Player/Werewolf_death7.png" id="12_tqg10"]
+[ext_resource type="AudioStream" uid="uid://dm213a2dn6lbv" path="res://MSD/footsteps_werewolf.wav" id="22_y1w18"]
+[ext_resource type="AudioStream" uid="uid://b70k0gthgbpv0" path="res://MSD/game_over.wav" id="23_1k1t4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uiv21"]
 animations = [{
@@ -334,6 +336,13 @@ autostart = true
 libraries = {
 &"": SubResource("AnimationLibrary_stnhq")
 }
+
+[node name="StepSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_y1w18")
+autoplay = true
+
+[node name="GameOverWolf" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_1k1t4")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

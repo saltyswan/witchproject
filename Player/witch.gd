@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 200.0
 
 @onready var _animated_sprite: AnimationPlayer = $AnimationPlayer
+@onready var step_sound = $StepSound
 
 var gameover = false
 var invincible = false
@@ -23,6 +24,9 @@ func _ready() -> void:
 	#print(hearts_list)
 
 func _physics_process(delta: float) -> void:
+	
+	if not step_sound.playing and velocity.length() > 0:
+		step_sound.play()
 	
 	if gameover:
 		return
@@ -60,7 +64,8 @@ func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
 			HpPlayer.take_damage()
 			invincible_state()
 		if HpPlayer.current_hp <= 0:
-			print("BAM you're dead")
+			print("[Witch] BAM you're dead")
+			$GameOverWitch.play()
 			gameover = true
 			_animated_sprite.play("death_down")
 		else:
@@ -70,7 +75,7 @@ func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
 
 func invincible_state(duration: float = 1.0):
 	invincible = true
-	print("Nothing can stop me!")
+	print("[Witch] Nothing can stop me!")
 	$InvTimer.wait_time = duration
 	$InvTimer.start()
 	#ADD BLINK FOR DURATION
@@ -78,22 +83,22 @@ func invincible_state(duration: float = 1.0):
 func _on_inv_timer_timeout() -> void:
 	invincible = false
 	blinking = false
-	print("I'm no longer invincible")
+	print("[Witch] I'm no longer invincible")
 
 func on_dangermode_fight_started() -> void:
 	_animated_sprite.play("attack_down")
 	combat_mode = true
-	print("Combat mode is true, you can transform.")
+	print("[Witch] Combat mode is true, you can transform.")
 
 func on_dangermode_fight_ended() -> void:
 	_animated_sprite.play("idle_down")
 	combat_mode = false
-	print("I can't transform anymore")
+	print("[Witch] I can't transform anymore")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death_down":
 			get_tree().change_scene_to_file("res://UI_HUD/GameOver.tscn")
-			print("Now heading to Game Over screen")
+			print("[Witch] Now heading to Game Over screen")
 	if anim_name == "blink":
-		print("I blinked!")
+		print("[Witch] I blinked!")
 #NOTE: add slow down here?

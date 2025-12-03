@@ -4,6 +4,10 @@ func _ready() -> void:
 	pass
 
 func _on_play_pressed():
+	#NOTE: add fade effect
+	$VBoxContainer/PlayButton/AudioStreamPlayer.play()
+
+func _on_audio_stream_player_finished() -> void:
 	hide()
 	get_tree().change_scene_to_file("res://playground.tscn")
 

@@ -1,6 +1,244 @@
-[gd_scene load_steps=2 format=3 uid="uid://jwwqhjdi6e5b"]
+[gd_scene load_steps=28 format=3 uid="uid://jwwqhjdi6e5b"]
 
 [ext_resource type="Script" uid="uid://cref4hmkh7jom" path="res://spawner.gd" id="1_mimr8"]
+[ext_resource type="Script" uid="uid://c4kwelihbaw2j" path="res://portal.gd" id="2_5q6u0"]
+[ext_resource type="Texture2D" uid="uid://cfb0foddsrkcg" path="res://maps/Blue Portal Sprite Sheet.png" id="3_5i5hu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyyrg"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aubng"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c33js"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcu3l"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(192, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajeec"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(256, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws8o5"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q6u0"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(448, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v3v6"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(448, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6eni8"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byeni"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnrru"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j4xw"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75q71"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_523ef"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd0ha"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2krg"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(448, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_savle"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhr8q"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_funek"]
+atlas = ExtResource("3_5i5hu")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_75q71"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyyrg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aubng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c33js")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcu3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajeec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws8o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q6u0")
+}],
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v3v6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6eni8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byeni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnrru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j4xw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75q71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_523ef")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd0ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2krg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_savle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhr8q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_funek")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_xhr8q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"open"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_funek"]
+resource_name = "close"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"close"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_savle"]
+resource_name = "open"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"open"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_61yfd"]
+_data = {
+&"RESET": SubResource("Animation_xhr8q"),
+&"close": SubResource("Animation_funek"),
+&"open": SubResource("Animation_savle")
+}
 
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_mimr8")
@@ -22,6 +260,19 @@ one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
+[node name="Portal" type="Area2D" parent="."]
+script = ExtResource("2_5q6u0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Portal"]
+position = Vector2(0, -21)
+sprite_frames = SubResource("SpriteFrames_75q71")
+animation = &"open"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Portal"]
+libraries = {
+&"": SubResource("AnimationLibrary_61yfd")
+}
+
 [connection signal="all_waves_cleared" from="." to="." method="_on_all_waves_cleared"]
 [connection signal="wave_cleared" from="." to="." method="_on_wave_cleared"]
 [connection signal="wave_started" from="." to="." method="_on_wave_started"]
@@ -30,3 +281,5 @@ one_shot = true
 [connection signal="timeout" from="ClearDelay" to="." method="_on_clear_delay_timeout"]
 [connection signal="timeout" from="WolfTimer" to="." method="_on_wolftimer_timeout"]
 [connection signal="timeout" from="WitchTimer" to="." method="_on_witch_timer_timeout"]
+[connection signal="animation_finished" from="Portal/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="Portal/AnimationPlayer" to="Portal" method="_on_animation_player_animation_finished"]

@@ -17,7 +17,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Dangermode="*res://dangermode.tscn"
 HpPlayer="*res://Combat/hp_player.gd"
 
 [display]
@@ -119,6 +118,7 @@ pause_menu={
 2d_physics/layer_4="WitchHurtbox"
 2d_physics/layer_5="Bullets"
 2d_physics/layer_6="LevelPortal"
+2d_physics/layer_7="Layer7"
 
 [rendering]
 
