@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b0ymedn030xpp" path="res://Weapon/bullet_anim4.png" id="5_lavnw"]
 [ext_resource type="Texture2D" uid="uid://nlxeft7s0b5e" path="res://Weapon/bullet_anim5.png" id="6_1a0e3"]
 [ext_resource type="Texture2D" uid="uid://c4lo68lex6der" path="res://Weapon/bullet_explode5.png" id="6_qo3tj"]
-[ext_resource type="AudioStream" uid="uid://dg0kaunywkgyk" path="res://MSD/ShootTry-Laser.wav" id="12_s0tk3"]
+[ext_resource type="AudioStream" uid="uid://bww0xfhibmib7" path="res://MSD/WitchShooting.wav" id="12_2xbrm"]
 [ext_resource type="AudioStream" uid="uid://b1ek30t5hg1ef" path="res://MSD/bulletexplode.wav" id="13_2xbrm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4s4u5"]
@@ -171,8 +171,8 @@ libraries = {
 autoplay = "shoot"
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_s0tk3")
-volume_db = -80.0
+stream = ExtResource("12_2xbrm")
+volume_db = -15.0
 autoplay = true
 
 [node name="ExplodeSound" type="AudioStreamPlayer" parent="."]

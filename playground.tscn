@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://47e11neavc7r"]
+[gd_scene load_steps=39 format=4 uid="uid://47e11neavc7r"]
 
 [ext_resource type="Script" uid="uid://ce4n0n5p8tiuw" path="res://playground.gd" id="1_pio1y"]
 [ext_resource type="PackedScene" uid="uid://2wm1kj185ahp" path="res://Player/witch.tscn" id="2_o00ia"]
@@ -7,12 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://cceth3tqyyxkr" path="res://maps/Dungeon_Tileset.png" id="6_4bqqs"]
 [ext_resource type="Texture2D" uid="uid://2erfuf20tgyp" path="res://maps/Doors4.png" id="6_te8jg"]
 [ext_resource type="Texture2D" uid="uid://da5k3dcs3t6i0" path="res://maps/Bluetorch1-Sheet-export.png" id="7_f7pug"]
-[ext_resource type="PackedScene" uid="uid://cbk1ebode25f8" path="res://dangermode.tscn" id="7_ynsuh"]
 [ext_resource type="Script" uid="uid://xlbk5ibc86lr" path="res://Levels/go_to_lv_2.gd" id="8_pi42a"]
-[ext_resource type="PackedScene" uid="uid://jwwqhjdi6e5b" path="res://Spawner.tscn" id="9_pi42a"]
 [ext_resource type="PackedScene" uid="uid://kpg6ry6cr1k6" path="res://maps/DoorsSpawn.tscn" id="11_pio1y"]
+[ext_resource type="PackedScene" uid="uid://jwwqhjdi6e5b" path="res://Spawner.tscn" id="13_f7pug"]
 [ext_resource type="PackedScene" uid="uid://5c7goktvlfsd" path="res://UI_HUD/HUD.tscn" id="13_yjl7g"]
+[ext_resource type="PackedScene" uid="uid://cbk1ebode25f8" path="res://dangermode.tscn" id="14_dk0co"]
 [ext_resource type="PackedScene" uid="uid://cl0vg0wlg3oot" path="res://UI_HUD/PauseMenu.tscn" id="14_f7pug"]
+[ext_resource type="PackedScene" uid="uid://cvqxihjksyiv8" path="res://maps/fading.tscn" id="14_jgc46"]
 
 [sub_resource type="Curve2D" id="Curve2D_v7dth"]
 _data = {
@@ -630,8 +631,6 @@ sources/1 = SubResource("TileSetAtlasSource_pio1y")
 sources/2 = SubResource("TileSetAtlasSource_pactg")
 sources/3 = SubResource("TileSetAtlasSource_5m40n")
 
-[sub_resource type="PackedScene" id="PackedScene_v7dth"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h1jm5"]
 size = Vector2(39.5, 44)
 
@@ -670,6 +669,8 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="PackedScene" id="PackedScene_f7pug"]
 
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_pio1y")
@@ -731,26 +732,6 @@ material = SubResource("CanvasItemMaterial_4bqqs")
 tile_map_data = PackedByteArray("AAARAAMAAQACAAUAAAD4/wMAAQAAAAUAAAD3/wIAAQAAAAIAAAD3/wMAAQAAAAMAAAD4/wIAAQAAAAQAAAD5/wIAAQABAAQAAAD5/wMAAQABAAUAAAD6/wIAAQACAAQAAAD6/wMAAQACAAUAAAD7/wIAAQADAAQAAAD7/wMAAQADAAUAAAD8/wIAAQAEAAQAAAD8/wMAAQAEAAUAAAD9/wIAAQAAAAQAAAD9/wMAAQAAAAUAAAD+/wIAAQABAAQAAAD+/wMAAQABAAUAAAD//wIAAQACAAQAAAD//wMAAQACAAUAAAAAAAIAAQADAAQAAAAAAAMAAQADAAUAAAABAAIAAQAAAAQAAAABAAMAAQAAAAUAAAACAAIAAQABAAQAAAACAAMAAQABAAUAAAADAAIAAQACAAQAAAADAAMAAQACAAUAAAAEAAIAAQADAAQAAAAEAAMAAQADAAUAAAAFAAIAAQAEAAQAAAAFAAMAAQAEAAUAAAAGAAIAAQAAAAQAAAAGAAMAAQAAAAUAAAAHAAIAAQABAAQAAAAHAAMAAQABAAUAAAAIAAIAAQACAAQAAAAIAAMAAQACAAUAAAAJAAIAAQAAAAQAAAAJAAMAAQAAAAUAAAAKAAIAAQABAAQAAAAKAAMAAQABAAUAAAALAAIAAQACAAQAAAALAAMAAQACAAUAAAAMAAIAAQADAAQAAAAMAAMAAQADAAUAAAANAAIAAQAEAAQAAAANAAMAAQAEAAUAAAAOAAIAAQAFAAQAAAAOAAMAAQAFAAUAAAAPAAIAAQAAAAQAAAAPAAMAAQAAAAUAAAAQAAIAAQABAAQAAAAQAAMAAQABAAUAAAARAAIAAQACAAQAAAASAAIAAQADAAQAAAASAAMAAQADAAUAAAATAAIAAQAFAAAAAAATAAMAAQAFAAEAAAD3/+//AQAAAAAAAAD3//D/AQAAAAAAAAD3//H/AQAAAAEAAAD3//L/AQAAAAIAAAD3//P/AQAAAAMAAAD3//T/AQAAAAAAAAD3//X/AQAAAAEAAAD3//b/AQAAAAIAAAD3//f/AQAAAAMAAAD3//j/AQAAAAAAAAD3//n/AQAAAAEAAAD3//r/AQAAAAIAAAD3//v/AQAAAAMAAAD3//z/AQAAAAAAAAD3//3/AQAAAAEAAAD3//7/AQAAAAIAAAD3////AQAAAAMAAAD3/wAAAQAAAAAAAAD3/wEAAQAAAAEAAAATAO//AQAFAAAAAAATAPD/AQAFAAIAAAATAPH/AQAFAAMAAAATAPL/AQAFAAAAAAATAPP/AQAFAAEAAAATAPT/AQAFAAIAAAATAPX/AQAFAAMAAAATAPb/AQAFAAAAAAATAPf/AQAFAAEAAAATAPj/AQAFAAIAAAATAPn/AQAFAAMAAAATAPr/AQAFAAAAAAATAP3/AQAFAAMAAAATAP7/AQAFAAAAAAATAP//AQAFAAEAAAATAAAAAQAFAAIAAAATAAEAAQAFAAMAAAD4/+//AQACAAAAAAD5/+//AQADAAAAAAD6/+//AQAEAAAAAAD7/+//AQADAAAAAAD8/+//AQAEAAAAAAD9/+//AQABAAAAAAD+/+//AQACAAAAAAD//+//AQADAAAAAAAAAO//AQABAAAAAAABAO//AQACAAAAAAACAO//AQADAAAAAAADAO//AQAGAAMAAAAEAO//AQAHAAMAAAAFAO//AQAEAAAAAAAGAO//AQABAAAAAAAHAO//AQACAAAAAAAIAO//AQADAAAAAAAJAO//AQAEAAAAAAAKAO//AQABAAAAAAALAO//AQACAAAAAAAMAO//AQADAAAAAAANAO//AQAEAAAAAAAOAO//AQABAAAAAAAPAO//AQABAAAAAAAQAO//AQACAAAAAAARAO//AQADAAAAAAASAO//AQAEAAAAAAA=")
 tile_set = SubResource("TileSet_h1jm5")
 
-[node name="Dangermode" parent="." node_paths=PackedStringArray("spawn_location") instance=ExtResource("7_ynsuh")]
-position = Vector2(127, -62)
-enemy_scene = SubResource("PackedScene_v7dth")
-spawn_location = NodePath("../SpawnPath/SpawnLocation")
-
-[node name="Fading" parent="Dangermode" index="1"]
-visible = false
-
-[node name="Spawner" parent="." node_paths=PackedStringArray("moon_anim", "portal_anim", "spawn1", "spawn2", "spawn3", "full_moon", "witch_instance") instance=ExtResource("9_pi42a")]
-moon_anim = NodePath("../Hud/MoonSprite/MoonPhases")
-portal_anim = NodePath("Portal")
-spawn1 = NodePath("../Spawn1")
-spawn2 = NodePath("../Spawn2")
-spawn3 = NodePath("../Spawn3")
-full_moon = NodePath("../Hud/FullMoon")
-witch_instance = NodePath("../Witch")
-
-[node name="AnimatedSprite2D" parent="Spawner/Portal" index="0"]
-scale = Vector2(0.5, 0.5)
-
 [node name="GoToLv2" type="Area2D" parent="."]
 position = Vector2(340, -62)
 collision_layer = 32
@@ -774,33 +755,39 @@ autoplay = "default"
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_f7pug")]
 
-[connection signal="animation_started" from="Witch/AnimationPlayer" to="Spawner" method="_on_animation_player_animation_started"]
+[node name="Fading" parent="." instance=ExtResource("14_jgc46")]
+
+[node name="Spawner" parent="." node_paths=PackedStringArray("moon_anim", "portal_anim", "spawn1", "spawn2", "spawn3", "full_moon", "witch_instance") instance=ExtResource("13_f7pug")]
+moon_anim = NodePath("../Hud/MoonSprite/MoonPhases")
+portal_anim = NodePath("Portal")
+spawn1 = NodePath("../Spawn1")
+spawn2 = NodePath("../Spawn2")
+spawn3 = NodePath("../Spawn3")
+full_moon = NodePath("../Hud/FullMoon")
+witch_instance = NodePath("../Witch")
+
+[node name="Portal" parent="Spawner" index="6"]
+scale = Vector2(0.5, 0.5)
+
+[node name="Dangermode" parent="." node_paths=PackedStringArray("spawn_location") instance=ExtResource("14_dk0co")]
+enemy_scene = SubResource("PackedScene_f7pug")
+spawn_location = NodePath("../SpawnPath/SpawnLocation")
+
 [connection signal="tree_entered" from="Witch/Weapon" to="Witch" method="_on_weapon_tree_entered"]
-[connection signal="fight_ended" from="Dangermode" to="." method="_on_dangermode_fight_ended"]
-[connection signal="fight_ended" from="Dangermode" to="Witch" method="_on_dangermode_fight_ended"]
-[connection signal="fight_ended" from="Dangermode" to="Witch/Weapon" method="_on_dangermode_fight_ended"]
-[connection signal="fight_ended" from="Dangermode" to="Spawner" method="_on_dangermode_fight_ended"]
-[connection signal="fight_ended" from="Dangermode" to="Hud" method="_on_dangermode_fight_ended"]
-[connection signal="fight_started" from="Dangermode" to="." method="_on_dangermode_fight_started"]
-[connection signal="fight_started" from="Dangermode" to="Witch" method="_on_dangermode_fight_started"]
-[connection signal="fight_started" from="Dangermode" to="Witch/Weapon" method="_on_dangermode_fight_started"]
-[connection signal="fight_started" from="Dangermode" to="Spawner" method="_on_dangermode_fight_started"]
-[connection signal="fight_started" from="Dangermode" to="Hud" method="_on_dangermode_fight_started"]
-[connection signal="animation_finished" from="Dangermode/Fading/FadingBackground/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="all_waves_cleared" from="Spawner" to="Dangermode" method="_on_spawner_all_waves_cleared"]
-[connection signal="tree_exited" from="Spawner" to="." method="_on_spawner_tree_exited"]
-[connection signal="tree_exiting" from="Spawner" to="." method="_on_spawner_tree_exiting"]
-[connection signal="wave_started" from="Spawner" to="." method="_on_spawner_wave_started"]
-[connection signal="wave_started" from="Spawner" to="Dangermode" method="_on_spawner_wave_started"]
-[connection signal="timeout" from="Spawner/WitchTimer" to="Witch/Weapon" method="_on_witch_timer_timeout"]
-[connection signal="animation_finished" from="Spawner/Portal/AnimatedSprite2D" to="Spawner/Portal" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="GoToLv2" to="." method="_on_go_to_lv_2_body_entered"]
+[connection signal="all_waves_cleared" from="Spawner" to="Dangermode" method="_on_spawner_all_waves_cleared"]
+[connection signal="fight_ended" from="Dangermode" to="." method="on_fight_ended"]
+[connection signal="fight_ended" from="Dangermode" to="Hud" method="_on_dangermode_fight_ended"]
+[connection signal="fight_ended" from="Dangermode" to="Spawner" method="_on_dangermode_fight_ended"]
+[connection signal="fight_started" from="Dangermode" to="." method="on_fight_started"]
+[connection signal="fight_started" from="Dangermode" to="Hud" method="_on_dangermode_fight_started"]
 
 [editable path="Witch"]
 [editable path="Witch/Weapon"]
-[editable path="Dangermode"]
-[editable path="Dangermode/Fading"]
-[editable path="Spawner"]
 [editable path="DoorsSpawn"]
 [editable path="Hud"]
 [editable path="PauseMenu"]
+[editable path="Fading"]
+[editable path="Spawner"]
+[editable path="Dangermode"]
+[editable path="Dangermode/Fading"]

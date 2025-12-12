@@ -10,6 +10,7 @@ var shooting_mode = false
 func _ready() -> void:
 	
 	$"../../Dangermode".fight_ended.connect(_on_dangermode_fight_ended)
+	$"../../Dangermode".fight_started.connect(_on_dangermode_fight_started)
 	
 	if shooting_mode:
 		shoot()
@@ -41,7 +42,7 @@ func instantiate_bullet():
 	b.transform = Spawnbullet.global_transform
 
 func _on_dangermode_fight_started() -> void:
-	#print("Shooting starts")
+	print("[Weapon] Shooting starts")
 	if not shooting_mode:
 		shooting_mode = true
 		shoot()

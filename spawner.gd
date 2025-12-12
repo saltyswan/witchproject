@@ -7,6 +7,8 @@ signal all_waves_cleared
 @onready var red_slime_scene = preload("res://Enemies/Red_slime.tscn")
 @onready var witch_scene = preload("res://Player/witch.tscn")
 @onready var wolf_scene = preload("res://Player/werewolf.tscn")
+@onready var skeleton_scene = preload("res://Enemies/skeleton.tscn")
+
 @export var moon_anim: AnimationPlayer
 @export var portal_anim: Area2D
 @export var spawn1 : Marker2D
@@ -16,9 +18,9 @@ signal all_waves_cleared
 @export var witch_instance : CharacterBody2D
 
 var waves = [
-	{"count": 4}, #Wave 1 = 3 enemies
-	{"count": 8},
-	{"count": 12} ]
+	{"count": 2}, #Wave 1 = 3 enemies
+	{"count": 4},
+	{"count": 6} ]
 
 var current_wave = 0
 var enemies_remaining = 0
@@ -27,6 +29,7 @@ var enemies_spawned = 0
 var wolf_instance : CharacterBody2D = null
 var dead = false
 var portal_opened = false
+var skeleton_none = true
 
 func _ready() -> void:
 	pass
@@ -59,6 +62,7 @@ func _on_wolftimer_timeout() -> void:
 	wolf_instance.global_position = witch_instance.global_position
 	witch_instance.queue_free()
 	$WitchTimer.start()
+	$WolfCry.play()
 	full_moon.show()
 
 func _on_witch_timer_timeout():
@@ -87,7 +91,29 @@ func _spawn_enemy():
 		enemy.global_position = spawn2.global_position
 	if current_wave == 2:
 		enemy.global_position = spawn3.global_position
+		$SkeletonTimer.start()
+		print("[Spawner] Skeleton is going to appear!")
+		
 	_start_next_wave()
+
+
+func _on_skeleton_timer_timeout() -> void:
+	if skeleton_none:
+		spawn_skeleton()
+		print("[Spawner] Skeleton is spawning now!")
+		skeleton_none = false
+	
+
+func spawn_skeleton():
+	var skeleton = skeleton_scene.instantiate()
+	skeleton.connect("tree_exited", Callable(self, "_on_enemy_died"))
+	skeleton.global_position = spawn3.global_position
+	add_child(skeleton)
+	skeleton.connect("last_enemy_killed", Callable(self, "last_enemy_cleared"))
+
+func last_enemy_cleared():
+	all_waves_cleared.emit()
+	print("[Spawner] All waves cleared signal emitted")
 
 func spawn_portal():
 	if not portal_opened:
@@ -123,7 +149,6 @@ func _on_clear_delay_timeout() -> void:
 		_start_next_wave()
 		print("[Spawner] Current wave:", current_wave)
 	elif current_wave >= waves.size():
-		all_waves_cleared.emit()
 		return
 
 func _on_animation_player_animation_started(anim_name: StringName) -> void:

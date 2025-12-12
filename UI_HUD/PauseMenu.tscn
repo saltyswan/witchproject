@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cl0vg0wlg3oot"]
+[gd_scene load_steps=5 format=3 uid="uid://cl0vg0wlg3oot"]
 
 [ext_resource type="Script" uid="uid://cc04oyv4gglxu" path="res://UI_HUD/pause_menu.gd" id="1_b3t1n"]
+[ext_resource type="FontFile" uid="uid://cvg4geji2ab31" path="res://UI_HUD/Algerian Regular.ttf" id="2_dct6x"]
 [ext_resource type="AudioStream" uid="uid://bjww0em0r3w6" path="res://MSD/button.wav" id="2_dn211"]
+[ext_resource type="Theme" uid="uid://bhsirk8npv0i3" path="res://UI_HUD/ButtonTheme.tres" id="3_5io8k"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_b3t1n")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2901961)
 
 [node name="PauseTitle" type="Label" parent="."]
 anchors_preset = 5
@@ -18,8 +28,11 @@ offset_bottom = 149.0
 grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("2_dct6x")
 theme_override_font_sizes/font_size = 45
-text = "PAUSE"
+text = "Pause"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -29,10 +42,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -30.5
-offset_top = -20.0
-offset_right = 30.5
-offset_bottom = 20.0
+offset_left = -58.0
+offset_top = -76.5
+offset_right = 55.0
+offset_bottom = 76.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -40,8 +53,7 @@ theme_override_constants/separation = 27
 
 [node name="Return" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+theme = ExtResource("3_5io8k")
 text = "Return"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Return"]
@@ -49,6 +61,7 @@ stream = ExtResource("2_dn211")
 
 [node name="Retry" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_5io8k")
 text = "Retry"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Retry"]
@@ -56,6 +69,7 @@ stream = ExtResource("2_dn211")
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("3_5io8k")
 text = "Exit"
 
 [connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return_pressed"]

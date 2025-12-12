@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bhsirk8npv0i3"]
+
+[ext_resource type="FontFile" uid="uid://cvg4geji2ab31" path="res://UI_HUD/Algerian Regular.ttf" id="1_akbye"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w2ni"]
+bg_color = Color(0.3254902, 0.16862746, 0.38431373, 1)
+border_color = Color(0.21563268, 0.102998175, 0.25779986, 1)
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vmqn"]
+bg_color = Color(0.45882353, 0.25490198, 0.5372549, 1)
+border_width_right = 1
+border_width_bottom = 4
+border_color = Color(0.3248956, 0.16748029, 0.38297966, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ot8mh"]
+bg_color = Color(0.19215687, 0.101960786, 0.21176471, 1)
+border_color = Color(0.94509804, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_akbye"]
+
+[resource]
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_outline_color = Color(0.16645658, 0.0841654, 0.13199836, 1)
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 25
+Button/fonts/font = ExtResource("1_akbye")
+Button/styles/hover = SubResource("StyleBoxFlat_1w2ni")
+Button/styles/normal = SubResource("StyleBoxFlat_1vmqn")
+Button/styles/pressed = SubResource("StyleBoxFlat_ot8mh")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_akbye")

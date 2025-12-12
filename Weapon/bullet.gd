@@ -10,6 +10,7 @@ func _on_body_entered(body: Node2D) -> void:
 		speed = 0
 		$AnimationPlayer.play("explode")
 		$ExplodeSound.play()
+		
 	else:
 		queue_free()
 

@@ -13,12 +13,13 @@ var blinking = false
 
 func _ready() -> void:
 	
-	$"../Dangermode".fight_ended.connect(on_dangermode_fight_ended)
+	$"../Dangermode".fight_ended.connect(_on_dangermode_fight_ended)
 	$"../Dangermode".fight_started.connect(on_dangermode_fight_started)
 	
 	add_to_group("witch")
 	if combat_mode:
 		$Weapon.shoot()
+		
 	#for child in hearts_scene.get_children():
 		#hearts_list.append(child)
 	#print(hearts_list)
@@ -55,10 +56,11 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
+func _on_hurtbox_body_entered(body) -> void:
 		if gameover:
 			return
 		if not invincible and body.is_in_group("mobs"):
+			$HurtboxSound.play()
 			_animated_sprite.play("blink")
 			blinking = true
 			HpPlayer.take_damage()
@@ -90,15 +92,15 @@ func on_dangermode_fight_started() -> void:
 	combat_mode = true
 	print("[Witch] Combat mode is true, you can transform.")
 
-func on_dangermode_fight_ended() -> void:
+func _on_dangermode_fight_ended() -> void:
 	_animated_sprite.play("idle_down")
 	combat_mode = false
 	print("[Witch] I can't transform anymore")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death_down":
-			get_tree().change_scene_to_file("res://UI_HUD/GameOver.tscn")
-			print("[Witch] Now heading to Game Over screen")
+			get_tree().quit()
+			print("[Witch] Now leaving the game")
 	if anim_name == "blink":
 		print("[Witch] I blinked!")
 #NOTE: add slow down here?

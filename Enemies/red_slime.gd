@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @export var target: CharacterBody2D
-@export var max_hp: int = 1
+@export var max_hp: int = 2
 var current_hp: int
 var target_position: Vector2
 var knockback:  Vector2 = Vector2.ZERO
@@ -39,15 +39,18 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 
-func _on_hitbox_area_entered(area: Area2D) -> void:
+
+
+func _on_hitbox_area_entered(area) -> void:
 	if area.is_in_group("bullet"):
 		if current_hp > 0:
-			current_hp -= 20
+			current_hp -= 1
+			$AnimationPlayer.play("blink")
 			#print("Enemy takes damage")
 		else:
 			queue_free()
 
-func _on_hitbox_body_entered(body: CharacterBody2D) -> void:
+func _on_hitbox_body_entered(body) -> void:
 	
 	if knocked:
 		return

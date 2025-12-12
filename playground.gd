@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var fading_scene = preload("res://maps/fading.tscn")
 @onready var pause_menu = $PauseMenu
 var dangermode = false
 #var pause_state = false
@@ -10,11 +9,10 @@ func _ready() -> void:
 	$Spawner.connect("wave_started", Callable(self, "_on_wave_started"))
 	$Spawner.connect("wave_cleared", Callable (self, "_on_wave_cleared"))
 	$Spawner.connect ("all_waves_cleared", Callable (self, "_on_waves_cleared"))
-	
-	$Dangermode.fight_ended.connect(on_fight_ended)
-	$Dangermode.fight_started.connect(on_fight_started)
 
 	pause_menu.hide()
+	#NOTE: add fade in, maybe
+	
 
 func on_fight_started():
 	dangermode = true
@@ -22,7 +20,7 @@ func on_fight_started():
 	$Spawner.wave_started.emit()
 	$Spawner/WolfTimer.start()
 	$Dangermode.now_in_combat = true
-	print("[Playground] Now in combat = ", $Dangermode.now_in_combat)
+	print("[Playground] Now in combat = ", $"Dangermode".now_in_combat)
 	
 func on_fight_ended():
 	dangermode = false
@@ -39,6 +37,7 @@ func _on_wave_cleared(wave_number):
 func _input(event) -> void:
 	if event.is_action_pressed("pause_menu"):
 		pause_menu.show()
+		$PauseMenu/VBoxContainer/Return.grab_focus()
 		get_tree().paused = true
 		print("[Playground] I'm taking a break")
 #func take_a_break():
@@ -56,14 +55,10 @@ func _on_go_to_lv_2_body_entered(body: Node2D) -> void:
 		fade_out_switch()
 
 func fade_out_switch():
-		var fading_in = fading_scene.instantiate()
-		add_child(fading_in)
-		fading_in.fadein_finished.connect(on_fadein_complete)
-		fading_in.fade_in()
+	$Fading.fadein_finished.connect(on_fadein_complete)
+	$Fading.fade_in()
 
 func on_fadein_complete():
 		print("[Playground] Your screen should be black now...")
-		var fading_out = fading_scene.instantiate()
-		add_child(fading_out)
-		fading_out.fade_out()
+		$Fading.fade_out()
 		get_tree().change_scene_to_file("res://Levels/Level2.tscn")

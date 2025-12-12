@@ -13,11 +13,11 @@ func _process(delta: float) -> void:
 func fade_in():
 	color_rect.visible = true
 	$FadingBackground/AnimationPlayer.play("fade_in")
-	print("Fade in activated")
+	print("[Fading] Fade in activated")
 
 func fade_out():
 	$FadingBackground/AnimationPlayer.play("fade_out")
-	print("Fade out activated")
+	print("[Fading] Fade out activated")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_in":

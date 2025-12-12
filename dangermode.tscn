@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbk1ebode25f8"]
+[gd_scene load_steps=12 format=3 uid="uid://cbk1ebode25f8"]
 
 [ext_resource type="PackedScene" uid="uid://cvqxihjksyiv8" path="res://maps/fading.tscn" id="2_flest"]
 [ext_resource type="Script" uid="uid://ds15g2c84en53" path="res://danger_zone.gd" id="2_w2pf1"]
+[ext_resource type="AudioStream" uid="uid://dhfni8tiogmc1" path="res://MSD/BattleTheme.wav" id="3_w2pf1"]
+[ext_resource type="AudioStream" uid="uid://dm37b17abn0fu" path="res://MSD/ExploTheme.wav" id="4_vo80h"]
+[ext_resource type="AudioStream" uid="uid://nn8u04h4xdgf" path="res://MSD/06 - Victory!.wav" id="5_1pmua"]
 
 [sub_resource type="GDScript" id="GDScript_hu84v"]
 script/source = "extends Node2D
@@ -9,7 +12,7 @@ script/source = "extends Node2D
 @onready var danger_zone: Area2D = $DangerZone
 @onready var threshold: CollisionShape2D = $DangerZone/Threshold
 @export var enemy_scene: PackedScene
-@export var combat_music: AudioStreamPlayer
+#@export var combat_music: AudioStreamPlayer
 @export var spawn_location: PathFollow2D
 @export var red_slime: CharacterBody2D
 @onready var red_slime_scene = preload(\"res://Enemies/Red_slime.tscn\")
@@ -33,7 +36,7 @@ func _on_danger_zone_body_entered(body: Node2D) -> void:
 #
 func _on_fight_started() -> void:
 	print(\"[Dangermode] Now in combat =\", now_in_combat)
-	#combat_music.play()
+	$Music/AnimationPlayer.play(\"fadetoBattle\")
 	if now_in_combat:
 		print(\"[Dangermode] In combat\")
 	if not now_in_combat:
@@ -42,15 +45,16 @@ func _on_fight_started() -> void:
 		#NOTE: add HUD moon changes
 
 func _on_spawner_all_waves_cleared() -> void:
-	fight_ended.emit()
-	stage_cleared = true
-
+	if not stage_cleared:
+		fight_ended.emit()
+		stage_cleared = true
 
 func _on_fight_ended() -> void:
 	var doors = get_tree().get_nodes_in_group(\"doors\")
 	for d in doors:
 		d.open_doors()
 	now_in_combat = false
+	$Music/AnimationPlayer.play(\"fadetoWin\")
 	print(\"[Dangermode] Fight is won GG!\")
 
 	#combat_music.stop()
@@ -68,6 +72,190 @@ func _on_slime_timer_timeout() -> void:
 a = Vector2(177, -163)
 b = Vector2(-251, -160)
 
+[sub_resource type="Animation" id="Animation_e1vha"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleTheme:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-10.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BattleTheme:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WinTheme:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-10.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WinTheme:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ExploTheme:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-10.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExploTheme:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_5n3va"]
+resource_name = "fadetoBattle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExploTheme:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(2.3784142, 1),
+"update": 0,
+"values": [-10.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExploTheme:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BattleTheme:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666668),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-80.0, -10.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BattleTheme:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_1pmua"]
+resource_name = "fadetoWin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BattleTheme:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 2.8284266),
+"update": 0,
+"values": [-10.0, -80.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BattleTheme:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WinTheme:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 2.1435473),
+"update": 0,
+"values": [-80.0, -10.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WinTheme:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5n3va"]
+_data = {
+&"RESET": SubResource("Animation_e1vha"),
+&"fadetoBattle": SubResource("Animation_5n3va"),
+&"fadetoWin": SubResource("Animation_1pmua")
+}
+
 [node name="Dangermode" type="Node2D"]
 script = SubResource("GDScript_hu84v")
 
@@ -81,6 +269,26 @@ script = ExtResource("2_w2pf1")
 shape = SubResource("SegmentShape2D_vo80h")
 
 [node name="Fading" parent="." instance=ExtResource("2_flest")]
+
+[node name="Music" type="Node2D" parent="."]
+
+[node name="BattleTheme" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_w2pf1")
+volume_db = -10.0
+
+[node name="ExploTheme" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_vo80h")
+volume_db = -10.0
+autoplay = true
+
+[node name="WinTheme" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("5_1pmua")
+volume_db = -10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Music"]
+libraries = {
+&"": SubResource("AnimationLibrary_5n3va")
+}
 
 [connection signal="fight_ended" from="." to="." method="_on_fight_ended"]
 [connection signal="fight_started" from="." to="." method="_on_fight_started"]

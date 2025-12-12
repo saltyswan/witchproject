@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=4 uid="uid://du0rs2i2vgpcj"]
+[gd_scene load_steps=14 format=4 uid="uid://du0rs2i2vgpcj"]
 
 [ext_resource type="Script" uid="uid://buhivvim7jq4i" path="res://Levels/level_2.gd" id="1_lfj2m"]
-[ext_resource type="PackedScene" uid="uid://jwwqhjdi6e5b" path="res://Spawner.tscn" id="2_m3ha0"]
 [ext_resource type="PackedScene" uid="uid://2wm1kj185ahp" path="res://Player/witch.tscn" id="3_vd23k"]
 [ext_resource type="PackedScene" uid="uid://5c7goktvlfsd" path="res://UI_HUD/HUD.tscn" id="6_jglcl"]
-[ext_resource type="PackedScene" uid="uid://cbk1ebode25f8" path="res://dangermode.tscn" id="7_xosfc"]
+[ext_resource type="PackedScene" uid="uid://cl0vg0wlg3oot" path="res://UI_HUD/PauseMenu.tscn" id="7_w0h0a"]
 [ext_resource type="Texture2D" uid="uid://cceth3tqyyxkr" path="res://maps/Dungeon_Tileset.png" id="8_mbiy8"]
 
 [sub_resource type="Curve2D" id="Curve2D_l5acx"]
@@ -291,12 +290,6 @@ physics_layer_0/collision_mask = 7
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_4bqqs")
 sources/0 = SubResource("TileSetAtlasSource_biamp")
 
-[sub_resource type="PackedScene" id="PackedScene_v115i"]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_w0h0a"]
-a = Vector2(1, -113)
-b = Vector2(0, 160)
-
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_lfj2m")
 
@@ -327,9 +320,8 @@ navigation_polygon = SubResource("NavigationPolygon_6dto8")
 position = Vector2(80, -105)
 zoom = Vector2(1.5, 1.5)
 
-[node name="Witch" parent="." node_paths=PackedStringArray("hearts_scene") instance=ExtResource("3_vd23k")]
+[node name="Witch" parent="." instance=ExtResource("3_vd23k")]
 position = Vector2(-144, -96)
-hearts_scene = NodePath("../Hud/VBoxContainer")
 
 [node name="SpawnBullet" parent="Witch/Weapon" index="2"]
 position = Vector2(3, 0)
@@ -345,37 +337,11 @@ material = SubResource("CanvasItemMaterial_v023s")
 tile_map_data = PackedByteArray("AAARAPP/AAAEAAYAAFARAAMAAAAFAAYAAAD4/wMAAAAFAAYAADD8//P/AAADAAIAAAD5//P/AAADAAIAAAARAPv/AAAEAAkAAAARAP7/AAAEAAkAAAD3//L/AAAAAAAAAAD3//P/AAAAAAAAAAD3//T/AAAAAAEAAAD3//X/AAAAAAIAAAD3//b/AAAAAAAAAAD3//f/AAAAAAEAAAD3//j/AAAAAAIAAAD3//v/AAAAAAMAAAD3//z/AAAAAAEAAAD3//3/AAAAAAIAAAD3//7/AAAAAAAAAAD3////AAAAAAEAAAD3/wAAAAAAAAIAAAD3/wEAAAAAAAMAAAD3/wIAAAAAAAIAAAD3/wMAAAAAAAMAAAD3/wQAAAAAAAQAAAD3/wUAAAAAAAUAAAD5//L/AAACAAAAAAD8//L/AAABAAAAAAD9//L/AAACAAAAAAD+//L/AAADAAAAAAD///L/AAAEAAAAAAAAAPL/AAABAAAAAAABAPL/AAACAAAAAAACAPL/AAADAAAAAAADAPL/AAABAAAAAAAEAPL/AAACAAAAAAAFAPL/AAADAAAAAAAGAPL/AAAEAAAAAAAHAPL/AAABAAAAAAAIAPL/AAACAAAAAAAJAPL/AAADAAAAAAAKAPL/AAABAAAAAAALAPL/AAACAAAAAAAMAPL/AAADAAAAAAANAPL/AAAEAAAAAAAOAPL/AAABAAAAAAAPAPL/AAACAAAAAAAQAPL/AAADAAAAAAARAPL/AAAEAAAAAAASAPL/AAAFAAAAAAASAPP/AAAFAAEAAAASAPT/AAAFAAIAAAASAPX/AAAFAAMAAAASAPb/AAAFAAAAAAASAPf/AAAFAAEAAAASAPj/AAAFAAIAAAASAPn/AAAFAAMAAAASAPr/AAAFAAAAAAASAPv/AAAFAAEAAAASAP7/AAAFAAEAAAASAP//AAAFAAIAAAASAAAAAAAFAAMAAAASAAEAAAAFAAAAAAASAAIAAAAFAAEAAAASAAMAAAAFAAIAAAASAAQAAAAFAAQAAAASAAUAAAAFAAUAAAD4/wQAAAABAAQAAAD4/wUAAAABAAUAAAD5/wQAAAACAAQAAAD5/wUAAAACAAUAAAD6/wQAAAADAAQAAAD6/wUAAAADAAUAAAD7/wQAAAABAAQAAAD7/wUAAAAAAAUAAAD8/wQAAAACAAQAAAD8/wUAAAABAAUAAAD9/wQAAAADAAQAAAD9/wUAAAACAAUAAAD+/wQAAAAEAAQAAAD+/wUAAAADAAUAAAD//wQAAAABAAQAAAD//wUAAAAAAAUAAAAAAAQAAAACAAQAAAAAAAUAAAABAAUAAAABAAQAAAADAAQAAAABAAUAAAACAAUAAAACAAQAAAAEAAQAAAACAAUAAAADAAUAAAADAAQAAAABAAQAAAADAAUAAAAAAAUAAAAEAAQAAAACAAQAAAAEAAUAAAABAAUAAAAFAAQAAAADAAQAAAAFAAUAAAACAAUAAAAGAAQAAAABAAQAAAAGAAUAAAADAAUAAAAHAAQAAAACAAQAAAAHAAUAAAAAAAUAAAAIAAQAAAADAAQAAAAIAAUAAAABAAUAAAAJAAQAAAAEAAQAAAAJAAUAAAACAAUAAAAKAAQAAAABAAQAAAAKAAUAAAADAAUAAAALAAQAAAACAAQAAAALAAUAAAAAAAUAAAAMAAQAAAADAAQAAAANAAQAAAABAAQAAAAOAAQAAAACAAQAAAAOAAUAAAABAAUAAAAPAAQAAAADAAQAAAAPAAUAAAACAAUAAAAQAAQAAAAEAAQAAAAQAAUAAAADAAUAAAARAAQAAAAEAAQAAAARAAUAAAAEAAUAAAD4//L/AAABAAAAAAD5//T/AAADAAIAAAAJAPr/AAADAAIAAAAJAPv/AAADAAIAAAALAP3/AAADAAIAAAALAP7/AAADAAIAAAAMAPn/AAACAAMAAAAAAPv/AAADAAIAAAABAPv/AAADAAIAAAD7//7/AAADAAIAAAD+/wIAAAADAAIAAAAOAP//AAADAAIAAAALAPv/AAACAAMAAAAEAPb/AAACAAMAAAD///f/AAACAAMAAAD8//3/AAACAAMAAAAKAP7/AAACAAMAAAANAPb/AAACAAMAAAASAPz/AAAFAAIAAAASAP3/AAAFAAIAAAA=")
 tile_set = SubResource("TileSet_cch3g")
 
-[node name="Dangermode" parent="." node_paths=PackedStringArray("witch", "spawn_location") instance=ExtResource("7_xosfc")]
-enemy_scene = SubResource("PackedScene_v115i")
-witch = NodePath("../Witch")
-spawn_location = NodePath("../SpawnPath/SpawnLocation")
-
-[node name="DangerZone" parent="Dangermode" index="0"]
-position = Vector2(0, 0)
-
-[node name="Threshold" parent="Dangermode/DangerZone" index="0"]
-position = Vector2(-72, -96)
-shape = SubResource("SegmentShape2D_w0h0a")
-
-[node name="Spawner" parent="." node_paths=PackedStringArray("spawn1", "spawn2", "spawn3") instance=ExtResource("2_m3ha0")]
-spawn1 = NodePath("../Spawn1")
-spawn2 = NodePath("../Spawn2")
-spawn3 = NodePath("../Spawn3")
-
 [node name="Hud" parent="." instance=ExtResource("6_jglcl")]
 
-[connection signal="animation_started" from="Witch/AnimationPlayer" to="Spawner" method="_on_animation_player_animation_started"]
-[connection signal="fight_ended" from="Dangermode" to="." method="on_fight_ended"]
-[connection signal="fight_ended" from="Dangermode" to="Witch/Weapon" method="_on_dangermode_fight_ended"]
-[connection signal="fight_ended" from="Dangermode" to="Spawner" method="_on_dangermode_fight_ended"]
-[connection signal="fight_started" from="Dangermode" to="." method="on_fight_started"]
-[connection signal="fight_started" from="Dangermode" to="Witch/Weapon" method="_on_dangermode_fight_started"]
-[connection signal="all_waves_cleared" from="Spawner" to="Dangermode" method="_on_spawner_all_waves_cleared"]
-[connection signal="wave_cleared" from="Spawner" to="." method="_on_wave_cleared"]
-[connection signal="wave_started" from="Spawner" to="." method="_on_wave_started"]
+[node name="PauseMenu" parent="." instance=ExtResource("7_w0h0a")]
 
 [editable path="Witch"]
 [editable path="Witch/Weapon"]
-[editable path="Dangermode"]
-[editable path="Dangermode/Fading"]
 [editable path="Hud"]
+[editable path="PauseMenu"]

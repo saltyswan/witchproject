@@ -45,6 +45,7 @@ func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
 		if not invincible and body.is_in_group("mobs"):
 			HpPlayer.take_damage()
 			invincible_state()
+			$AnimationPlayer.play("blink")
 		if HpPlayer.current_hp <= 0:
 			print("[Werewolf] BAM you're dead")
 			gameover = true
@@ -67,8 +68,8 @@ func _on_inv_timer_timeout() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death":
-			get_tree().change_scene_to_file("res://UI_HUD/GameOver.tscn")
-			print("[Werewolf] Now heading to Game Over screen")
+			get_tree().quit()
+			print("[Werewolf] Now leaving the game")
 
 func _on_claw_timer_timeout() -> void:
 	if not gameover:

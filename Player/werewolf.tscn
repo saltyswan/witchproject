@@ -1,7 +1,8 @@
-[gd_scene load_steps=37 format=3 uid="uid://bqril3qd36dv4"]
+[gd_scene load_steps=40 format=3 uid="uid://bqril3qd36dv4"]
 
 [ext_resource type="Script" uid="uid://co0xj73eyskns" path="res://Player/werewolf.gd" id="1_uiv21"]
 [ext_resource type="Texture2D" uid="uid://ohsq574usw0x" path="res://Player/Werewolf_attack1.png" id="2_r0xnq"]
+[ext_resource type="Shader" uid="uid://kjiqujvjfoow" path="res://Player/witch.gdshader" id="2_stnhq"]
 [ext_resource type="Texture2D" uid="uid://dhqd36qm8r62w" path="res://Player/Transformation_animcomplete1.png" id="3_75ii8"]
 [ext_resource type="Texture2D" uid="uid://d1j040gp3svx6" path="res://Player/Werewolf_attack2.png" id="3_y1w18"]
 [ext_resource type="Texture2D" uid="uid://c0fhrsjq661vh" path="res://Player/Werewolf_attack3.png" id="4_1k1t4"]
@@ -23,6 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://brsmcmdgqrjyl" path="res://Player/Werewolf_death7.png" id="12_tqg10"]
 [ext_resource type="AudioStream" uid="uid://dm213a2dn6lbv" path="res://MSD/footsteps_werewolf.wav" id="22_y1w18"]
 [ext_resource type="AudioStream" uid="uid://b70k0gthgbpv0" path="res://MSD/game_over.wav" id="23_1k1t4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7jjt"]
+shader = ExtResource("2_stnhq")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uiv21"]
 animations = [{
@@ -119,6 +125,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"attack"]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_r0xnq"]
 resource_name = "attack"
@@ -204,10 +222,27 @@ tracks/1/keys = {
 "values": [&"run"]
 }
 
+[sub_resource type="Animation" id="Animation_fd6wo"]
+resource_name = "blink"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q50x0"]
 _data = {
 &"RESET": SubResource("Animation_uiv21"),
 &"attack": SubResource("Animation_r0xnq"),
+&"blink": SubResource("Animation_fd6wo"),
 &"death": SubResource("Animation_q50x0"),
 &"run": SubResource("Animation_g4ruo")
 }
@@ -297,6 +332,7 @@ script = ExtResource("1_uiv21")
 direction_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_q7jjt")
 sprite_frames = SubResource("SpriteFrames_uiv21")
 animation = &"attack"
 

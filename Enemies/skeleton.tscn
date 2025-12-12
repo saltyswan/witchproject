@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bnsn4s1bbh85y"]
+[gd_scene load_steps=23 format=3 uid="uid://bnsn4s1bbh85y"]
 
 [ext_resource type="Texture2D" uid="uid://sfishgxxgwt3" path="res://Enemies/Skeleton_attack1.png" id="1_e5202"]
 [ext_resource type="Texture2D" uid="uid://bkcdxhxh6tqqo" path="res://Enemies/Skeleton_walk1.png" id="1_g687e"]
+[ext_resource type="Shader" uid="uid://kjiqujvjfoow" path="res://Player/witch.gdshader" id="1_o5rw1"]
+[ext_resource type="Script" uid="uid://bqcg65fwidepq" path="res://Enemies/skeleton.gd" id="1_pf54f"]
 [ext_resource type="Texture2D" uid="uid://b2aecsib2bdf" path="res://Enemies/Skeleton_walk2.png" id="2_i84q7"]
 [ext_resource type="Texture2D" uid="uid://b2twoqvuabiup" path="res://Enemies/Skeleton_attack2.png" id="2_pf54f"]
 [ext_resource type="Texture2D" uid="uid://s3gy0785uw6h" path="res://Enemies/Skeleton_walk3.png" id="3_nc5xu"]
@@ -12,9 +14,15 @@
 [ext_resource type="Texture2D" uid="uid://5cxabuj2uygw" path="res://Enemies/Skeleton_attack6.png" id="6_ny6m6"]
 [ext_resource type="Texture2D" uid="uid://cds5pe5n3pvbo" path="res://Enemies/Skeleton_attack7.png" id="7_ghoec"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agc0e"]
-radius = 6.0
-height = 22.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ojyg"]
+shader = ExtResource("1_o5rw1")
+shader_parameter/flash_color = Color(0.72, 0, 0.011999818, 1)
+shader_parameter/flash_value = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5rw1"]
+shader = ExtResource("1_o5rw1")
+shader_parameter/flash_color = Color(0.62553877, 0, 0.0075483937, 1)
+shader_parameter/flash_value = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jvndi"]
 animations = [{
@@ -62,15 +70,181 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="SkeletonNode" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agc0e"]
+radius = 8.0
+height = 24.0
 
-[node name="Skeleton" type="CharacterBody2D" parent="."]
+[sub_resource type="Animation" id="Animation_pf54f"]
+resource_name = "attack"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Skeleton"]
+[sub_resource type="Animation" id="Animation_o5rw1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_2ojyg")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:material")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_o5rw1")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_2ojyg"]
+resource_name = "blink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("ShaderMaterial_o5rw1")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2ojyg"]
+_data = {
+&"RESET": SubResource("Animation_o5rw1"),
+&"attack": SubResource("Animation_pf54f"),
+&"blink": SubResource("Animation_2ojyg")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pf54f"]
+radius = 11.0
+
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("direction_sprite") groups=["mobs"]]
+material = SubResource("ShaderMaterial_2ojyg")
+collision_mask = 30
+script = ExtResource("1_pf54f")
+direction_sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_o5rw1")
+sprite_frames = SubResource("SpriteFrames_jvndi")
+animation = &"attack"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_agc0e")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Skeleton"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2ojyg")
+}
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Skeleton"]
-sprite_frames = SubResource("SpriteFrames_jvndi")
-autoplay = "default"
+[node name="KnockTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+visible = false
+collision_mask = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_pf54f")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 2.0
+target_desired_distance = 1.0
+path_max_distance = 10.0
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

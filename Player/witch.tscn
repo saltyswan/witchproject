@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://cygbre4xc8tvh" path="res://Player/Sprite_witch_runup3.png" id="18_l12tu"]
 [ext_resource type="Texture2D" uid="uid://baw6nu17g8eqx" path="res://Player/Sprite_witch_runup4.png" id="19_55vgx"]
 [ext_resource type="PackedScene" uid="uid://db0u3xvvwgiqq" path="res://Weapon/Weapon.tscn" id="24_02vsg"]
-[ext_resource type="AudioStream" uid="uid://dud5c2jdp762" path="res://MSD/footstep-witch.mp3" id="25_y6hiv"]
+[ext_resource type="AudioStream" uid="uid://qowdvm8xx3iv" path="res://MSD/stepsound.wav" id="25_sojuo"]
 [ext_resource type="AudioStream" uid="uid://b70k0gthgbpv0" path="res://MSD/game_over.wav" id="26_sojuo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y6hiv"]
@@ -387,10 +387,13 @@ shape = SubResource("CapsuleShape2D_02vsg")
 [node name="InvTimer" type="Timer" parent="."]
 
 [node name="StepSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("25_y6hiv")
+stream = ExtResource("25_sojuo")
+volume_db = -20.0
 
 [node name="GameOverWitch" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("26_sojuo")
+
+[node name="HurtboxSound" type="AudioStreamPlayer" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="Weapon" method="_on_animation_player_animation_started"]

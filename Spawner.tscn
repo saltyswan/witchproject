@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://jwwqhjdi6e5b"]
+[gd_scene load_steps=29 format=3 uid="uid://jwwqhjdi6e5b"]
 
 [ext_resource type="Script" uid="uid://cref4hmkh7jom" path="res://spawner.gd" id="1_mimr8"]
 [ext_resource type="Script" uid="uid://c4kwelihbaw2j" path="res://portal.gd" id="2_5q6u0"]
 [ext_resource type="Texture2D" uid="uid://cfb0foddsrkcg" path="res://maps/Blue Portal Sprite Sheet.png" id="3_5i5hu"]
+[ext_resource type="AudioStream" uid="uid://cbqwmi7mo3sit" path="res://MSD/wolf-howl-359873.mp3" id="4_1v3v6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyyrg"]
 atlas = ExtResource("3_5i5hu")
@@ -243,20 +244,22 @@ _data = {
 [node name="Spawner" type="Node2D"]
 script = ExtResource("1_mimr8")
 
-[node name="WaveDelay" type="Timer" parent="."]
+[node name="WaveDelay" type="Timer" parent="." groups=["timers"]]
 wait_time = 0.5
 one_shot = true
 
-[node name="ClearDelay" type="Timer" parent="."]
+[node name="ClearDelay" type="Timer" parent="." groups=["timers"]]
 wait_time = 1.1
 
-[node name="WolfTimer" type="Timer" parent="."]
+[node name="WolfTimer" type="Timer" parent="." groups=["timers"]]
 wait_time = 12.0
 one_shot = true
 
-[node name="WitchTimer" type="Timer" parent="."]
+[node name="WitchTimer" type="Timer" parent="." groups=["timers"]]
 wait_time = 6.0
 one_shot = true
+
+[node name="SkeletonTimer" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
@@ -273,13 +276,18 @@ libraries = {
 &"": SubResource("AnimationLibrary_61yfd")
 }
 
+[node name="WolfCry" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_1v3v6")
+volume_db = -10.0
+
 [connection signal="all_waves_cleared" from="." to="." method="_on_all_waves_cleared"]
 [connection signal="wave_cleared" from="." to="." method="_on_wave_cleared"]
 [connection signal="wave_started" from="." to="." method="_on_wave_started"]
-[connection signal="timeout" from="WaveDelay" to="." method="on_timer_timeout"]
 [connection signal="timeout" from="WaveDelay" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="WaveDelay" to="." method="on_timer_timeout"]
 [connection signal="timeout" from="ClearDelay" to="." method="_on_clear_delay_timeout"]
 [connection signal="timeout" from="WolfTimer" to="." method="_on_wolftimer_timeout"]
 [connection signal="timeout" from="WitchTimer" to="." method="_on_witch_timer_timeout"]
+[connection signal="timeout" from="SkeletonTimer" to="." method="_on_skeleton_timer_timeout"]
 [connection signal="animation_finished" from="Portal/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_finished" from="Portal/AnimationPlayer" to="Portal" method="_on_animation_player_animation_finished"]

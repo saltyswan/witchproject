@@ -10,8 +10,10 @@ func _ready() -> void:
 
 func take_damage():
 	current_hp -= hit_damage
-	print("Current HP:", current_hp)
+	print("[HP Player] Witch HP:", current_hp)
 	hp_lost.emit(current_hp)
+
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
