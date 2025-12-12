@@ -8,6 +8,7 @@ func _ready() -> void:
 
 	$MoonSprite.hide()
 	$FullMoon.hide()
+	$GameOver.hide()
 	
 	HpPlayer.hp_lost.connect(on_hp_lost)
 
@@ -36,3 +37,7 @@ func _on_dangermode_fight_started() -> void:
 
 func _on_dangermode_fight_ended() -> void:
 	$MoonSprite.hide()
+
+
+func _on_twitch_pressed() -> void:
+	pass # Replace with function body.

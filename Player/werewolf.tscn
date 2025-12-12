@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bqril3qd36dv4"]
+[gd_scene load_steps=42 format=3 uid="uid://bqril3qd36dv4"]
 
 [ext_resource type="Script" uid="uid://co0xj73eyskns" path="res://Player/werewolf.gd" id="1_uiv21"]
 [ext_resource type="Texture2D" uid="uid://ohsq574usw0x" path="res://Player/Werewolf_attack1.png" id="2_r0xnq"]
@@ -23,9 +23,11 @@
 [ext_resource type="Texture2D" uid="uid://4ailtuuf8xab" path="res://Player/Werewolf_death6.png" id="11_2eh8d"]
 [ext_resource type="Texture2D" uid="uid://brsmcmdgqrjyl" path="res://Player/Werewolf_death7.png" id="12_tqg10"]
 [ext_resource type="AudioStream" uid="uid://dm213a2dn6lbv" path="res://MSD/footsteps_werewolf.wav" id="22_y1w18"]
-[ext_resource type="AudioStream" uid="uid://b70k0gthgbpv0" path="res://MSD/game_over.wav" id="23_1k1t4"]
+[ext_resource type="AudioStream" uid="uid://6ks42hwrt8n7" path="res://MSD/GameOverSound2.wav" id="24_q7jjt"]
+[ext_resource type="AudioStream" uid="uid://degy6nsvuo04v" path="res://MSD/Dmgtaken.wav" id="25_q7jjt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q7jjt"]
+resource_local_to_scene = true
 shader = ExtResource("2_stnhq")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_value = 0.0
@@ -166,9 +168,25 @@ tracks/1/keys = {
 "values": [&"attack"]
 }
 
+[sub_resource type="Animation" id="Animation_fd6wo"]
+resource_name = "blink"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_q50x0"]
 resource_name = "death"
-length = 0.7
+length = 2.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -222,22 +240,6 @@ tracks/1/keys = {
 "values": [&"run"]
 }
 
-[sub_resource type="Animation" id="Animation_fd6wo"]
-resource_name = "blink"
-length = 0.9
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/flash_value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0, 0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q50x0"]
 _data = {
 &"RESET": SubResource("Animation_uiv21"),
@@ -248,11 +250,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4ruo"]
-radius = 7.0
+radius = 6.0
 height = 26.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q50x0"]
-height = 32.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jally"]
 animations = [{
@@ -272,14 +271,19 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0xnq"]
-size = Vector2(17, 68)
+size = Vector2(18, 54)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q50x0"]
+radius = 7.0
+height = 28.0
 
 [sub_resource type="Animation" id="Animation_1k1t4"]
 length = 0.001
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("../Clawsprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -295,7 +299,7 @@ length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("../Clawsprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -307,7 +311,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = false
-tracks/1/path = NodePath("AnimatedSprite2D")
+tracks/1/path = NodePath("../Clawsprite2D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -324,6 +328,9 @@ _data = {
 &"RESET": SubResource("Animation_1k1t4"),
 &"default": SubResource("Animation_y1w18")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7jjt"]
+size = Vector2(22, 60)
 
 [node name="Werewolf" type="CharacterBody2D" node_paths=PackedStringArray("direction_sprite") groups=["witch"]]
 collision_layer = 2
@@ -345,6 +352,14 @@ autoplay = "run"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_g4ruo")
 
+[node name="Clawsprite2D" type="AnimatedSprite2D" parent="." groups=["witch"]]
+position = Vector2(20, 0)
+sprite_frames = SubResource("SpriteFrames_jally")
+
+[node name="ClawCollision2D" type="CollisionShape2D" parent="." groups=["bullet", "witch"]]
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_r0xnq")
+
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 45
@@ -357,14 +372,6 @@ shape = SubResource("CapsuleShape2D_q50x0")
 [node name="Claw" type="Area2D" parent="." groups=["bullet"]]
 collision_layer = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Claw"]
-position = Vector2(20, 0)
-sprite_frames = SubResource("SpriteFrames_jally")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw"]
-position = Vector2(20, 0)
-shape = SubResource("RectangleShape2D_r0xnq")
-
 [node name="ClawTimer" type="Timer" parent="Claw"]
 autostart = true
 
@@ -372,13 +379,21 @@ autostart = true
 libraries = {
 &"": SubResource("AnimationLibrary_stnhq")
 }
+autoplay = "RESET"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Claw" groups=["bullet"]]
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_q7jjt")
 
 [node name="StepSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_y1w18")
 autoplay = true
 
 [node name="GameOverWolf" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("23_1k1t4")
+stream = ExtResource("24_q7jjt")
+
+[node name="HurtboxSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_q7jjt")
 
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

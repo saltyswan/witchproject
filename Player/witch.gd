@@ -67,12 +67,16 @@ func _on_hurtbox_body_entered(body) -> void:
 			invincible_state()
 		if HpPlayer.current_hp <= 0:
 			print("[Witch] BAM you're dead")
+			$"../Spawner/WolfTimer".stop()
+			$"../Hud/GameOver/".show()
+			$"../Dangermode/Music/AnimationPlayer".play("fadetogameover")
+			$"../Fading".fade_in()
+			$"../Hud/GameOver/GameOverFade".play("fade_in")
 			$GameOverWitch.play()
 			gameover = true
 			_animated_sprite.play("death_down")
 		else:
 			return
-
 
 
 func invincible_state(duration: float = 1.0):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://5c7goktvlfsd"]
+[gd_scene load_steps=23 format=3 uid="uid://5c7goktvlfsd"]
 
 [ext_resource type="Script" uid="uid://4dg1bqchqeh2" path="res://UI_HUD/hud.gd" id="1_5digi"]
 [ext_resource type="Texture2D" uid="uid://dw02ophqolxsg" path="res://Enemies/HPheartv2.png" id="2_4ps3q"]
@@ -10,6 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://ceq2bdvh4kt1o" path="res://UI_HUD/Moon-6.png" id="8_rv3fl"]
 [ext_resource type="Texture2D" uid="uid://ci68irkmv5eoa" path="res://UI_HUD/Moon-7.png" id="9_gp7da"]
 [ext_resource type="Texture2D" uid="uid://nt0iq26arv4x" path="res://UI_HUD/Moon-8.png" id="10_qcu83"]
+[ext_resource type="Texture2D" uid="uid://bfy5he05q2xjo" path="res://UI_HUD/GameOverText.png" id="11_h5tnk"]
+[ext_resource type="Script" uid="uid://c2sqfjet3ipj2" path="res://UI_HUD/end_game.gd" id="12_rv3fl"]
+[ext_resource type="Theme" uid="uid://bhsirk8npv0i3" path="res://UI_HUD/ButtonTheme.tres" id="12_xaibk"]
+[ext_resource type="FontFile" uid="uid://cvg4geji2ab31" path="res://UI_HUD/Algerian Regular.ttf" id="13_rv3fl"]
+[ext_resource type="Texture2D" uid="uid://tfdhadmb8j7p" path="res://UI_HUD/gameicon.png" id="14_gp7da"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5w0r8"]
 animations = [{
@@ -105,6 +110,66 @@ _data = {
 &"default": SubResource("Animation_xqndm")
 }
 
+[sub_resource type="Animation" id="Animation_h5tnk"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="Animation" id="Animation_5pbyu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_osrgr"]
+_data = {
+&"RESET": SubResource("Animation_5pbyu"),
+&"fade_in": SubResource("Animation_h5tnk")
+}
+
 [node name="Hud" type="CanvasLayer" node_paths=PackedStringArray("hearts_scene")]
 script = ExtResource("1_5digi")
 hearts_scene = NodePath("VBoxContainer")
@@ -166,3 +231,95 @@ offset_right = 110.0
 offset_bottom = 25.0
 grow_vertical = 2
 texture = ExtResource("6_osrgr")
+
+[node name="GameOver" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -172.5
+offset_top = -37.5
+offset_right = 172.5
+offset_bottom = 37.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_h5tnk")
+
+[node name="GameOverFade" type="AnimationPlayer" parent="GameOver"]
+libraries = {
+&"": SubResource("AnimationLibrary_osrgr")
+}
+
+[node name="EndGame" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0040001
+offset_right = 2.0
+offset_bottom = -0.16003418
+script = ExtResource("12_rv3fl")
+
+[node name="ColorRect" type="ColorRect" parent="EndGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08377393, 0.037612833, 0.03761252, 1)
+
+[node name="VBoxContainer" type="HBoxContainer" parent="EndGame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = 103.0
+offset_right = 125.0
+offset_bottom = 146.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 54
+
+[node name="Twitch" type="Button" parent="EndGame/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_xaibk")
+text = "Twitch"
+
+[node name="Credits" type="Button" parent="EndGame/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("12_xaibk")
+text = "Credits"
+
+[node name="Label" type="Label" parent="EndGame"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -209.0
+offset_top = 65.0
+offset_right = 212.0
+offset_bottom = 88.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("13_rv3fl")
+theme_override_font_sizes/font_size = 20
+text = "Thank you for playing my first game! o/"
+
+[node name="GameIcon" type="TextureRect" parent="EndGame"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -124.0
+offset_top = 136.0
+offset_right = 132.0
+offset_bottom = 280.0
+grow_horizontal = 2
+texture = ExtResource("14_gp7da")

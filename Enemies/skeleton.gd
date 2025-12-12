@@ -85,7 +85,7 @@ func _on_knock_timer_timeout() -> void:
 
 func _on_attack_timer_timeout() -> void:
 	$AnimationPlayer.play("attack")
-	speed = 30
+	speed = 60
 	
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

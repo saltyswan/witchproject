@@ -1,11 +1,38 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmfurd482hj0e"]
+[gd_scene load_steps=19 format=3 uid="uid://dmfurd482hj0e"]
 
 [ext_resource type="Script" uid="uid://cwuysewbeowtk" path="res://UI_HUD/main_menu.gd" id="1_k42oj"]
-[ext_resource type="Texture2D" uid="uid://ckdrs034uxajq" path="res://UI_HUD/mainmenu_goodsize.png" id="2_q2nw8"]
+[ext_resource type="Texture2D" uid="uid://cq5frgvsqr3f1" path="res://UI_HUD/mainmenu_animated1.png" id="2_ot8mh"]
+[ext_resource type="Texture2D" uid="uid://dmjceynwiofye" path="res://UI_HUD/mainmenu_animated2.png" id="3_7kjal"]
 [ext_resource type="AudioStream" uid="uid://bjww0em0r3w6" path="res://MSD/button.wav" id="3_dbg2s"]
 [ext_resource type="Theme" uid="uid://bhsirk8npv0i3" path="res://UI_HUD/ButtonTheme.tres" id="3_q2nw8"]
+[ext_resource type="Texture2D" uid="uid://dviddlvdhe6xy" path="res://UI_HUD/mainmenu_animated3.png" id="4_5tddq"]
+[ext_resource type="Texture2D" uid="uid://dggnvhc5ovhya" path="res://UI_HUD/mainmenu_animated4.png" id="5_dkxxh"]
 [ext_resource type="AudioStream" uid="uid://bimyf5so6s6ft" path="res://MSD/MenuTheme.mp3" id="5_skhpm"]
 [ext_resource type="PackedScene" uid="uid://cvqxihjksyiv8" path="res://maps/fading.tscn" id="6_pd78h"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_r3yr7"]
+frames = 4
+frame_0/texture = ExtResource("2_ot8mh")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("3_7kjal")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("4_5tddq")
+frame_2/duration = 0.2
+frame_3/texture = ExtResource("5_dkxxh")
+frame_3/duration = 0.2
+
+[sub_resource type="Animation" id="Animation_67k5d"]
+resource_name = "default"
+loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_dydum"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nltgx"]
+_data = {
+&"RESET": SubResource("Animation_dydum"),
+&"default": SubResource("Animation_67k5d")
+}
 
 [sub_resource type="InputEventKey" id="InputEventKey_k42oj"]
 
@@ -61,8 +88,13 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("2_q2nw8")
+texture = SubResource("AnimatedTexture_r3yr7")
 expand_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BackgroundMenu"]
+libraries = {
+&"": SubResource("AnimationLibrary_nltgx")
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchors_preset = 5

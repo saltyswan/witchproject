@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbk1ebode25f8"]
+[gd_scene load_steps=13 format=3 uid="uid://cbk1ebode25f8"]
 
 [ext_resource type="PackedScene" uid="uid://cvqxihjksyiv8" path="res://maps/fading.tscn" id="2_flest"]
 [ext_resource type="Script" uid="uid://ds15g2c84en53" path="res://danger_zone.gd" id="2_w2pf1"]
@@ -69,8 +69,8 @@ func _on_slime_timer_timeout() -> void:
 "
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_vo80h"]
-a = Vector2(177, -163)
-b = Vector2(-251, -160)
+a = Vector2(351, -189)
+b = Vector2(-224, -188)
 
 [sub_resource type="Animation" id="Animation_e1vha"]
 length = 0.001
@@ -145,6 +145,18 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BattleTheme:stream")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_w2pf1")]
 }
 
 [sub_resource type="Animation" id="Animation_5n3va"]
@@ -249,11 +261,39 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_toinf"]
+resource_name = "fadetogameover"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("BattleTheme:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_w2pf1")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BattleTheme:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.99),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-10.0, -80.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5n3va"]
 _data = {
 &"RESET": SubResource("Animation_e1vha"),
 &"fadetoBattle": SubResource("Animation_5n3va"),
-&"fadetoWin": SubResource("Animation_1pmua")
+&"fadetoWin": SubResource("Animation_1pmua"),
+&"fadetogameover": SubResource("Animation_toinf")
 }
 
 [node name="Dangermode" type="Node2D"]

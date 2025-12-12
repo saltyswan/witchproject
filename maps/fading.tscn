@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvqxihjksyiv8"]
+[gd_scene load_steps=7 format=3 uid="uid://cvqxihjksyiv8"]
 
 [ext_resource type="Script" uid="uid://bwiuud8ftmse5" path="res://maps/fading.gd" id="1_lseyn"]
 
@@ -11,15 +11,27 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(-0.1),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.03529412, 0.03529412, 0.03529412, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_wj3sb"]
 resource_name = "fade_in"
-length = 0.3
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,7 +39,7 @@ tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 1.2666667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0.019607844, 0.019607844, 0.019607844, 0), Color(0.019607844, 0.019607844, 0.019607844, 1)]
@@ -49,10 +61,27 @@ tracks/0/keys = {
 "values": [Color(0.019607844, 0.019607844, 0.019607844, 1), Color(0.019607844, 0.019607844, 0.019607844, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_xx1w8"]
+resource_name = "fade_in_main"
+length = 0.34
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.04, 0.04, 0.04, 0), Color(0.04, 0.04, 0.04, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xx1w8"]
 _data = {
 &"RESET": SubResource("Animation_lseyn"),
 &"fade_in": SubResource("Animation_wj3sb"),
+&"fade_in_main": SubResource("Animation_xx1w8"),
 &"fade_out": SubResource("Animation_5yaqh")
 }
 
