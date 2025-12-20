@@ -11,6 +11,7 @@ var knocked = false
 var speed = 100.0
 const KB_FORCE = 300
 signal last_enemy_killed
+var attacking = false
 
 func _ready() -> void:
 	add_to_group("mobs")
@@ -24,6 +25,8 @@ func _physics_process(delta: float) -> void:
 	if not is_instance_valid(target):
 		var werewitch = get_tree().get_nodes_in_group("witch")
 		print(werewitch)
+		if attacking:
+			$AnimationPlayer.stop("attack")
 		if werewitch.size() > 0:
 			target = werewitch[0]
 	
@@ -36,12 +39,17 @@ func _physics_process(delta: float) -> void:
 		nav_agent.target_position = target.global_position
 		velocity = global_position.direction_to(nav_agent.get_next_path_position()) * speed
 		move_and_slide()
-
+		
 	if velocity.x < 0:
 		direction_sprite.flip_h = true
-		
+		$SwordAttack/AnimatedSprite2D.flip_h = true
+		$SwordAttack/AnimatedSprite2D.position.x = -$SwordAttack/AnimatedSprite2D.position.x
+		$AnimatedSprite2D/SwordCollision.scale.x = -1.0
 	elif velocity.x >= 0 :
 		direction_sprite.flip_h = false
+		$SwordAttack/AnimatedSprite2D.flip_h = false
+		$SwordAttack/AnimatedSprite2D.position.x = -$SwordAttack/AnimatedSprite2D.position.x
+		$AnimatedSprite2D/SwordCollision.scale.x = 1.0
 	
 	else:
 		return
@@ -76,19 +84,22 @@ func hit_witch (duration: float = 0.3):
 		$KnockTimer.start()
 		$KnockTimer.wait_time = duration
 		knocked = true
-		#print("Enemy HP:", current_hp)
+		print("[Skeleton] I'm knocked!")
 
 func _on_knock_timer_timeout() -> void:
 	knocked = false
 	knockback = Vector2.ZERO
-	#print("Enemy not knocked anymore")
+	print("[Skeleton] Not knocked anymore")
 
 func _on_attack_timer_timeout() -> void:
 	$AnimationPlayer.play("attack")
+	print("[Skeleton] I'm attacking")
 	speed = 60
+	attacking = true
 	
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack":
 		$AttackTimer.start()
 		speed = 100
+		attacking = false

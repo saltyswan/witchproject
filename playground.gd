@@ -10,6 +10,8 @@ func _ready() -> void:
 	$Spawner.connect("wave_cleared", Callable (self, "_on_wave_cleared"))
 	$Spawner.connect ("all_waves_cleared", Callable (self, "_on_waves_cleared"))
 	$Hud/EndGame.hide()
+	HpPlayer.reset_level()
+	print("[Playground] Max HP restored")
 
 	pause_menu.hide()
 	#NOTE: add fade in, maybe

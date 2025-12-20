@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bqril3qd36dv4"]
+[gd_scene load_steps=47 format=3 uid="uid://bqril3qd36dv4"]
 
 [ext_resource type="Script" uid="uid://co0xj73eyskns" path="res://Player/werewolf.gd" id="1_uiv21"]
 [ext_resource type="Texture2D" uid="uid://ohsq574usw0x" path="res://Player/Werewolf_attack1.png" id="2_r0xnq"]
@@ -25,6 +25,14 @@
 [ext_resource type="AudioStream" uid="uid://dm213a2dn6lbv" path="res://MSD/footsteps_werewolf.wav" id="22_y1w18"]
 [ext_resource type="AudioStream" uid="uid://6ks42hwrt8n7" path="res://MSD/GameOverSound2.wav" id="24_q7jjt"]
 [ext_resource type="AudioStream" uid="uid://degy6nsvuo04v" path="res://MSD/Dmgtaken.wav" id="25_q7jjt"]
+[ext_resource type="Texture2D" uid="uid://com6rbf7v3pw5" path="res://Player/surpriseffectOK1.png" id="26_ktt4j"]
+[ext_resource type="Texture2D" uid="uid://dcs86gp4350a1" path="res://Player/surpriseffectOK2.png" id="27_2eh8d"]
+[ext_resource type="Texture2D" uid="uid://dqlab0ffllppj" path="res://Player/surpriseffectOK3.png" id="28_tqg10"]
+[ext_resource type="Texture2D" uid="uid://bqmne8vmk57r3" path="res://Player/surpriseffectOK4.png" id="29_uluyp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4ruo"]
+radius = 6.0
+height = 26.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q7jjt"]
 resource_local_to_scene = true
@@ -101,6 +109,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q7jjt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0xnq"]
+size = Vector2(18, 54)
+
 [sub_resource type="Animation" id="Animation_uiv21"]
 length = 0.001
 tracks/0/type = "value"
@@ -138,34 +151,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
-}
-
-[sub_resource type="Animation" id="Animation_r0xnq"]
-resource_name = "attack"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:animation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"attack"]
 }
 
 [sub_resource type="Animation" id="Animation_fd6wo"]
@@ -215,6 +200,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_g4ruo"]
 resource_name = "run"
 length = 1.2
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -243,15 +229,17 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_q50x0"]
 _data = {
 &"RESET": SubResource("Animation_uiv21"),
-&"attack": SubResource("Animation_r0xnq"),
 &"blink": SubResource("Animation_fd6wo"),
 &"death": SubResource("Animation_q50x0"),
 &"run": SubResource("Animation_g4ruo")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4ruo"]
-radius = 6.0
-height = 26.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q50x0"]
+radius = 7.0
+height = 28.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7jjt"]
+size = Vector2(22, 60)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jally"]
 animations = [{
@@ -265,25 +253,89 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("11_1eak0")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0xnq"]
-size = Vector2(18, 54)
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3v1g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_ktt4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_2eh8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_tqg10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_uluyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ktt4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_2eh8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_tqg10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_uluyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ktt4j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_2eh8d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_tqg10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_uluyp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q50x0"]
-radius = 7.0
-height = 28.0
-
-[sub_resource type="Animation" id="Animation_1k1t4"]
-length = 0.001
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_862i2"]
+resource_name = "pretransfo"
+length = 1.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Clawsprite2D:frame")
+tracks/0/path = NodePath("SurpriseSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SurpriseSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.01, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_fbjhc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SurpriseSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -292,45 +344,24 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-
-[sub_resource type="Animation" id="Animation_y1w18"]
-resource_name = "default"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Clawsprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "method"
+tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath("../Clawsprite2D")
+tracks/1/enabled = true
+tracks/1/path = NodePath("SurpriseSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.6),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
+"update": 1,
+"values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_stnhq"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_deqnh"]
 _data = {
-&"RESET": SubResource("Animation_1k1t4"),
-&"default": SubResource("Animation_y1w18")
+&"RESET": SubResource("Animation_fbjhc"),
+&"pretransfo": SubResource("Animation_862i2")
 }
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7jjt"]
-size = Vector2(22, 60)
 
 [node name="Werewolf" type="CharacterBody2D" node_paths=PackedStringArray("direction_sprite") groups=["witch"]]
 collision_layer = 2
@@ -338,27 +369,27 @@ collision_mask = 45
 script = ExtResource("1_uiv21")
 direction_sprite = NodePath("AnimatedSprite2D")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_g4ruo")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_q7jjt")
 sprite_frames = SubResource("SpriteFrames_uiv21")
 animation = &"attack"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="AnimatedSprite2D"]
+collision_layer = 16
+physics_material_override = SubResource("PhysicsMaterial_q7jjt")
+
+[node name="ClawCollision2D" type="CollisionShape2D" parent="AnimatedSprite2D/StaticBody2D" groups=["bullet", "witch"]]
+position = Vector2(20, 0)
+shape = SubResource("RectangleShape2D_r0xnq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_q50x0")
 }
 autoplay = "run"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_g4ruo")
-
-[node name="Clawsprite2D" type="AnimatedSprite2D" parent="." groups=["witch"]]
-position = Vector2(20, 0)
-sprite_frames = SubResource("SpriteFrames_jally")
-
-[node name="ClawCollision2D" type="CollisionShape2D" parent="." groups=["bullet", "witch"]]
-position = Vector2(20, 0)
-shape = SubResource("RectangleShape2D_r0xnq")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 2
@@ -375,15 +406,14 @@ collision_layer = 2
 [node name="ClawTimer" type="Timer" parent="Claw"]
 autostart = true
 
-[node name="AnimationPlay" type="AnimationPlayer" parent="Claw"]
-libraries = {
-&"": SubResource("AnimationLibrary_stnhq")
-}
-autoplay = "RESET"
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Claw" groups=["bullet"]]
 position = Vector2(20, 0)
 shape = SubResource("RectangleShape2D_q7jjt")
+
+[node name="Clawsprite2D" type="AnimatedSprite2D" parent="Claw" groups=["witch"]]
+position = Vector2(20, 0)
+sprite_frames = SubResource("SpriteFrames_jally")
+autoplay = "default"
 
 [node name="StepSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_y1w18")
@@ -395,6 +425,20 @@ stream = ExtResource("24_q7jjt")
 [node name="HurtboxSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("25_q7jjt")
 
+[node name="PretransfoTimer" type="Timer" parent="."]
+wait_time = 5.7
+autostart = true
+
+[node name="SurpriseSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_x3v1g")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_deqnh")
+}
+
 [connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
@@ -402,4 +446,4 @@ stream = ExtResource("25_q7jjt")
 [connection signal="tree_entered" from="Claw" to="." method="_on_claw_tree_entered"]
 [connection signal="timeout" from="Claw/ClawTimer" to="." method="_on_claw_timer_timeout"]
 [connection signal="tree_entered" from="Claw/ClawTimer" to="." method="_on_claw_timer_tree_entered"]
-[connection signal="animation_finished" from="Claw/AnimationPlay" to="." method="_on_animation_play_animation_finished"]
+[connection signal="timeout" from="PretransfoTimer" to="." method="_on_pretransfo_timer_timeout"]

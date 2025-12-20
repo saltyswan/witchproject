@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://du0rs2i2vgpcj"]
+[gd_scene load_steps=5 format=3 uid="uid://du0rs2i2vgpcj"]
 
 [ext_resource type="Script" uid="uid://buhivvim7jq4i" path="res://Levels/level_2.gd" id="1_lfj2m"]
 [ext_resource type="PackedScene" uid="uid://cvqxihjksyiv8" path="res://maps/fading.tscn" id="3_nn734"]
+[ext_resource type="AudioStream" uid="uid://b334ajdgd78c5" path="res://MSD/TutorialTheme.wav" id="4_506po"]
 [ext_resource type="PackedScene" uid="uid://5c7goktvlfsd" path="res://UI_HUD/HUD.tscn" id="6_jglcl"]
 
 [node name="Level2" type="Node2D"]
@@ -10,6 +11,11 @@ script = ExtResource("1_lfj2m")
 [node name="Hud" parent="." instance=ExtResource("6_jglcl")]
 
 [node name="Fading" parent="." instance=ExtResource("3_nn734")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_506po")
+volume_db = -5.0
+autoplay = true
 
 [connection signal="pressed" from="Hud/EndGame/VBoxContainer/Twitch" to="Hud/EndGame" method="_on_twitch_pressed"]
 [connection signal="pressed" from="Hud/EndGame/VBoxContainer/Credits" to="Hud/EndGame" method="_on_credits_pressed"]

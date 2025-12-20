@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_credits_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://UI_HUD/Credits.tscn")
 
 func _on_twitch_pressed() -> void:
 	OS.shell_open("https://www.twitch.tv/swan_tinydev")

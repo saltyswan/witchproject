@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bnsn4s1bbh85y"]
+[gd_scene load_steps=35 format=3 uid="uid://bnsn4s1bbh85y"]
 
 [ext_resource type="Texture2D" uid="uid://sfishgxxgwt3" path="res://Enemies/Skeleton_attack1.png" id="1_e5202"]
 [ext_resource type="Texture2D" uid="uid://bkcdxhxh6tqqo" path="res://Enemies/Skeleton_walk1.png" id="1_g687e"]
@@ -13,6 +13,15 @@
 [ext_resource type="Texture2D" uid="uid://du8akhlcfb2v0" path="res://Enemies/Skeleton_attack5.png" id="5_jm08w"]
 [ext_resource type="Texture2D" uid="uid://5cxabuj2uygw" path="res://Enemies/Skeleton_attack6.png" id="6_ny6m6"]
 [ext_resource type="Texture2D" uid="uid://cds5pe5n3pvbo" path="res://Enemies/Skeleton_attack7.png" id="7_ghoec"]
+[ext_resource type="Texture2D" uid="uid://dcctn62ak6vk8" path="res://Enemies/skeleton-attack1.png" id="14_ny6m6"]
+[ext_resource type="Texture2D" uid="uid://nyjrwv33awo3" path="res://Enemies/skeleton-attack2.png" id="15_ghoec"]
+[ext_resource type="Texture2D" uid="uid://2w72g6iiicu5" path="res://Enemies/skeleton-attack3.png" id="16_agc0e"]
+[ext_resource type="Texture2D" uid="uid://cy4opipwxcqex" path="res://Enemies/exclamationpoint1.png" id="17_m0it4"]
+[ext_resource type="Texture2D" uid="uid://b41u26o4wqos8" path="res://Enemies/exclamationpoint2.png" id="18_3dxxf"]
+[ext_resource type="Texture2D" uid="uid://dtkrmmyuu7hej" path="res://Enemies/exclamationpoint3.png" id="19_5b5y3"]
+[ext_resource type="Texture2D" uid="uid://bahiw4j1mppj4" path="res://Enemies/exclamationpoint4.png" id="20_d6wwh"]
+[ext_resource type="Texture2D" uid="uid://brnaild4pw1d3" path="res://Enemies/exclamationpoint5.png" id="21_ijspx"]
+[ext_resource type="AudioStream" uid="uid://c3jxtmqvbl8d0" path="res://MSD/skeletonhit.wav" id="22_3dxxf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ojyg"]
 shader = ExtResource("1_o5rw1")
@@ -70,37 +79,29 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tvnsf"]
+height = 46.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u4k0d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_ny6m6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ghoec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_agc0e")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_agc0e"]
 radius = 8.0
 height = 24.0
-
-[sub_resource type="Animation" id="Animation_pf54f"]
-resource_name = "attack"
-length = 1.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"attack"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
 
 [sub_resource type="Animation" id="Animation_o5rw1"]
 length = 0.001
@@ -164,6 +165,130 @@ tracks/4/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimatedSprite2D/SwordCollision/CollisionShape2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PreattackSprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PreattackSprite:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_pf54f"]
+resource_name = "attack"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D/SwordCollision/CollisionShape2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8333333, 1.3666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PreattackSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PreattackSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.8333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.8333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_2ojyg"]
 resource_name = "blink"
@@ -202,6 +327,29 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pf54f"]
 radius = 11.0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_yv1gr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_m0it4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_3dxxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5b5y3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_d6wwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ijspx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("direction_sprite") groups=["mobs"]]
 material = SubResource("ShaderMaterial_2ojyg")
 collision_mask = 30
@@ -214,6 +362,25 @@ sprite_frames = SubResource("SpriteFrames_jvndi")
 animation = &"attack"
 autoplay = "default"
 
+[node name="SwordCollision" type="Area2D" parent="AnimatedSprite2D"]
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/SwordCollision"]
+visible = false
+position = Vector2(22, 1)
+shape = SubResource("CapsuleShape2D_tvnsf")
+
+[node name="SwordAttack" type="Area2D" parent="."]
+collision_mask = 10
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SwordAttack"]
+visible = false
+modulate = Color(0.36, 0.0684, 0.0684, 1)
+position = Vector2(22, -4)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_u4k0d")
+frame = 2
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_agc0e")
 
@@ -221,6 +388,7 @@ shape = SubResource("CapsuleShape2D_agc0e")
 libraries = {
 &"": SubResource("AnimationLibrary_2ojyg")
 }
+autoplay = "RESET"
 
 [node name="KnockTimer" type="Timer" parent="."]
 wait_time = 0.6
@@ -232,7 +400,6 @@ one_shot = true
 autostart = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
-visible = false
 collision_mask = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
@@ -242,6 +409,14 @@ shape = SubResource("CapsuleShape2D_pf54f")
 path_desired_distance = 2.0
 target_desired_distance = 1.0
 path_max_distance = 10.0
+
+[node name="PreattackSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, -25)
+sprite_frames = SubResource("SpriteFrames_yv1gr")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_3dxxf")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="KnockTimer" to="." method="_on_knock_timer_timeout"]

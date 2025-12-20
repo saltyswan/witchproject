@@ -20,18 +20,6 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_5w0r8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_h5tnk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_5pbyu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_osrgr")
-}, {
-"duration": 1.0,
 "texture": ExtResource("7_xaibk")
 }, {
 "duration": 1.0,
@@ -42,10 +30,22 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("10_qcu83")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5w0r8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_h5tnk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5pbyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_osrgr")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [sub_resource type="Animation" id="Animation_cae5a"]
@@ -72,12 +72,12 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_xqndm"]
 resource_name = "default"
-length = 0.7
+length = 8.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -98,43 +98,16 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(-0.0333333, 0.0666667, 0.1666667, 0.2666667, 0.3666667, 0.4666667, 0.5666667, 0.6666667),
+"times": PackedFloat32Array(0, 0.96666664, 1.9666667, 2.9666667, 3.9333334, 4.9666667, 5.9666667, 6.9333334),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [5, 6, 7, 0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_23r0t"]
 _data = {
 &"RESET": SubResource("Animation_cae5a"),
 &"default": SubResource("Animation_xqndm")
-}
-
-[sub_resource type="Animation" id="Animation_h5tnk"]
-resource_name = "fade_in"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="Animation" id="Animation_5pbyu"]
@@ -162,6 +135,33 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_h5tnk"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_osrgr"]
@@ -213,7 +213,6 @@ stretch_mode = 5
 [node name="MoonSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(88, 273)
 sprite_frames = SubResource("SpriteFrames_5w0r8")
-frame = 1
 
 [node name="MoonPhases" type="AnimationPlayer" parent="MoonSprite"]
 libraries = {
@@ -254,6 +253,7 @@ libraries = {
 }
 
 [node name="EndGame" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0040001

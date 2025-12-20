@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://14xrh77xuwd3"
-path="res://.godot/imported/SkeletonHit.wav-bf2a3d15fb8c28baec56a72a911afa4e.sample"
+uid="uid://c3jxtmqvbl8d0"
+path="res://.godot/imported/skeletonhit.wav-0c2199f9249504d7ad6ed149294f9663.sample"
 
 [deps]
 
-source_file="res://MSD/SkeletonHit.wav"
-dest_files=["res://.godot/imported/SkeletonHit.wav-bf2a3d15fb8c28baec56a72a911afa4e.sample"]
+source_file="res://MSD/skeletonhit.wav"
+dest_files=["res://.godot/imported/skeletonhit.wav-0c2199f9249504d7ad6ed149294f9663.sample"]
 
 [params]
 

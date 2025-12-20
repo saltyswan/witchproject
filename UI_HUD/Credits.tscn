@@ -1,14 +1,145 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfrkcxnwcfvmr"]
+[gd_scene load_steps=7 format=3 uid="uid://cfrkcxnwcfvmr"]
 
 [ext_resource type="Script" uid="uid://bvt42b4wr7rrs" path="res://UI_HUD/credits.gd" id="1_khs6p"]
+[ext_resource type="FontFile" uid="uid://cvg4geji2ab31" path="res://UI_HUD/Algerian Regular.ttf" id="2_1l5lc"]
+[ext_resource type="Texture2D" uid="uid://bvgo3p2p8err6" path="res://UI_HUD/creditsbackground_skeleton.png" id="3_ny122"]
+[ext_resource type="Theme" uid="uid://bhsirk8npv0i3" path="res://UI_HUD/ButtonTheme.tres" id="4_k5wto"]
+[ext_resource type="Texture2D" uid="uid://bpd7tyynqkp8l" path="res://UI_HUD/Sprite_witch.png" id="5_ny122"]
+[ext_resource type="AudioStream" uid="uid://b334ajdgd78c5" path="res://MSD/TutorialTheme.wav" id="6_k5wto"]
 
-[node name="Credits" type="Control"]
-layout_mode = 3
+[node name="Credits" type="CanvasLayer"]
+script = ExtResource("1_khs6p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0.13394469, 0.021883862, 0.13938999, 1)
+
+[node name="Label4" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.0
+offset_top = 17.0
+offset_right = 100.0
+offset_bottom = 75.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_1l5lc")
+theme_override_font_sizes/font_size = 51
+text = "CREDITS"
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.07700001
+anchor_right = 0.23
+offset_left = 0.0799942
+offset_top = 93.0
+offset_right = 15.199997
+offset_bottom = 540.0
+theme_override_fonts/font = ExtResource("2_1l5lc")
+text = "aldebaranrequiem
+
+Alterax95
+
+BabaDesBois
+
+DySeath
+
+ekaliroots
+
+Elephando
+
+Exaheimer
+
+InkLuckyStudio: 
+main menu & game icon"
+
+[node name="Label2" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.342
+anchor_right = 0.57100004
+offset_left = -0.32000732
+offset_top = 93.0
+offset_right = -58.160034
+offset_bottom = 540.0
+theme_override_fonts/font = ExtResource("2_1l5lc")
+text = "khotiCeres
+
+Kranchy00
+
+lartisanmeurtrier
+
+lightcroft
+
+mdossan
+
+mokratos_gaming
+
+MrEliptik
+
+Podyaourth"
+
+[node name="Label3" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.60300004
+anchor_right = 0.809
+offset_left = 0.11993408
+offset_top = 93.0
+offset_right = 0.35998535
+offset_bottom = 540.0
+theme_override_fonts/font = ExtResource("2_1l5lc")
+text = "romubuntu
+
+roxydiumtv
+
+ShadowTzu
+
+Skythion
+
+Vulcainos
+
+and other twitch
+viewers: thanks! <3"
+
+[node name="TextureRect" type="TextureRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -640.0
-offset_bottom = -360.0
+offset_left = 480.0
+offset_top = 287.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_khs6p")
+texture = ExtResource("3_ny122")
+
+[node name="ExitButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -54.0
+offset_right = 19.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("4_k5wto")
+text = "Exit"
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+offset_right = 96.0
+grow_vertical = 0
+texture = ExtResource("5_ny122")
+flip_h = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_k5wto")
+volume_db = -5.0
+autoplay = true
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

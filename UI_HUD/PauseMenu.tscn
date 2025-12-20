@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl0vg0wlg3oot"]
+[gd_scene load_steps=7 format=3 uid="uid://cl0vg0wlg3oot"]
 
 [ext_resource type="Script" uid="uid://cc04oyv4gglxu" path="res://UI_HUD/pause_menu.gd" id="1_b3t1n"]
 [ext_resource type="FontFile" uid="uid://cvg4geji2ab31" path="res://UI_HUD/Algerian Regular.ttf" id="2_dct6x"]
 [ext_resource type="AudioStream" uid="uid://bjww0em0r3w6" path="res://MSD/button.wav" id="2_dn211"]
 [ext_resource type="Theme" uid="uid://bhsirk8npv0i3" path="res://UI_HUD/ButtonTheme.tres" id="3_5io8k"]
+[ext_resource type="Texture2D" uid="uid://bfs0sev0r53tw" path="res://Player/tuto2.png" id="5_emjgt"]
+[ext_resource type="Texture2D" uid="uid://bycxci5hxsiag" path="res://Player/tuto1.png" id="6_spdtq"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -71,6 +73,20 @@ stream = ExtResource("2_dn211")
 layout_mode = 2
 theme = ExtResource("3_5io8k")
 text = "Exit"
+
+[node name="Controls1" type="TextureRect" parent="."]
+offset_left = 407.0
+offset_top = 396.0
+offset_right = 475.0
+offset_bottom = 457.0
+texture = ExtResource("5_emjgt")
+
+[node name="Controls2" type="TextureRect" parent="."]
+offset_left = 484.0
+offset_top = 398.0
+offset_right = 545.0
+offset_bottom = 448.0
+texture = ExtResource("6_spdtq")
 
 [connection signal="pressed" from="VBoxContainer/Return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="VBoxContainer/Retry" to="." method="_on_retry_pressed"]

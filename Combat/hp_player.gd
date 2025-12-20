@@ -5,6 +5,7 @@ var current_hp = max_hp
 var hit_damage = 1
 signal hp_lost(current_hp: int)
 
+
 func _ready() -> void:
 	pass 
 
@@ -13,7 +14,8 @@ func take_damage():
 	print("[HP Player] Witch HP:", current_hp)
 	hp_lost.emit(current_hp)
 
-
+func reset_level():
+	current_hp = max_hp
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

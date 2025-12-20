@@ -3,6 +3,8 @@ extends Node2D
 signal wave_started(wave_number)
 signal wave_cleared(wave_number)
 signal all_waves_cleared
+signal witch_retransformed
+signal wolf_transformed
 
 @onready var red_slime_scene = preload("res://Enemies/Red_slime.tscn")
 @onready var witch_scene = preload("res://Player/witch.tscn")
@@ -18,9 +20,10 @@ signal all_waves_cleared
 @export var witch_instance : CharacterBody2D
 
 var waves = [
-	{"count": 2}, #Wave 1 = 3 enemies
-	{"count": 4},
-	{"count": 6} ]
+	{"count": 4}, #Wave 1 = 3 enemies
+	{"count": 6},
+	{"count": 8},
+	{"count": 10}]
 
 var current_wave = 0
 var enemies_remaining = 0
@@ -56,7 +59,7 @@ func _on_timer_timeout() -> void:
 	spawning = false
 
 func _on_wolftimer_timeout() -> void:
-	print("ROARRRRRR")
+	print("[Spawner] ROARRRRRR")
 	wolf_instance = wolf_scene.instantiate()
 	get_tree().get_current_scene().add_child(wolf_instance)
 	wolf_instance.global_position = witch_instance.global_position
@@ -64,6 +67,7 @@ func _on_wolftimer_timeout() -> void:
 	$WitchTimer.start()
 	$WolfCry.play()
 	full_moon.show()
+	wolf_transformed.emit()
 
 func _on_witch_timer_timeout():
 	print("[Spawner] I'm human again!")
@@ -76,6 +80,7 @@ func _on_witch_timer_timeout():
 	$WolfTimer.start()
 	moon_anim.play("default")
 	full_moon.hide()
+	witch_retransformed.emit()
 
 
 func _spawn_enemy():
@@ -91,6 +96,8 @@ func _spawn_enemy():
 		enemy.global_position = spawn2.global_position
 	if current_wave == 2:
 		enemy.global_position = spawn3.global_position
+	if current_wave == 3:
+		enemy.global_position = spawn1.global_position
 		$SkeletonTimer.start()
 		print("[Spawner] Skeleton is going to appear!")
 		
@@ -133,7 +140,6 @@ func spawn_portal():
 			portal_anim.open_portal()
 			portal_opened = true
 			
-
 func _on_enemy_died():
 	enemies_remaining -= 1
 	print("[Spawner] Enemies remaining:", enemies_remaining)

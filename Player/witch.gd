@@ -12,16 +12,16 @@ var blinking = false
 #var current_hp = max_hp
 
 func _ready() -> void:
-	
 	$"../Dangermode".fight_ended.connect(_on_dangermode_fight_ended)
 	$"../Dangermode".fight_started.connect(on_dangermode_fight_started)
+	$"../Spawner".witch_retransformed.connect(on_witch_retransformed)
 	
 	add_to_group("witch")
 	if combat_mode:
 		$Weapon.shoot()
 		
 	#for child in hearts_scene.get_children():
-		#hearts_list.append(child)
+	#hearts_list.append(child)
 	#print(hearts_list)
 
 func _physics_process(delta: float) -> void:
@@ -69,6 +69,7 @@ func _on_hurtbox_body_entered(body) -> void:
 			print("[Witch] BAM you're dead")
 			$"../Spawner/WolfTimer".stop()
 			$"../Hud/GameOver/".show()
+			$"../Hud/MoonSprite".hide()
 			$"../Dangermode/Music/AnimationPlayer".play("fadetogameover")
 			$"../Fading".fade_in()
 			$"../Hud/GameOver/GameOverFade".play("fade_in")
@@ -90,11 +91,17 @@ func _on_inv_timer_timeout() -> void:
 	invincible = false
 	blinking = false
 	print("[Witch] I'm no longer invincible")
+	
 
 func on_dangermode_fight_started() -> void:
 	_animated_sprite.play("attack_down")
+	$PretransfoTimer.start()
 	combat_mode = true
 	print("[Witch] Combat mode is true, you can transform.")
+
+func on_witch_retransformed():
+	$PretransfoTimer.start()
+	print("[Witch] Pretransformation timer started")
 
 func _on_dangermode_fight_ended() -> void:
 	_animated_sprite.play("idle_down")
@@ -103,8 +110,11 @@ func _on_dangermode_fight_ended() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death_down":
-			get_tree().quit()
+			get_tree().change_scene_to_file("res://UI_HUD/MainMenu.tscn")
 			print("[Witch] Now leaving the game")
 	if anim_name == "blink":
 		print("[Witch] I blinked!")
-#NOTE: add slow down here?
+
+func _on_pretransfo_timer_timeout() -> void:
+	$PretransfoAnim.play("pretransformation")
+	print("[Witch] My pretransformation anim is playing")

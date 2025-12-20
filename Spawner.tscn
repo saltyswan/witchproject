@@ -252,11 +252,11 @@ one_shot = true
 wait_time = 1.1
 
 [node name="WolfTimer" type="Timer" parent="." groups=["timers"]]
-wait_time = 8.0
+wait_time = 7.0
 one_shot = true
 
 [node name="WitchTimer" type="Timer" parent="." groups=["timers"]]
-wait_time = 6.0
+wait_time = 7.0
 one_shot = true
 
 [node name="SkeletonTimer" type="Timer" parent="."]
@@ -278,7 +278,6 @@ libraries = {
 
 [node name="WolfCry" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_1v3v6")
-volume_db = -10.0
 
 [connection signal="all_waves_cleared" from="." to="." method="_on_all_waves_cleared"]
 [connection signal="wave_cleared" from="." to="." method="_on_wave_cleared"]

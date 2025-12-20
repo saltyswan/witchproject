@@ -13,7 +13,7 @@ func _on_retry_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _on_exit_pressed() -> void:
-	get_tree().quit()
+	get_tree().change_scene_to_file("res://UI_HUD/MainMenu.tscn")
 
 func _on_return_pressed() -> void:
 	get_tree().paused = false

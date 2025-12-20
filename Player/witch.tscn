@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://2wm1kj185ahp"]
+[gd_scene load_steps=48 format=3 uid="uid://2wm1kj185ahp"]
 
 [ext_resource type="Script" uid="uid://x1wd1ftbm1l7" path="res://Player/witch.gd" id="1_3anrn"]
 [ext_resource type="Shader" uid="uid://kjiqujvjfoow" path="res://Player/witch.gdshader" id="2_02vsg"]
@@ -24,8 +24,12 @@
 [ext_resource type="Texture2D" uid="uid://cygbre4xc8tvh" path="res://Player/Sprite_witch_runup3.png" id="18_l12tu"]
 [ext_resource type="Texture2D" uid="uid://baw6nu17g8eqx" path="res://Player/Sprite_witch_runup4.png" id="19_55vgx"]
 [ext_resource type="PackedScene" uid="uid://db0u3xvvwgiqq" path="res://Weapon/Weapon.tscn" id="24_02vsg"]
+[ext_resource type="Texture2D" uid="uid://com6rbf7v3pw5" path="res://Player/surpriseffectOK1.png" id="24_bvaeg"]
+[ext_resource type="Texture2D" uid="uid://dcs86gp4350a1" path="res://Player/surpriseffectOK2.png" id="25_e8m1g"]
 [ext_resource type="AudioStream" uid="uid://qowdvm8xx3iv" path="res://MSD/stepsound.wav" id="25_sojuo"]
+[ext_resource type="Texture2D" uid="uid://dqlab0ffllppj" path="res://Player/surpriseffectOK3.png" id="26_7sm7w"]
 [ext_resource type="AudioStream" uid="uid://6ks42hwrt8n7" path="res://MSD/GameOverSound2.wav" id="26_x3ybl"]
+[ext_resource type="Texture2D" uid="uid://bqmne8vmk57r3" path="res://Player/surpriseffectOK4.png" id="27_l12tu"]
 [ext_resource type="AudioStream" uid="uid://degy6nsvuo04v" path="res://MSD/Dmgtaken.wav" id="27_x3ybl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y6hiv"]
@@ -134,6 +138,50 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_55vgx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_bvaeg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_e8m1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_7sm7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_l12tu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_bvaeg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_e8m1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_7sm7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_l12tu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_bvaeg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_e8m1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_7sm7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_l12tu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sk4no"]
 radius = 4.0
 height = 13.0
@@ -175,6 +223,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SurpriseSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SurpriseSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_wjae3"]
@@ -350,7 +422,69 @@ _data = {
 radius = 5.0
 height = 15.0
 
+[sub_resource type="Animation" id="Animation_e8m1g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SurpriseSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SurpriseSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bvaeg"]
+resource_name = "pretransformation"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SurpriseSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SurpriseSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7sm7w"]
+_data = {
+&"RESET": SubResource("Animation_e8m1g"),
+&"pretransformation": SubResource("Animation_bvaeg")
+}
+
 [node name="Witch" type="CharacterBody2D" groups=["witch"]]
+scale = Vector2(1.3, 1.3)
 collision_layer = 2
 collision_mask = 109
 script = ExtResource("1_3anrn")
@@ -362,6 +496,12 @@ position = Vector2(1, -5)
 sprite_frames = SubResource("SpriteFrames_8u5wv")
 animation = &"idle_down"
 autoplay = "idle_down"
+
+[node name="SurpriseSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(1, -4)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_55vgx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4.5)
@@ -397,10 +537,20 @@ stream = ExtResource("26_x3ybl")
 [node name="HurtboxSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("27_x3ybl")
 
+[node name="PretransfoTimer" type="Timer" parent="."]
+wait_time = 5.7
+one_shot = true
+
+[node name="PretransfoAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7sm7w")
+}
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="Weapon" method="_on_animation_player_animation_started"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="InvTimer" to="." method="_on_inv_timer_timeout"]
+[connection signal="timeout" from="PretransfoTimer" to="." method="_on_pretransfo_timer_timeout"]
 
 [editable path="Weapon"]

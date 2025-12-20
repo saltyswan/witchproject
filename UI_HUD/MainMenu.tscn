@@ -21,12 +21,12 @@ frame_2/duration = 0.2
 frame_3/texture = ExtResource("5_dkxxh")
 frame_3/duration = 0.2
 
+[sub_resource type="Animation" id="Animation_dydum"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_67k5d"]
 resource_name = "default"
 loop_mode = 1
-
-[sub_resource type="Animation" id="Animation_dydum"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nltgx"]
 _data = {
@@ -121,6 +121,7 @@ metadata/_edit_use_anchors_ = true
 stream = ExtResource("3_dbg2s")
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("3_q2nw8")
 text = "Quit"
@@ -159,9 +160,13 @@ libraries = {
 
 [node name="Fading" parent="." instance=ExtResource("6_pd78h")]
 
+[node name="FadingBackground" parent="Fading" index="0"]
+visible = false
+
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_pressed"]
 [connection signal="finished" from="VBoxContainer/PlayButton/AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="animation_finished" from="Fading/FadingBackground/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 
 [editable path="Fading"]

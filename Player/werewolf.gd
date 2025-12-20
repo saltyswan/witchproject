@@ -4,7 +4,6 @@ const SPEED = 150.0
 
 @onready var _animated_sprite: AnimationPlayer = $AnimationPlayer
 @export var direction_sprite: AnimatedSprite2D
-@onready var _claw_animation: AnimationPlayer = $Claw/AnimationPlay
 @onready var claw_node: Node2D = $Claw
 
 var gameover = false
@@ -14,10 +13,10 @@ func _ready():
 	add_to_group("witch")
 	direction_sprite.flip_h = false
 	print("Ready is applied")
+	
 	#claw_node.hide()
 
 func _physics_process(delta: float) -> void:
-	pass
 	
 	if gameover:
 		return
@@ -28,16 +27,15 @@ func _physics_process(delta: float) -> void:
 	if input_vector.length() > 0:
 		input_vector = input_vector.normalized()
 		velocity = input_vector * SPEED
-
-	if input_vector.x < 0:
-		direction_sprite.flip_h = true
-		$Clawsprite2D.scale.x = -1.0
-		$Claw.scale.x = -1.0
-
-	else:
-		direction_sprite.flip_h = false
-		$Clawsprite2D.scale.x = 1.0
-		$Claw.scale.x = 1.0
+		
+		if input_vector.x < 0:
+			direction_sprite.flip_h = true
+			$Claw.scale.x = -1.0
+			$AnimatedSprite2D/StaticBody2D.scale.x = -1.0
+		elif input_vector.x > 0:
+			direction_sprite.flip_h = false
+			$Claw.scale.x = 1.0
+			$AnimatedSprite2D/StaticBody2D.scale.x = 1.0
 
 	move_and_slide()
 
@@ -56,6 +54,7 @@ func _on_hurtbox_body_entered(body: CharacterBody2D) -> void:
 			$"../Hud/GameOver/".show()
 			$"../Dangermode/Music/AnimationPlayer".play("fadetogameover")
 			$"../Fading".fade_in()
+			$"../Hud/MoonSprite".hide()
 			$"../Hud/GameOver/GameOverFade".play("fade_in")
 			$GameOverWolf.play()
 			_animated_sprite.play("death")
@@ -74,16 +73,9 @@ func _on_inv_timer_timeout() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death":
-			get_tree().quit()
+			get_tree().change_scene_to_file("res://UI_HUD/MainMenu.tscn")
 			print("[Werewolf] Now leaving the game")
 
-#func _on_claw_timer_timeout() -> void:
-	#if not gameover:
-		#_animated_sprite.play("attack")
-		#claw_node.show()
-		#_claw_animation.play("default")
-		#print("[Werewolf] Claw attack !")
-#
-#func _on_animation_play_animation_finished(anim_name: StringName) -> void:
-	#if anim_name == "default":
-		#claw_node.hide()
+func _on_pretransfo_timer_timeout() -> void:
+	$SurpriseSprite.show()
+	$AnimationPlayer2.play("pretransfo")
